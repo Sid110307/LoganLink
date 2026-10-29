@@ -1,0 +1,51 @@
+Designator,Qty,Manufacturer,MPN,Description,Package,Variant,Mouser#,DigiKey#,Unit_INR_qty1,Unit_INR_qty25,Notes
+U1,1,Espressif,ESP32-S3-WROOM-1-N16R2,"SoC module BLE5/WiFi 16MB flash 2MB PSRAM -40..85C",Module 18x25.5,B+C,,,520,430,MSL3
+U2,1,Texas Instruments,LMR36015-Q1 (adjustable 400kHz; confirm orderable suffix),"Buck 4.2-60V 1.5A AEC-Q100",VQFN-HR-12,B+C,,,260,190,
+U3 U4,2,Texas Instruments,TPS22918QDBVRQ1,"Load switch 5.5V 2A AEC-Q100",SOT-23-6,B+C,,,70,45,
+U5,1,u-blox,MAX-M10S-00B,"GNSS receiver multi-constellation",LCC 9.7x10.1,B+C,,,1650,1350,
+U6,1,STMicroelectronics,ASM330LHHXTR,"6-axis IMU automotive",LGA-14,B+C,,,620,480,
+U7,1,STMicroelectronics,AIS2DW12TR,"3-axis ultra-low-power accel automotive",LGA-12,B+C,,,230,170,
+U8,1,Micro Crystal,RV-3028-C7 32.768kHz 1ppm TA QC,"RTC 45nA I2C",C7 3.2x1.5,B+C,,,260,210,
+U9,1,Sensirion,SHT45-AD1B-R2,"Temp/RH sensor",DFN-4,B+C,,,380,300,
+U10,1,Sensirion,SGP41-D-R4,"VOC/NOx sensor",DFN-6,B+C,,,780,640,
+U11,1,Sensirion,SCD41-D-R2,"CO2 photoacoustic sensor",LGA 10.1x10.1,B+C,,,2900,2400,optional-depopulate to save cost
+U12,1,Winbond,W25Q256JVEIQ,"NOR flash 32MB SPI",WSON-8 6x5,B+C,,,260,190,
+U13,1,Texas Instruments,SN65HVD230QDRQ1,"CAN transceiver 3.3V AEC-Q100",SOIC-8,B+C,,,160,110,
+U14,1,Texas Instruments,LMV331QDCKRQ1 (confirm),"Comparator open-drain AEC-Q100",SC-70-5,B+C,,,60,40,
+U15,1,STMicroelectronics,VNLD5090TR-E,"Dual low-side OMNIFET III",SO-8,B+C,,,150,110,
+U16,1,SIMCom,A7672S-LASE (confirm India band variant),"LTE Cat-1 module",LCC 24x24,C,,,1100,900,DNP on B
+U17,1,Texas Instruments,TPS54360BQDDARQ1,"Buck 60V 3.5A AEC-Q100 (LTE 3.8V)",SO-8 PowerPAD,C,,,280,210,DNP on B
+Q1 Q2 Q3,3,Diodes Inc,2N7002KQ-7,"N-MOSFET 60V ESD AEC-Q101",SOT-23,B+C,,,12,6,K-line driver + IGN/REV buffers
+Q4,1,Nexperia,PMBT3904-Q,"NPN LTE PWRKEY",SOT-23,C,,,8,4,DNP on B
+D1,1,Vishay,SM8S26AHE3_A/I,"TVS 26V 6.6kW load-dump AEC-Q101",DO-218AB,B+C,,,190,140,
+D2,1,STMicroelectronics,STPS3H100UY,"Schottky 100V 3A AEC-Q101",SMB,B+C,,,45,30,
+D3,1,Nexperia,PESD1LIN-Q,"ESD K-line",SOD-323,B+C,,,15,9,
+D4,1,onsemi,NUP2105LT1G,"ESD CAN",SOT-23,B+C,,,20,12,
+D5,1,STMicroelectronics,USBLC6-2SC6Y,"USB ESD AEC-Q101",SOT-23-6,B+C,,,35,22,
+D6-D9,4,Nexperia,BAT54S-Q,"Dual Schottky clamp",SOT-23,B+C,,,10,5,ADC clamps
+D10,1,Nexperia,BAS16-Q,"Switching diode 100V",SOT-23,B+C,,,6,3,K-line pull-up isolation
+D11 D12,2,Nexperia,BZX84-C12-Q,"Zener 12V",SOT-23,B+C,,,6,3,IGN/REV gate clamps
+L1,1,Coilcraft,XAL6060-153MEB,"15uH 3A+ AEC-Q200",6.5x6.5,B+C,,,140,110,
+L2,1,Wurth Elektronik,74438357100,"10uH shielded",4030,B+C,,,60,45,or any 10uH >=1.5A AEC-Q200
+L3,1,Coilcraft,XAL6060-472MEB,"4.7uH LTE buck",6.5x6.5,C,,,140,110,DNP on B
+L50,1,Murata,LQW15AN47NJ00D,"47nH RF choke",0402,B+C,,,15,10,GNSS antenna bias
+C1 C2 C4,3,Murata,GCM32ER72A475KA (check),"4.7uF 100V X7R AEC-Q200",1210,B+C,,,45,30,
+C3,1,Panasonic,EEH-ZA1J470P,"47uF 63V hybrid polymer AEC-Q200",6.3x7.7,B+C,,,85,60,
+C5 C6,2,Murata,GCM31CR71A226KE02,"22uF 10V X7R AEC-Q200",1206,B+C,,,30,18,buck output
+C31,1,Murata,GCM21BR72A104KA37,"100nF 100V X7R",0805,B+C,,,8,4,ripple coupling
+CPASS,~45,Murata/Yageo/KEMET,various GCM/CGA series,"0402/0603 MLCC decoupling X7R/C0G",0402/0603,B+C,,,2,1,see schematic
+RPASS,~55,Yageo/Panasonic,RC/ERJ series,"0402/0603 1% resistors",0402/0603,B+C,,,1,0.5,
+R30 R14 R16,3,Panasonic,ERA-6AEB105V,"1M 0.1% 25ppm thin film",0805,B+C,,,25,15,VBAT and K-line dividers
+R31 R15,2,Panasonic,ERA-6AEB154V,"150k 0.1% 25ppm",0805,B+C,,,25,15,
+R17,1,Panasonic,ERA-6AEB683V,"68k 0.1% 25ppm",0805,B+C,,,25,15,
+R10,1,Vishay,CRCW1206510RFKEAHP,"510R 0.5W high-power",1206,B+C,,,15,8,K-line pull-up
+R50,1,Vishay,CRCW121022R0FKEA,"22R 0.5W",1210,B+C,,,10,5,GNSS antenna feed
+LED1,1,Kingbright,APHB1608LZGKSURKC,"Bi-colour LED red/green",0603,B+C,,,25,15,
+SW1,1,C&K,PTS526SM15SMTR2LFS,"Tact switch sealed",SMD,B+C,,,40,30,
+J1,1,Molex,430451000 (confirm RA 10-ckt),"Micro-Fit 3.0 2x5 RA header",THT,B+C,,,140,110,hand solder
+J2,1,GCT,USB4105-GF-A,"USB-C receptacle",SMD/THT,B+C,,,60,45,
+J3 J4,2,Hirose,U.FL-R-SMT-1(10),"U.FL",SMD,B+C (J4: C),,,25,18,
+J6,1,Amphenol,C707 10M006 512 2,"Nano-SIM push-push",SMD,C,,,90,70,DNP on B
+J7,1,JST,SM02B-GHS-TB(LF)(SN),"GH 2-pin coolant probe",SMD,B+C,,,20,15,optional
+PCB,1,LionCircuits,LL-VM1 rev A,"4L 1.6mm ENIG 80x55mm black mask",—,B+C,,,1100,260,qty1 price is per board from a 5-pc prototype order
+PCBA,1,LionCircuits,turnkey assembly,"SMT top side only + 1 THT (J1)",—,B+C,,,2500,450,setup/stencil amortised; quote required

@@ -1,0 +1,21 @@
+GPIO,Net,Direction,Peripheral,Domain,Strap,Notes
+0,BTN_PAIR,In,GPIO,3V3,Yes (boot),10k pull-up; button to GND; hold at reset = download mode
+1,VBAT_SENSE,Analog,ADC1_CH0,3V3,No,1M/150k + 10nF; ULP-readable in deep sleep
+2,VBAT_AC,Analog,ADC1_CH1,AUX_PWR,No,AC-coupled ripple path; 1.65V bias from AUX_PWR
+4,CAN_TXD,Out,TWAI TX,—,No,SN65HVD230Q DNP on the Logan build
+5,CAN_RXD,In,TWAI RX,—,No,SN65HVD230Q DNP
+6,IGN_SENSE_N,In,RTC GPIO ext1,3V3,No,optional IGN pad + 2N7002K buffer (DNP by default)
+7,ACC_WAKE_INT,In,RTC GPIO ext0,3V3,No,LIS2DW12 INT1 push-pull active-high
+8,I2C_SDA,I/O,I2C0,3V3,No,4.7k pull-up; LIS2DW12 @0x19
+9,I2C_SCL,Out,I2C0,3V3,No,4.7k pull-up
+15,XTAL_32K_P,—,32 kHz crystal,—,No,32.768 kHz 7 pF crystal + 2 x load caps
+16,XTAL_32K_N,—,32 kHz crystal,—,No,
+17,K_TXD,Out,UART1 TX (inverted),3V3,No,drives Q1 gate via 100R; 100k pull-down
+18,K_RXD,In,UART1 RX,AUX_PWR,No,LMV331 open-drain; 10k pull-up to AUX_PWR
+19,USB_DN,USB,USB-Serial-JTAG,—,No,USBLC6-2SC6Y
+20,USB_DP,USB,USB-Serial-JTAG,—,No,
+21,AUX_PWR,Out,GPIO (source),—,No,powers LMV331 + ripple bias + K_RXD pull-up (<1 mA); held low in deep sleep
+38,LED_R,Out,LEDC,3V3,No,330R
+39,LED_G,Out,LEDC,3V3,No,150R
+43,U0TXD,Out,UART0,3V3,No,Tag-Connect / test pads console
+44,U0RXD,In,UART0,3V3,No,

@@ -1,0 +1,33 @@
+Designator,Qty,Manufacturer,MPN,Description,Package,Fit,Source,Unit_INR_qty1,Unit_INR_qty25,Notes
+U1,1,Espressif,ESP32-S3-MINI-1-N8,"BLE5/WiFi module, 8 MB flash, pre-certified, -40..85C",Module 15.4x20.5,Fit,Mouser/DigiKey,340,290,MSL3; antenna at PCB far end
+U2,1,Texas Instruments,LMR36006-Q1 (adjustable; confirm orderable suffix),"Buck 4.2-60V 0.6A AEC-Q100",WSON/SOT-23-THN,Fit,Mouser/DigiKey,170,125,400 kHz variant preferred
+U3,1,STMicroelectronics,LIS2DW12TR,"3-axis accel, ultra-low-power, wake-up INT",LGA-12 2x2,Fit,Mouser/DigiKey,130,95,
+U4,1,Texas Instruments,LMV331IDBVR (or LMV331QDCKRQ1),"Comparator open-drain, K-line RX",SOT-23-5,Fit,Mouser/DigiKey,35,20,
+U5,1,Texas Instruments,SN65HVD230QDRQ1,"CAN transceiver 3.3V",SOIC-8,DNP,Mouser/DigiKey,0,0,footprint only (Logan has no CAN on OBD)
+Q1,1,Diodes Inc,2N7002KQ-7,"N-MOSFET 60V, K-line driver",SOT-23,Fit,Mouser/DigiKey,10,5,
+Q2,1,Diodes Inc,2N7002KQ-7,"IGN buffer",SOT-23,DNP,Mouser/DigiKey,0,0,optional IGN pad
+F1,1,Littelfuse,0451002.MRL,"NANO2 fuse 2 A 125 V",SMD 2410,Fit,Mouser/DigiKey,45,30,
+D1,1,Littelfuse,SMCJ33A,"TVS 33 V standoff, 1500 W",SMC,Fit,Mouser/DigiKey,30,18,see docs/15 §4.2 (33 V not 26 V)
+D2,1,STMicroelectronics,STPS2H100AY,"Schottky 100 V 2 A AEC-Q101",SMA,Fit,Mouser/DigiKey,25,15,
+D3,1,Nexperia,PESD1LIN-Q,"ESD K-line",SOD-323,Fit,Mouser/DigiKey,12,7,
+D4,1,STMicroelectronics,USBLC6-2SC6Y,"USB ESD",SOT-23-6,Fit,Mouser/DigiKey,30,18,
+D5 D6,2,Nexperia,BAT54S-Q,"ADC clamps",SOT-23,Fit,Mouser/DigiKey,8,4,
+D7,1,Nexperia,BAS16-Q,"K-line pull-up isolation",SOT-23,Fit,Mouser/DigiKey,3,2,
+L1,1,Coilcraft,XGL4030-223ME (or equiv. 22uH >=1.2A shielded AEC-Q200),"Buck inductor 22 uH",4x4,Fit,Mouser/DigiKey,55,40,confirm Isat/DCR
+L2,1,Murata,BLM31KN601SN1L (or 10uH 1A),"Input filter ferrite / inductor",1206,Fit,Mouser/DigiKey,12,7,
+C1 C2,2,Murata,GCM31CR72A225KA (check),"2.2uF 100V X7R",1206,Fit,Mouser/DigiKey,20,12,input
+C3,1,Panasonic,EEE-FK1J220P,"22uF 63V aluminium electrolytic 105C AEC-Q200",SMD 6.3x5.8,Fit,Mouser/DigiKey,25,15,bulk / hold-up
+C4 C5,2,Murata,GCM31CR71A226KE02,"22uF 10V X7R",1206,Fit,Mouser/DigiKey,15,9,buck output
+Y1,1,Abracon,ABS07-32.768KHZ-7-T (check load cap vs S3),"32.768 kHz crystal",3.2x1.5,Fit,Mouser/DigiKey,40,28,+2 x C0G load caps
+J1,1,Molex,68503-1602,"OBD-II 16-pos plug housing (male, 4 mm), clamped by the shell",Cable-mount,Fit,element14/Newark/DigiKey,140,110,turnkey; 6 of 16 cavities populated
+J1P,6,Molex,57964-9702,"OBD-II male crimp pin for 68503",Crimp,Fit,element14/Newark/DigiKey,25,18,pins 4 5 6 7 14 16 on 20 mm 22 AWG leads to PCB pads
+J2,1,GCT,USB4105-GF-A,"USB-C receptacle",SMD/THT,Fit,Mouser/DigiKey,60,45,
+SW1,1,C&K,PTS526SM15SMTR2LFS,"Tact switch",SMD,Fit,Mouser/DigiKey,30,22,recessed pinhole
+LED1,1,Kingbright,APHB1608LZGKSURKC,"Bi-colour LED",0603,Fit,Mouser/DigiKey,25,15,
+RPREC,5,Panasonic/Yageo,ERA-6A 0.5% 50ppm series (1M x2, 150k, 68k, 1M),"Divider resistors",0805,Fit,Mouser/DigiKey,8,4,calibrated in firmware so 0.5% is enough
+CPASS,~20,Murata/Yageo,GCM/CC series,"MLCC decoupling",0402/0603,Fit,Mouser/DigiKey,2,1,
+RPASS,~22,Yageo,RC series,"Resistors 1%",0402/0603,Fit,Mouser/DigiKey,1,0.5,
+R10,1,Vishay,CRCW1206510RFKEAHP,"510R 0.5W K-line pull-up",1206,Fit,Mouser/DigiKey,15,8,
+PCB,1,LionCircuits,LL-VM1 rev B,"2-layer 1.6mm ENIG 46x38mm",—,—,LionCircuits,200,60,qty1 = per board from a 5-pc lot
+PCBA,1,LionCircuits,turnkey,"SMT top side + 1 THT (J1, hand-solder)",—,—,LionCircuits,1500,300,setup dominates small lots; get a quote
+ENCL,1,self-print,dongle.scad,"ASA/PA12 thin-wall shell + light pipe + 2 screws",—,—,—,120,80,

@@ -1,0 +1,37 @@
+GPIO,Net,Direction,Peripheral,Rail_domain,Strap,Notes
+0,BTN_PAIR,In,GPIO,AON,Yes (boot),10k pull-up; button to GND; hold at reset = download mode
+1,VBAT_SENSE,Analog,ADC1_CH0,AON,No,1M/150k 0.1% + 10nF; ULP-readable
+2,VBAT_AC,Analog,ADC1_CH1,SW,No,AC-coupled ripple path; bias 1.65V from 3V3_SW
+3,AIN_FUEL,Analog,ADC1_CH2,—,Yes (JTAG sel; inert),100k/22k divider; optional tap
+4,CAN_TXD,Out,TWAI TX,SW,No,
+5,CAN_RXD,In,TWAI RX,SW,No,
+6,AIN_SPARE,Analog,ADC1_CH5,SW,No,coolant NTC 10k half-bridge
+7,ACC_WAKE_INT,In,RTC GPIO ext0,AON,No,AIS2DW12 INT1 push-pull active-high
+8,REV_SENSE_N,In,RTC GPIO,AON,No,optional reverse tap buffer; active-low
+9,IMU_INT1,In,GPIO,SW,No,ASM330LHHX FIFO watermark
+10,FLASH_CS,Out,SPI2 CS,SW,No,10k pull-up to 3V3_SW
+11,FLASH_MOSI,Out,SPI2 MOSI,SW,No,
+12,FLASH_SCK,Out,SPI2 SCK,SW,No,33R series at source
+13,FLASH_MISO,In,SPI2 MISO,SW,No,
+14,IGN_SENSE_N,In,RTC GPIO ext1,AON,No,optional ignition tap buffer; active-low
+15,GNSS_RXD,Out,UART2 TX,GNSS,No,33R series
+16,GNSS_TXD,In,UART2 RX,GNSS,No,
+17,K_TXD,Out,UART1 TX (inverted),SW,No,drives Q1 gate via 100R; 100k pull-down
+18,K_RXD,In,UART1 RX,SW,No,LMV331 open-drain; 10k pull-up to 3V3_SW
+19,USB_DN,USB,USB-Serial-JTAG,AON,No,
+20,USB_DP,USB,USB-Serial-JTAG,AON,No,
+21,GNSS_EN,Out,GPIO,AON,No,TPS22918 ON; 100k pull-down
+35,SPARE / AUX_FB,Analog-in,GPIO,—,No,available because N16R2 (quad PSRAM)
+36,LTE_PWRKEY,Out,GPIO,C only,No,via NPN Q4
+37,LTE_STATUS,In,GPIO,C only,No,
+38,LED_R,Out,LEDC,AON,No,330R
+39,LED_G,Out,LEDC,AON,No,150R
+40,AUX_OUT_EN,Out,GPIO,AON,No,VNLD5090 IN1; 100k pull-down
+41,I2C0_SDA,I/O,I2C0,AON,No,4.7k to 3V3_AON (RV-3028 0x52; AIS2DW12 0x19)
+42,I2C0_SCL,Out,I2C0,AON,No,4.7k to 3V3_AON
+43,U0TXD,Out,UART0,AON,No,Tag-Connect console / LTE RXD on variant C
+44,U0RXD,In,UART0,AON,No,Tag-Connect console / LTE TXD on variant C
+45,LTE_EN,Out,GPIO,AON,Yes (VDD_SPI; must be 0),100k pull-down
+46,SENS_EN,Out,GPIO,AON,Yes (must be 0),100k pull-down; enables 3V3_SW
+47,I2C1_SDA,I/O,I2C1,SW,No,2.2k to 3V3_SW (ASM330 0x6A; SHT45 0x44; SGP41 0x59; SCD41 0x62)
+48,I2C1_SCL,Out,I2C1,SW,No,2.2k to 3V3_SW
