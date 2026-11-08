@@ -1,4 +1,4 @@
-# 14 — Implementation Sequence, Maintenance and References
+# 14. Implementation Sequence, Maintenance and References
 
 ## 1. Build sequence
 
@@ -14,7 +14,7 @@
 | 7. Enclosure | 1 week (parallel) | Print, fit, iterate parameters; inserts | Fit checks of doc 09 §6 |
 | 8. Installation + commissioning | 1 day | Doc 11 | Doc 11 §8 complete |
 | 9. Verification | 3–4 weeks | Doc 12 DV list (EMC/transients at a test lab) | Release gate (doc 12 §4) |
-| 10. Release | — | Enable Secure Boot + flash encryption on production units; sign v1.0.0 | Units shipped/installed |
+| 10. Release | - | Enable Secure Boot + flash encryption on production units; sign v1.0.0 | Units shipped/installed |
 
 ## 2. Device programming and configuration
 
@@ -74,7 +74,7 @@
 ## 7. Engineering references
 
 **Standards**
-- ISO 9141-2:1994 *Road vehicles — Diagnostic systems — CARB requirements for interchange of digital information*
+- ISO 9141-2:1994 *Road vehicles, Diagnostic systems, CARB requirements for interchange of digital information*
 - ISO 14230-1/-2/-3 (KWP2000 on K-line): physical layer, data link layer, application layer
 - ISO 15031-3 / SAE J1962 (diagnostic connector); SAE J1979 / ISO 15031-5 (emissions diagnostic services, PIDs)
 - ISO 15765-2/-4 (diagnostics on CAN); ISO 11898-2 (CAN high-speed physical layer)

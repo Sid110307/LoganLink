@@ -152,11 +152,11 @@ fun TripsScreen(go: (String) -> Unit) {
                 Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                         KpiTile("This week", "%.0f".format(Locale.US, weekKm), Modifier.weight(1f), unit = "km", accent = Signal)
-                        KpiTile("Economy", weekKmPerL?.let { "%.1f".format(Locale.US, it) } ?: "—", Modifier.weight(1f), unit = "km/L")
+                        KpiTile("Economy", weekKmPerL?.let { "%.1f".format(Locale.US, it) } ?: "--", Modifier.weight(1f), unit = "km/L")
                     }
                     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                        KpiTile("Fuel spend", if (week.isEmpty()) "—" else fmtRupees(weekSpend), Modifier.weight(1f))
-                        KpiTile("Avg score", weekScore?.toString() ?: "—", Modifier.weight(1f), unit = "/100",
+                        KpiTile("Fuel spend", if (week.isEmpty()) "--" else fmtRupees(weekSpend), Modifier.weight(1f))
+                        KpiTile("Avg score", weekScore?.toString() ?: "--", Modifier.weight(1f), unit = "/100",
                             accent = weekScore?.let(::scoreColor) ?: MaterialTheme.colorScheme.primary)
                     }
                 }
@@ -328,9 +328,9 @@ private fun TripInsights(trips: List<com.loganlink.core.data.Trip>, now: Long) {
     val avgSpeed = if (drive > 0) km / (drive / 3600.0) else null
     Panel("Last 30 days", subtitle = "${month.size} trips · %,.0f km".format(Locale.US, km), icon = R.drawable.analytics) {
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            com.loganlink.ui.components.MetricTile("Cost per km", if (km > 0) "₹%.1f".format(Locale.US, spend / 100.0 / km) else "—", Modifier.weight(1f))
-            com.loganlink.ui.components.MetricTile("Stuck in traffic", if (drive > 0) "%.0f".format(Locale.US, idle * 100.0 / drive) else "—", Modifier.weight(1f), "%")
-            com.loganlink.ui.components.MetricTile("Avg speed", avgSpeed?.let { "%.0f".format(Locale.US, it) } ?: "—", Modifier.weight(1f), "km/h")
+            com.loganlink.ui.components.MetricTile("Cost per km", if (km > 0) "₹%.1f".format(Locale.US, spend / 100.0 / km) else "--", Modifier.weight(1f))
+            com.loganlink.ui.components.MetricTile("Stuck in traffic", if (drive > 0) "%.0f".format(Locale.US, idle * 100.0 / drive) else "--", Modifier.weight(1f), "%")
+            com.loganlink.ui.components.MetricTile("Avg speed", avgSpeed?.let { "%.0f".format(Locale.US, it) } ?: "--", Modifier.weight(1f), "km/h")
         }
         if (trend.size >= 3) {
             Text("Economy per trip", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)

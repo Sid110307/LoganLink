@@ -2,7 +2,7 @@ GPIO,Net,Direction,Peripheral,Rail_domain,Strap,Notes
 0,BTN_PAIR,In,GPIO,AON,Yes (boot),10k pull-up; button to GND; hold at reset = download mode
 1,VBAT_SENSE,Analog,ADC1_CH0,AON,No,1M/150k 0.1% + 10nF; ULP-readable
 2,VBAT_AC,Analog,ADC1_CH1,SW,No,AC-coupled ripple path; bias 1.65V from 3V3_SW
-3,AIN_FUEL,Analog,ADC1_CH2,—,Yes (JTAG sel; inert),100k/22k divider; optional tap
+3,AIN_FUEL,Analog,ADC1_CH2,-,Yes (JTAG sel; inert),100k/22k divider; optional tap
 4,CAN_TXD,Out,TWAI TX,SW,No,
 5,CAN_RXD,In,TWAI RX,SW,No,
 6,AIN_SPARE,Analog,ADC1_CH5,SW,No,coolant NTC 10k half-bridge
@@ -21,7 +21,7 @@ GPIO,Net,Direction,Peripheral,Rail_domain,Strap,Notes
 19,USB_DN,USB,USB-Serial-JTAG,AON,No,
 20,USB_DP,USB,USB-Serial-JTAG,AON,No,
 21,GNSS_EN,Out,GPIO,AON,No,TPS22918 ON; 100k pull-down
-35,SPARE / AUX_FB,Analog-in,GPIO,—,No,available because N16R2 (quad PSRAM)
+35,SPARE / AUX_FB,Analog-in,GPIO,-,No,available because N16R2 (quad PSRAM)
 36,LTE_PWRKEY,Out,GPIO,C only,No,via NPN Q4
 37,LTE_STATUS,In,GPIO,C only,No,
 38,LED_R,Out,LEDC,AON,No,330R

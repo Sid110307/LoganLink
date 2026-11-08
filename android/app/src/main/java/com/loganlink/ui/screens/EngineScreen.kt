@@ -87,8 +87,8 @@ fun EngineScreen(onBack: () -> Unit) {
                     MetricTile("Throttle", n0(f?.throttle), Modifier.weight(1f), unit = "%")
                 }
                 TileRow {
-                    MetricTile("Engine load", f?.load?.toString() ?: "—", Modifier.weight(1f), unit = "%")
-                    MetricTile("Ignition advance", f?.advance?.let { String.format(Locale.US, "%+d", it) } ?: "—",
+                    MetricTile("Engine load", f?.load?.toString() ?: "--", Modifier.weight(1f), unit = "%")
+                    MetricTile("Ignition advance", f?.advance?.let { String.format(Locale.US, "%+d", it) } ?: "--",
                         Modifier.weight(1f), unit = "°")
                 }
             }
@@ -96,9 +96,9 @@ fun EngineScreen(onBack: () -> Unit) {
             Panel("Fuel trims", icon = R.drawable.fuel,
                 subtitle = avgLtft?.let { "Long-term average over the last minute: ${String.format(Locale.US, "%+.1f", it)} %" }) {
                 TileRow {
-                    MetricTile("Short-term", f?.stft?.let { String.format(Locale.US, "%+d", it) } ?: "—", Modifier.weight(1f),
+                    MetricTile("Short-term", f?.stft?.let { String.format(Locale.US, "%+d", it) } ?: "--", Modifier.weight(1f),
                         unit = "%", emphasis = trimColor(f?.stft?.toDouble(), 15.0))
-                    MetricTile("Long-term", f?.ltft?.let { String.format(Locale.US, "%+d", it) } ?: "—", Modifier.weight(1f),
+                    MetricTile("Long-term", f?.ltft?.let { String.format(Locale.US, "%+d", it) } ?: "--", Modifier.weight(1f),
                         unit = "%", emphasis = trimColor(f?.ltft?.toDouble(), 10.0))
                 }
             }
@@ -122,7 +122,7 @@ private fun TileRow(content: @Composable androidx.compose.foundation.layout.RowS
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp), content = content)
 
 
-private fun n0(v: Double?) = v?.let { String.format(Locale.US, "%.0f", it) } ?: "—"
+private fun n0(v: Double?) = v?.let { String.format(Locale.US, "%.0f", it) } ?: "--"
 
 private fun coolantColor(c: Double?): Color? = when {
     c == null -> null

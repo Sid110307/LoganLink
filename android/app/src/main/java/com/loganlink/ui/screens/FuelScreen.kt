@@ -138,8 +138,8 @@ fun FuelScreen(onBack: () -> Unit) {
                 subtitle = if (stats.trackedKm > 0) String.format(Locale.US, "Mileage from %,d km between full tanks", stats.trackedKm)
                 else "Log two \"filled to full\" fill-ups to see real mileage") {
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    KpiTile("Average", stats.kmPerL?.let { f1(it) } ?: "—", Modifier.weight(1f), unit = "km/L", accent = Signal)
-                    KpiTile("Cost per km", stats.paisePerKm?.let { String.format(Locale.US, "%.2f", it / 100) }?.let { "₹$it" } ?: "—",
+                    KpiTile("Average", stats.kmPerL?.let { f1(it) } ?: "--", Modifier.weight(1f), unit = "km/L", accent = Signal)
+                    KpiTile("Cost per km", stats.paisePerKm?.let { String.format(Locale.US, "%.2f", it / 100) }?.let { "₹$it" } ?: "--",
                         Modifier.weight(1f))
                 }
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -266,7 +266,7 @@ private fun AddFillDialog(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Column(Modifier.weight(1f)) {
                         Text("Filled to full", style = MaterialTheme.typography.bodyLarge)
-                        Text("Pump clicked off — needed for mileage", style = MaterialTheme.typography.bodySmall,
+                        Text("Pump clicked off, needed for mileage", style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                     Switch(checked = full, onCheckedChange = { full = it })

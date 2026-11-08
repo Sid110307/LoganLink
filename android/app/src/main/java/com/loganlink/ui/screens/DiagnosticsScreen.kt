@@ -92,7 +92,7 @@ fun DiagnosticsScreen(onBack: () -> Unit) {
         val text = buildReport(vehicle.nickname, vehicle.plate, mil, active, past)
         val send = Intent(Intent.ACTION_SEND).apply {
             type = "text/plain"
-            putExtra(Intent.EXTRA_SUBJECT, "Fault code report — ${vehicle.nickname}")
+            putExtra(Intent.EXTRA_SUBJECT, "Fault code report - ${vehicle.nickname}")
             putExtra(Intent.EXTRA_TEXT, text)
         }
         context.startActivity(Intent.createChooser(send, "Share fault report"))
@@ -119,8 +119,8 @@ fun DiagnosticsScreen(onBack: () -> Unit) {
                 icon = R.drawable.engine,
                 subtitle = when {
                     !connected -> "Connect to the car to read the light and codes"
-                    live?.ecuOnline != true -> "Engine computer not responding — switch the ignition on"
-                    mil -> "On — the engine computer has stored a fault"
+                    live?.ecuOnline != true -> "Engine computer not responding, switch the ignition on"
+                    mil -> "On, the engine computer has stored a fault"
                     else -> "Off"
                 },
                 actions = {
@@ -193,7 +193,7 @@ fun DiagnosticsScreen(onBack: () -> Unit) {
                 clearing = true
                 val r = hub.clearDtcs()
                 clearing = false
-                snack.showSnackbar(if (r.ok) "Codes cleared — the light should go out" else Status.describe(r.status))
+                snack.showSnackbar(if (r.ok) "Codes cleared, the light should go out" else Status.describe(r.status))
             }
         },
         onDismiss = { confirmClear = false },
@@ -212,7 +212,7 @@ private fun DtcCard(d: DtcEntry) {
             else StatusChip("Cleared", StateInfo)
         },
     ) {
-        if (d.pending && isActive) StatusChip("Pending — not yet confirmed", StateWarning)
+        if (d.pending && isActive) StatusChip("Pending, not yet confirmed", StateWarning)
         Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text("Likely causes", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Text(info.causes, style = MaterialTheme.typography.bodyMedium)
@@ -244,7 +244,7 @@ private fun buildReport(nick: String, plate: String, mil: Boolean, active: List<
             appendLine("Active codes (${active.size}):")
             active.forEach { d ->
                 val i = DtcCatalog.lookup(d.code)
-                appendLine("• ${d.code}${if (d.pending) " (pending)" else ""} — ${i.title} [${i.severity.label}]")
+                appendLine("• ${d.code}${if (d.pending) " (pending)" else ""} - ${i.title} [${i.severity.label}]")
                 appendLine("  Likely causes: ${i.causes}")
                 appendLine("  First seen ${fmtDate(d.firstSeen, "d MMM yyyy")}, last seen ${fmtDate(d.lastSeen, "d MMM yyyy")}")
             }
@@ -253,7 +253,7 @@ private fun buildReport(nick: String, plate: String, mil: Boolean, active: List<
             appendLine()
             appendLine("History (cleared):")
             past.forEach { d ->
-                appendLine("• ${d.code} — ${DtcCatalog.lookup(d.code).title}, cleared ${fmtDate(d.cleared ?: d.lastSeen, "d MMM yyyy")}")
+                appendLine("• ${d.code} - ${DtcCatalog.lookup(d.code).title}, cleared ${fmtDate(d.cleared ?: d.lastSeen, "d MMM yyyy")}")
             }
         }
     }.trimEnd()

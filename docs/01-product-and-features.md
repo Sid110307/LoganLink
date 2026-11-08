@@ -1,4 +1,4 @@
-# 01 — Product Definition and Feature Specification
+# 01. Product Definition and Feature Specification
 
 ## 1. Product definition
 
@@ -40,9 +40,9 @@ Each feature also has a **Tier**. **T1** works with B alone, so it is guaranteed
 | TM-04 | Intake air temp, MAP, throttle, load, ignition advance, STFT/LTFT, O₂ voltage | A: PIDs 0x0F, 0x0B, 0x11, 0x04, 0x0E, 0x06/0x07, 0x14 | K-line | `obd` scheduler at priority rates (§4 doc 03) | “Engine” screen tiles plus sparkline | T2 |
 | TM-05 | Battery voltage, live and resting | B | VBAT divider, 12-bit ADC, 2-point calibrated | `vbat` 10 Hz filtered | Battery card | T1 |
 | TM-06 | Charging-system status | B: VBAT while engine running | as above | `vbat`: charge state machine (Not-charging < 13.0 V, Normal 13.6–14.7 V, Over > 14.9 V) | Status chip | T1 |
-| TM-07 | Fuel used and instantaneous consumption | A: MAP+RPM+IAT+trims (speed-density) | — | `fuel` model (doc 07 §8) self-calibrated with fill-ups | L/100 km & km/L live; trip totals | T2 |
+| TM-07 | Fuel used and instantaneous consumption | A: MAP+RPM+IAT+trims (speed-density) | - | `fuel` model (doc 07 §8) self-calibrated with fill-ups | L/100 km & km/L live; trip totals | T2 |
 | TM-08 | Fuel level | C: fuel-sender voltage tap; else estimate (last fill − used) | AIN_AUX 100 k/22 k divider | `aux` with 60 s median filter (fuel slosh) | Fuel bar plus range estimate | T2 |
-| TM-09 | Odometer mirror | B: integrated GNSS/OBD distance, set once from cluster reading | — | `trip` | Odometer field; service due calc | T1 |
+| TM-09 | Odometer mirror | B: integrated GNSS/OBD distance, set once from cluster reading | - | `trip` | Odometer field; service due calc | T1 |
 | TM-10 | Operating history | B | 32 MB NOR flash | `logger` ring buffer (≈140 h at 1 Hz full record) | History browser | T1 |
 
 ### 3.2 Intelligent diagnostics

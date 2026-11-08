@@ -56,7 +56,7 @@ data class LiveFrame(
             val s = speed ?: return null; val f = fuelRate ?: return null
             return if (f > 0.05 && s > 3) s / f else null
         }
-    val stateName get() = STATES.getOrElse(state) { "—" }
+    val stateName get() = STATES.getOrElse(state) { "--" }
 
     companion object {
         const val LENGTH = 62

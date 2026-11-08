@@ -11,7 +11,7 @@ enum class LinkState(val label: String) {
     Connecting("Looking for your car…"),
     Authenticating("Securing connection…"),
     Ready("Connected"),
-    AuthFailed("Not authorised — pair again"),
+    AuthFailed("Not authorised, pair again"),
 }
 
 data class CmdResult(val status: Int, val data: ByteArray = ByteArray(0)) {

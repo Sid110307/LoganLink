@@ -1,4 +1,4 @@
-# 09 — Mechanical Engineering and Enclosure
+# 09. Mechanical Engineering and Enclosure
 
 Source CAD: `mechanical/enclosure.scad` (parametric OpenSCAD). Every dimension below derives from its parameters.
 Change the parameters, not the numbers here.
@@ -65,7 +65,7 @@ reversed, set `imu_orientation` in the app.
 |---------|---------|
 | Heat | ASA (Tg ≈ 100 °C) or PC-ABS; no PETG/PLA (softens at 70–80 °C). Board dissipation 0.5 W, so no heat sink is needed |
 | Humidity / condensation | Sensor vents give natural exchange. A Ø2 mm drain at the lowest point when mounted connector-down. Conformal coat optional (doc 05 §5) |
-| Dust | 6-slot vent backed by **PTFE vent membrane** (e.g., GORE-style adhesive vent, or acoustic mesh) — IP5X-class dust ingress on the vent. Overall enclosure rating IP40 |
+| Dust | 6-slot vent backed by **PTFE vent membrane** (e.g., GORE-style adhesive vent, or acoustic mesh), IP5X-class dust ingress on the vent. Overall enclosure rating IP40 |
 | Sensor accuracy | SHT45 sits on the PCB thermal peninsula next to the left-wall louvres. The SCD41 needs free air exchange: total vent open area ≈ 185 mm² |
 | UV | Under-dash location, so no UV exposure. If dash-top mounted, use ASA (UV-stable) |
 
@@ -110,5 +110,5 @@ recommended hole (Ø3.6 mm is typical for M2.5 × 5.7).
 
 1. Press 8 inserts into the base. 2. Fit the light pipe into the lid. 3. Apply the vent membrane inside the lid. 4. Stick the
 pairing-QR label inside the lid. 5. Connect the GNSS antenna pigtail U.FL to J3 and route it out of the slot with a service loop. 6. Place
-the PCB and fit 4 × M2.5 × 6. 7. Close the lid and fit 4 × M2.5 × 12 (0.3 N·m — plastic, don't over-torque). Disassembly is the reverse.
+the PCB and fit 4 × M2.5 × 6. 7. Close the lid and fit 4 × M2.5 × 12 (0.3 N·m, plastic, don't over-torque). Disassembly is the reverse.
 The inserts tolerate > 10 cycles.

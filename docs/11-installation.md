@@ -1,4 +1,4 @@
-# 11 — Installation and Vehicle Integration (reference car: Renault X90, K7M 1.6)
+# 11. Installation and Vehicle Integration (reference car: Renault X90, K7M 1.6)
 
 > **Safety first.** Work with the ignition off and the key out. For the optional taps (§6), disconnect the battery negative terminal
 > first. Before you do, make sure you have the radio security code if your head unit needs one. Stay clear of yellow airbag
@@ -48,8 +48,8 @@
 | J1 pin | From | Wire | Notes |
 |--------|------|------|-------|
 | 1 VBAT | Splitter pin 16 | 0.5 mm² red | Inline **3 A** fuse within 100 mm of the splitter |
-| 2 GND | Splitter pin 4 | 0.5 mm² black | — |
-| 3 GND_SIG | Splitter pin 5 | 0.35 mm² black/white | — |
+| 2 GND | Splitter pin 4 | 0.5 mm² black | - |
+| 3 GND_SIG | Splitter pin 5 | 0.35 mm² black/white | - |
 | 4 K-LINE | Splitter pin 7 | 0.35 mm² white | Twist loosely with pin-3 wire (≈ 30 twists/m) |
 | 6 / 8 CAN H/L | Splitter 6 / 14 | 0.35 mm² twisted pair | Fit even if unused: zero cost, and future-proof |
 | 5 IGN, 7 FUEL, 9 REV | Taps (§6) | 0.35 mm² | Leave the cavities empty if not used |
@@ -79,7 +79,7 @@ All taps use **solder + adhesive-lined heat-shrink** or a Posi-Tap-type connecto
 | IGN (+APC) | Cabin fuse box: an ignition-switched fuse output (e.g., the radio's switched feed or cluster feed) | Multimeter: 0 V key off, 12 V key on, stays at ≥ 9 V while cranking | 0.5 A PTC at the tap point |
 | REV | Reverse-lamp feed: at the reverse switch harness on the gearbox, or the rear lamp connector | 12 V only in reverse with ignition on | 0.5 A PTC |
 | FUEL | Fuel-gauge sender signal at the cluster connector or the tank-sender connector (under the rear seat) | Voltage varies with fuel level, key on (record full/reserve readings, V6) | Series 10 kΩ at the tap (module input is 122 kΩ) |
-| Coolant probe (alternative to ECU data) | 10 kΩ NTC, clamped to the upper radiator hose near the thermostat housing with a stainless clamp + thermal pad | — | JST-GH lead routed through the bulkhead grommet, away from the exhaust manifold |
+| Coolant probe (alternative to ECU data) | 10 kΩ NTC, clamped to the upper radiator hose near the thermostat housing with a stainless clamp + thermal pad | - | JST-GH lead routed through the bulkhead grommet, away from the exhaust manifold |
 
 Never tap ECU sensor wires (doc 02 §7).
 

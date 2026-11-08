@@ -90,7 +90,7 @@ fun ParkingScreen(onBack: () -> Unit) {
 
                 Panel("Your car", icon = R.drawable.parking, subtitle = "Parked ${ago(park.t, now)} · ${fmtDate(park.t)}") {
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        MetricTile("Accuracy", if (park.accuracyM > 0f) "± %.0f".format(Locale.US, park.accuracyM) else "—",
+                        MetricTile("Accuracy", if (park.accuracyM > 0f) "± %.0f".format(Locale.US, park.accuracyM) else "--",
                             Modifier.weight(1f), unit = "m")
                         MetricTile("Location", "%.5f, %.5f".format(Locale.US, park.lat, park.lon), Modifier.weight(2f))
                     }

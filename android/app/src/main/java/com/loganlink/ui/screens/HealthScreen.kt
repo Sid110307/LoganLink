@@ -105,7 +105,7 @@ fun HealthScreen(go: (String) -> Unit) {
                 subtitle = when {
                     active.isNotEmpty() -> "${active.size} active fault code${if (active.size > 1) "s" else ""}" +
                         (if (mil) " · check-engine light on" else "")
-                    mil -> "Check-engine light is on — read codes"
+                    mil -> "Check-engine light is on, read codes"
                     else -> "No active fault codes" + (dtcs.firstOrNull()?.let { " · last seen ${ago(it.lastSeen)}" } ?: "")
                 },
                 trailing = {
@@ -155,10 +155,10 @@ fun HealthScreen(go: (String) -> Unit) {
                 onClick = { go(Routes.ENGINE) }) {
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     val c = f?.coolant
-                    MetricTile("Coolant", c?.let { String.format(Locale.US, "%.0f", it) } ?: "—", Modifier.weight(1f), unit = "°C",
+                    MetricTile("Coolant", c?.let { String.format(Locale.US, "%.0f", it) } ?: "--", Modifier.weight(1f), unit = "°C",
                         emphasis = when { c == null -> null; c >= 105 -> StateCritical; c >= 100 -> StateWarning; else -> null })
                     val lt = avgLtft ?: f?.ltft?.toDouble()
-                    MetricTile("Long-term fuel trim", lt?.let { String.format(Locale.US, "%+.0f", it) } ?: "—", Modifier.weight(1f),
+                    MetricTile("Long-term fuel trim", lt?.let { String.format(Locale.US, "%+.0f", it) } ?: "--", Modifier.weight(1f),
                         unit = "%", emphasis = if (lt != null && abs(lt) > 10) StateWarning else null)
                 }
             }
@@ -225,7 +225,7 @@ private fun scoreLabel(score: Int) = when {
     score >= 80 -> "Healthy"
     score >= 60 -> "Fair"
     score >= 45 -> "Weakening"
-    else -> "Weak — have it tested"
+    else -> "Weak, have it tested"
 }
 
 private fun usedColor(used: Double): Color = when {

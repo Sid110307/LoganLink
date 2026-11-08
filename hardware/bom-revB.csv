@@ -28,6 +28,6 @@ RPREC,5,Panasonic/Yageo,ERA-6A 0.5% 50ppm series (1M x2, 150k, 68k, 1M),"Divider
 CPASS,~20,Murata/Yageo,GCM/CC series,"MLCC decoupling",0402/0603,Fit,Mouser/DigiKey,2,1,
 RPASS,~22,Yageo,RC series,"Resistors 1%",0402/0603,Fit,Mouser/DigiKey,1,0.5,
 R10,1,Vishay,CRCW1206510RFKEAHP,"510R 0.5W K-line pull-up",1206,Fit,Mouser/DigiKey,15,8,
-PCB,1,LionCircuits,LL-VM1 rev B,"2-layer 1.6mm ENIG 46x38mm",—,—,LionCircuits,200,60,qty1 = per board from a 5-pc lot
-PCBA,1,LionCircuits,turnkey,"SMT top side + 1 THT (J1, hand-solder)",—,—,LionCircuits,1500,300,setup dominates small lots; get a quote
-ENCL,1,self-print,dongle.scad,"ASA/PA12 thin-wall shell + light pipe + 2 screws",—,—,—,120,80,
+PCB,1,LionCircuits,LL-VM1 rev B,"2-layer 1.6mm ENIG 46x38mm",-,-,LionCircuits,200,60,qty1 = per board from a 5-pc lot
+PCBA,1,LionCircuits,turnkey,"SMT top side + 1 THT (J1, hand-solder)",-,-,LionCircuits,1500,300,setup dominates small lots; get a quote
+ENCL,1,self-print,dongle.scad,"ASA/PA12 thin-wall shell + light pipe + 2 screws",-,-,-,120,80,

@@ -1,5 +1,6 @@
 package com.loganlink.ui.screens
 
+import androidx.compose.ui.graphics.luminance
 import com.loganlink.ui.components.fadeScroll
 import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
@@ -278,6 +279,7 @@ private fun AboutHeader() {
     val scope = rememberCoroutineScope()
     val haptic = androidx.compose.ui.platform.LocalHapticFeedback.current
     val p = flip.value
+    val dark = MaterialTheme.colorScheme.background.luminance() < 0.5f
     Row(verticalAlignment = Alignment.CenterVertically) {
         androidx.compose.foundation.layout.Box(
             Modifier.size(52.dp)
@@ -299,7 +301,9 @@ private fun AboutHeader() {
         ) {
             if (p < 0.5f) androidx.compose.foundation.Image(androidx.compose.ui.res.painterResource(R.drawable.ic_launcher_fg), null,
                 Modifier.size(52.dp).scale(1.5f))
-            else androidx.compose.foundation.Image(androidx.compose.ui.res.painterResource(R.drawable.face), null, Modifier.size(52.dp))
+            else androidx.compose.foundation.Image(androidx.compose.ui.res.painterResource(R.drawable.face), null, Modifier.size(52.dp),
+                colorFilter = if (dark) androidx.compose.ui.graphics.ColorFilter.colorMatrix(androidx.compose.ui.graphics.ColorMatrix(floatArrayOf(
+                    -1f, 0f, 0f, 0f, 255f, 0f, -1f, 0f, 0f, 255f, 0f, 0f, -1f, 0f, 255f, 0f, 0f, 0f, 1f, 0f))) else null)
         }
         Text("LoganLink", style = MaterialTheme.typography.headlineMedium, modifier = Modifier.padding(start = 12.dp))
     }

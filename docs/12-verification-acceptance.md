@@ -1,4 +1,4 @@
-# 12 — System Verification and Acceptance
+# 12. System Verification and Acceptance
 
 ## 1. Test equipment
 
@@ -8,10 +8,10 @@
 | DMM | 4½ digit, µA range (e.g., UNI-T UT61E+) | 4,000–6,000 | Calibration, sleep current |
 | µA logger (recommended) | Nordic PPK2 or Joulescope-class | 8,000 (PPK2) | Sleep profile, wake events |
 | Oscilloscope | 2-ch 100 MHz (e.g., Rigol DS1102Z-E) | 25,000–30,000 | K-line timing, ripple, buck |
-| USB-UART / USB-C cable | — | 300 | Programming |
+| USB-UART / USB-C cable | - | 300 | Programming |
 | K-line reference tool | Genuine ELM327-based (OBDLink SX) or a known-good scan tool | 3,000–6,000 | Cross-check readings on the car |
 | ISO 7637/16750 pulse generator | Lab only (test house) | rented: ~₹25k–60k/day at Indian EMC labs | Transient compliance |
-| Thermal chamber / heat gun + thermocouple | — | lab / 1,500 | Thermal tests |
+| Thermal chamber / heat gun + thermocouple | - | lab / 1,500 | Thermal tests |
 
 ## 2. Factory self-test (firmware `selftest` command, each board)
 
@@ -24,7 +24,7 @@
 | K-line loopback | Fixture ties K to 510 Ω/12 V; echo test of 64 bytes at 10,400 baud | 0 errors |
 | VBAT channel | Fixture supplies 12.000 V and 15.000 V | Reads within ±30 mV after calibration |
 | BLE | Advertising seen by the fixture scanner, RSSI at 1 m | ≥ −60 dBm |
-| LED / button | Operator visual + button press | — |
+| LED / button | Operator visual + button press | - |
 | Current | 12.0 V STANDBY | 10–25 mA |
 
 ## 3. Design verification (prototype units, DV)

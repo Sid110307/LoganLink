@@ -1,4 +1,4 @@
-# 05 — Custom PCB Design (LL-VM1 rev A)
+# 05. Custom PCB Design (LL-VM1 rev A)
 
 ## 1. KiCad project architecture (KiCad 8)
 
@@ -98,7 +98,7 @@ The coolant NTC probe uses a separate 2-pin **JST GH** (SM02B-GHS-TB) connector,
 | L1 Top | Components, signals, RF CPWG | 1 oz (35 µm) | 7628 prepreg 0.21 mm, εr ≈ 4.4 |
 | L2 | **Solid GND** (no splits) | 0.5 oz | core ~1.07 mm |
 | L3 | Power pours (VBAT_PROT, 3V3 rails) + low-speed signals | 0.5 oz | 7628 prepreg 0.21 mm |
-| L4 Bottom | Signals, test points, GND fill | 1 oz | — |
+| L4 Bottom | Signals, test points, GND fill | 1 oz | - |
 
 Controlled impedance (verify with the fab's calculator for its exact stack):
 - **50 Ω coplanar waveguide with ground (L1 over L2):** width ≈ 0.30 mm, gap ≈ 0.20 mm. Plain microstrip would need ≈ 0.36 mm.
@@ -140,11 +140,11 @@ Rules:
 | Net class | Track | Clearance | Via | Notes |
 |-----------|-------|-----------|-----|-------|
 | `PWR_HV` | 0.8 mm (1 oz, ≥ 2 A at ΔT 10 °C) | **0.5 mm** (60 V + transient creepage margin) | 0.6/0.3 mm, ≥ 2 per transition | L3 pour preferred |
-| `PWR_LV` | 0.5 mm | 0.2 mm | 0.6/0.3 | — |
-| `HV_SIG` (K-line, taps) | 0.3 mm | 0.5 mm | 0.6/0.3 | — |
+| `PWR_LV` | 0.5 mm | 0.2 mm | 0.6/0.3 | - |
+| `HV_SIG` (K-line, taps) | 0.3 mm | 0.5 mm | 0.6/0.3 | - |
 | `RF50` | 0.30 mm CPWG | gap 0.20 mm | GND via fence every 1.5 mm (λ/20 at 1.6 GHz ≈ 9 mm, far below) | No vias in the line, length < 15 mm |
-| `CAN` | 0.25 mm diff | 0.2 mm | — | — |
-| default | 0.2 mm | 0.15 mm | 0.45/0.2 mm | — |
+| `CAN` | 0.25 mm diff | 0.2 mm | - | - |
+| default | 0.2 mm | 0.15 mm | 0.45/0.2 mm | - |
 
 - **L2 stays unbroken.** Every signal on L1/L4 has a continuous L2 reference. No signal crosses a gap in L3 power pours.
   Where a signal changes layers between L1 and L4, place a ground stitching via within 1 mm, so the return current
@@ -230,12 +230,12 @@ the car parked in the sun, when the module is asleep anyway. In DRIVE, cabin ven
 |------|---------------|-----------|-------|
 | ESP32-S3-WROOM-1 | KiCad std `RF_Module:ESP32-S3-WROOM-1` | std | Check that the keep-out zone is included |
 | LMR36015 | TI WEBENCH/Ultra Librarian export | VQFN-HR 12 (RNX) | Check pin-1 and the 2-pad thermal |
-| MAX-M10S | u-blox symbol (create) | LCC-18 9.7×10.1 per *MAX-M10S Integration Manual* | — |
+| MAX-M10S | u-blox symbol (create) | LCC-18 9.7×10.1 per *MAX-M10S Integration Manual* | - |
 | ASM330LHHX, AIS2DW12 | SnapEDA/ST | LGA-14L / LGA-12 | Paste 1:1 |
 | SHT45/SGP41/SCD41 | Sensirion KiCad libs | DFN / SCD41 LGA | Respect the recommended keep-outs |
-| W25Q256JVEI | KiCad std | WSON-8 6×5 | — |
-| SN65HVD230 | KiCad std | SOIC-8 | — |
+| W25Q256JVEI | KiCad std | WSON-8 6×5 | - |
+| SN65HVD230 | KiCad std | SOIC-8 | - |
 | SM8S26A | create | DO-218AB | Heavy copper pads, 4 vias |
-| VNLD5090-E | create | SO-8 | — |
+| VNLD5090-E | create | SO-8 | - |
 | Micro-Fit 43045-1000 | Molex model | THT RA 2×5 3.0 mm | Pegs plated |
 | A7672S | SIMCom reference footprint | LCC 24×24 | Variant C |

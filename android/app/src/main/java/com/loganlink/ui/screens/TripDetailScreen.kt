@@ -151,9 +151,9 @@ private fun TripBody(r: TripLoad.Ready, modifier: Modifier) {
                 MetricTile("Max speed", "%.0f".format(Locale.US, t.maxSpeed), Modifier.weight(1f), unit = "km/h")
             }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                MetricTile("Fuel", if (t.fuelMl > 0) "%.2f".format(Locale.US, t.litres) else "—", Modifier.weight(1f), unit = "L")
-                MetricTile("Economy", t.kmPerL?.let { "%.1f".format(Locale.US, it) } ?: "—", Modifier.weight(1f), unit = "km/L")
-                MetricTile("Cost", if (t.costPaise > 0) fmtRupees(t.costPaise) else "—", Modifier.weight(1f))
+                MetricTile("Fuel", if (t.fuelMl > 0) "%.2f".format(Locale.US, t.litres) else "--", Modifier.weight(1f), unit = "L")
+                MetricTile("Economy", t.kmPerL?.let { "%.1f".format(Locale.US, it) } ?: "--", Modifier.weight(1f), unit = "km/L")
+                MetricTile("Cost", if (t.costPaise > 0) fmtRupees(t.costPaise) else "--", Modifier.weight(1f))
             }
         }
 

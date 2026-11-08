@@ -1,4 +1,4 @@
-# 02 — Target Vehicle Electrical/Electronic Architecture and Integration Design
+# 02. Target Vehicle Electrical/Electronic Architecture and Integration Design
 
 > **Evidence level.** The reference car is a 2007–2010 Indian-market Renault X90 (Phase-1) sedan built at Nashik with the K7M 1.6.
 > Other X90/K7M-family cars and most K-line OBD-II petrol cars of that era share this architecture. Facts below are marked: **[D]** documented in Renault/Dacia
@@ -96,16 +96,16 @@ Example OBD request RPM: `C2 33 F1 01 0C F3`.
 
 | Signal | Native location | Characteristics | Acquisition method (selected) | Rationale |
 |--------|-----------------|-----------------|-------------------------------|-----------|
-| Engine speed | ECU (crank sensor) | — | **A** PID 0x0C / LID; fallback **B** alternator ripple | No wire-tapping of crank sensor (inductive, high-voltage spikes, ECU-critical) |
+| Engine speed | ECU (crank sensor) | - | **A** PID 0x0C / LID; fallback **B** alternator ripple | No wire-tapping of crank sensor (inductive, high-voltage spikes, ECU-critical) |
 | Vehicle speed | Gearbox VSS → ECU/cluster | Square-wave pulses | **A** PID 0x0D; **B** GNSS | Avoids loading cluster speed input |
 | Coolant temp | NTC to ECU (and separate gauge sender) | 0–5 V ECU-referenced | **A**; optional **C**: own NTC probe | Never parallel-tap ECU NTC: alters ECU reading |
-| MAP, IAT, TPS, advance, trims, O₂ | ECU | — | **A** only | — |
+| MAP, IAT, TPS, advance, trims, O₂ | ECU | - | **A** only | - |
 | Battery voltage | +BAT | 9–15 V, ripple, transients | **B** OBD pin 16 | Direct, guaranteed |
 | Ignition state | +APC | 0/12 V | **C** optional IGN tap (100 k input, fused 1 A) **or** inferred: VBAT > 13.2 V or K-line ECU response | Optional tap gives clean key-on before crank |
 | Fuel level | Tank sender → cluster gauge (resistive, about 20–300 Ω class **[M → V6]**) | DC voltage at sender wire varies with level | **C** optional: high-impedance (122 kΩ) voltage measurement at sender wire | Draws < 0.1 mA, does not affect gauge; calibrated by fill points |
 | Reverse | Reverse-lamp feed | 0/12 V | **C** optional REV tap | For parking features |
-| Position, heading, speed | — | — | **B** GNSS MAX-M10S | — |
-| Accelerations, rotation | — | — | **B** IMU | — |
+| Position, heading, speed | - | - | **B** GNSS MAX-M10S | - |
+| Accelerations, rotation | - | - | **B** IMU | - |
 
 ## 5. Data-acquisition strategy (three paths)
 

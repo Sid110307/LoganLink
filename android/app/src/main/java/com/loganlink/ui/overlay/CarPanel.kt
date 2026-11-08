@@ -69,15 +69,15 @@ fun CarPanel(hub: VehicleHub, onDrag: (Float, Float) -> Unit, onClose: () -> Uni
                 }
             }
             Row(verticalAlignment = Alignment.Bottom) {
-                Text(f?.speed?.let { "%.0f".format(it) } ?: "—", style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Light, fontSize = 52.sp), color = Color.White)
+                Text(f?.speed?.let { "%.0f".format(it) } ?: "--", style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Light, fontSize = 52.sp), color = Color.White)
                 Text(" km/h", color = Color.White.copy(alpha = .6f), modifier = Modifier.padding(bottom = 10.dp))
                 Spacer(Modifier.weight(1f))
                 Icon(painterResource(R.drawable.xmark), "Close", Modifier.size(22.dp).clickable(onClick = onClose), tint = Color.White.copy(alpha = .6f))
             }
             Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                Stat("RPM", f?.rpm?.toString() ?: "—")
-                Stat("Coolant", f?.coolant?.let { "%.0f°".format(it) } ?: "—", (f?.coolant ?: 0.0) > 105)
-                Stat("Battery", f?.vbat?.let { "%.1f".format(it) } ?: "—", f?.engineRunning == true && (f?.vbat ?: 14.0) < 12.8)
+                Stat("RPM", f?.rpm?.toString() ?: "--")
+                Stat("Coolant", f?.coolant?.let { "%.0f°".format(it) } ?: "--", (f?.coolant ?: 0.0) > 105)
+                Stat("Battery", f?.vbat?.let { "%.1f".format(it) } ?: "--", f?.engineRunning == true && (f?.vbat ?: 14.0) < 12.8)
             }
             val alert = when {
                 (f?.coolant ?: 0.0) > 105 -> "Engine overheating"

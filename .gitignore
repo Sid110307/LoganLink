@@ -18,4 +18,10 @@ firmware/dependencies.lock
 # Misc
 .DS_Store
 Thumbs.db
-*.stl
+
+# KiCad
+.history/
+*.lck
+*-backups/
+fp-info-cache
+*.kicad_prl

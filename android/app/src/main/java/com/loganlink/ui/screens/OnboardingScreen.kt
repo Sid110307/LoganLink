@@ -1,5 +1,6 @@
 package com.loganlink.ui.screens
 
+import androidx.compose.ui.draw.scale
 import androidx.compose.runtime.LaunchedEffect
 import com.loganlink.ui.components.reveal
 import androidx.compose.foundation.background
@@ -174,23 +175,19 @@ private fun FindModule(creds: Creds, onPaired: () -> Unit, onBack: () -> Unit) {
 
 @Composable
 private fun Welcome(onPair: () -> Unit, onDemo: () -> Unit) {
-    val needle = remember { androidx.compose.animation.core.Animatable(0f) }
-    var ready by remember { mutableStateOf(false) }
-    LaunchedEffect(Unit) {
-        kotlinx.coroutines.delay(250)
-        needle.animateTo(1f, androidx.compose.animation.core.tween(750, easing = androidx.compose.animation.core.FastOutSlowInEasing))
-        needle.animateTo(0.115f, androidx.compose.animation.core.tween(900, easing = androidx.compose.animation.core.FastOutSlowInEasing))
-        ready = true
-    }
     Column(Modifier.fillMaxSize().safeDrawingPadding().padding(horizontal = 24.dp, vertical = 16.dp)) {
         Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
-            Text("LOGANLINK", style = MaterialTheme.typography.labelLarge, letterSpacing = 3.sp)
+            Image(painterResource(R.drawable.ic_launcher_fg), null, Modifier.size(36.dp).scale(1.4f))
             Spacer(Modifier.weight(1f))
             Text("v${com.loganlink.BuildConfig.VERSION_NAME}", style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
-        Box(Modifier.fillMaxWidth().weight(1f), contentAlignment = androidx.compose.ui.Alignment.Center) {
-            IgnitionGauge(needle.value, ready, Modifier.size(280.dp))
+        Column(Modifier.fillMaxWidth().weight(1f), verticalArrangement = Arrangement.Center) {
+            Text("LoganLink", style = MaterialTheme.typography.displayMedium.copy(fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
+                letterSpacing = (-1.5).sp))
+            Spacer(Modifier.height(8.dp))
+            com.loganlink.ui.components.TypewriterText("Connected-Vehicle System for OBD-II supported cars",
+                MaterialTheme.typography.titleLarge, color = MaterialTheme.colorScheme.primary, perCharMs = 32)
         }
         Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
             SetupStep(1, "Plug into the OBD port", "Under the dash or in the glovebox")
@@ -203,39 +200,6 @@ private fun Welcome(onPair: () -> Unit, onDemo: () -> Unit) {
         }
         TextButton(onClick = onDemo, Modifier.fillMaxWidth()) {
             Text("Try without a car", color = MaterialTheme.colorScheme.onSurfaceVariant)
-        }
-    }
-}
-
-@Composable
-private fun IgnitionGauge(p: Float, ready: Boolean, modifier: Modifier) {
-    val accent = MaterialTheme.colorScheme.primary
-    val tick = MaterialTheme.colorScheme.outline
-    val red = com.loganlink.ui.theme.StateCritical
-    val textColor = MaterialTheme.colorScheme.onSurface
-    Box(modifier, contentAlignment = androidx.compose.ui.Alignment.Center) {
-        androidx.compose.foundation.Canvas(Modifier.fillMaxSize()) {
-            val c = center; val r = size.minDimension / 2f
-            val start = 135f; val sweep = 270f
-            for (i in 0..56) {
-                val f = i / 56f
-                val major = i % 8 == 0
-                val a = Math.toRadians((start + sweep * f).toDouble())
-                val outer = r * 0.98f; val inner = r * if (major) 0.84f else 0.91f
-                val col = when { f > 0.82f -> red; f <= p -> accent; else -> tick }
-                drawLine(col, androidx.compose.ui.geometry.Offset(c.x + inner * kotlin.math.cos(a).toFloat(), c.y + inner * kotlin.math.sin(a).toFloat()),
-                    androidx.compose.ui.geometry.Offset(c.x + outer * kotlin.math.cos(a).toFloat(), c.y + outer * kotlin.math.sin(a).toFloat()),
-                    strokeWidth = if (major) 5f else 3f, cap = androidx.compose.ui.graphics.StrokeCap.Round)
-            }
-            val na = Math.toRadians((start + sweep * p).toDouble())
-            drawLine(accent, c, androidx.compose.ui.geometry.Offset(c.x + r * 0.78f * kotlin.math.cos(na).toFloat(), c.y + r * 0.78f * kotlin.math.sin(na).toFloat()),
-                strokeWidth = 7f, cap = androidx.compose.ui.graphics.StrokeCap.Round)
-            drawCircle(accent, r * 0.05f, c)
-        }
-        Column(horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally, modifier = Modifier.padding(top = 120.dp)) {
-            Text("%,d".format((p * 7000).toInt()), style = MaterialTheme.typography.headlineMedium, color = textColor)
-            com.loganlink.ui.components.MorphText(if (ready) "Ready" else "Self-test", MaterialTheme.typography.labelLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }

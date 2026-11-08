@@ -47,5 +47,5 @@ J2,1,GCT,USB4105-GF-A,"USB-C receptacle",SMD/THT,B+C,,,60,45,
 J3 J4,2,Hirose,U.FL-R-SMT-1(10),"U.FL",SMD,B+C (J4: C),,,25,18,
 J6,1,Amphenol,C707 10M006 512 2,"Nano-SIM push-push",SMD,C,,,90,70,DNP on B
 J7,1,JST,SM02B-GHS-TB(LF)(SN),"GH 2-pin coolant probe",SMD,B+C,,,20,15,optional
-PCB,1,LionCircuits,LL-VM1 rev A,"4L 1.6mm ENIG 80x55mm black mask",—,B+C,,,1100,260,qty1 price is per board from a 5-pc prototype order
-PCBA,1,LionCircuits,turnkey assembly,"SMT top side only + 1 THT (J1)",—,B+C,,,2500,450,setup/stencil amortised; quote required
+PCB,1,LionCircuits,LL-VM1 rev A,"4L 1.6mm ENIG 80x55mm black mask",-,B+C,,,1100,260,qty1 price is per board from a 5-pc prototype order
+PCBA,1,LionCircuits,turnkey assembly,"SMT top side only + 1 THT (J1)",-,B+C,,,2500,450,setup/stencil amortised; quote required

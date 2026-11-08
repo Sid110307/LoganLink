@@ -1,4 +1,4 @@
-# 08 — Smartphone Application: Product Design and Engineering
+# 08. Smartphone Application: Product Design and Engineering
 
 > **Implementation note (rev B):** the app is now a native Android app in Kotlin with Jetpack Compose, in `android/`. It replaces
 > the Flutter prototype described in §1, §6 and §11 below. The product design, flows, protocol use and data model in this document
@@ -15,7 +15,7 @@
 | Charts | `fl_chart` | Line, bar and scatter charts with good performance |
 | Maps | `google_maps_flutter` (Google Maps SDK) | Best Indian road and POI coverage. Directions via a deep link to the Maps app |
 | Notifications | `flutter_local_notifications` | All alerts are generated locally. No server is needed |
-| Voice | Android App Actions (`shortcuts.xml` capabilities) + iOS App Intents (Siri), `flutter_tts` for spoken alerts | — |
+| Voice | Android App Actions (`shortcuts.xml` capabilities) + iOS App Intents (Siri), `flutter_tts` for spoken alerts | - |
 | Minimum OS | Android 9 (API 28), with full background auto-connect on Android 12+. iOS 15 | Covers > 95 % of active Indian smartphones |
 
 ## 2. Information architecture
@@ -84,10 +84,10 @@ driver's app scans it, then bonds during a pairing window the owner opens.
 | Red | `#FF4D5E` | Stop safely / critical |
 | Blue | `#5AA9FF` | Info, cold engine |
 | Type | **Inter** (UI) with **tabular figures** for all live numbers. Display numerals 300 weight, 64–96 pt | Calm, premium, legible at a glance |
-| Grid | 4-pt spacing; card radius 20; chip radius 10 | — |
+| Grid | 4-pt spacing; card radius 20; chip radius 10 | - |
 | Motion | 120 ms (taps), 240 ms (transitions), 180 ms ease-out needle smoothing | No bouncy motion. Data animates, chrome doesn't |
-| Iconography | Material Symbols Outlined, 1.5 px weight | — |
-| Accessibility | Contrast ≥ 4.5:1 for text (WCAG AA), Dynamic Type up to 200 %, colour never the only signal (icons + words) | — |
+| Iconography | Material Symbols Outlined, 1.5 px weight | - |
+| Accessibility | Contrast ≥ 4.5:1 for text (WCAG AA), Dynamic Type up to 200 %, colour never the only signal (icons + words) | - |
 
 Light theme exists for daytime parked use. It follows the system setting, except Drive Mode, which is always dark.
 Implemented in `app/lib/theme/tokens.dart`.

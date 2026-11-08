@@ -1,4 +1,4 @@
-# 04 — Electronic Hardware Design
+# 04. Electronic Hardware Design
 
 All part numbers are current production parts as of this design. "Q1/AEC" marks automotive-qualified
 parts. Before ordering, confirm the **exact orderable suffix** (package, reel, temperature grade) on the
@@ -33,14 +33,14 @@ should be checked.
 | C_in bulk | Hybrid polymer | **Panasonic EEH-ZA1J470P** | 47 µF 63 V, 125 °C, AEC-Q200 | SMD 6.3×7.7 | Low ESR, hold-up |
 | J1 | Vehicle connector | **Molex Micro-Fit 3.0** RA dual-row 10-ckt header 43045-1000 ⚠ (mating 43025-1000 + 43030-0007 crimps) | 5 A/contact, 105 °C, positive latch | THT | Vibration-proof latch, keyed |
 | J2 | USB-C | **GCT USB4105-GF-A** | USB 2.0, 16-pin | SMD/THT | Programming/console |
-| J3,J4 | RF | **Hirose U.FL-R-SMT-1(10)** | 50 Ω | — | GNSS and LTE antennas |
+| J3,J4 | RF | **Hirose U.FL-R-SMT-1(10)** | 50 Ω | - | GNSS and LTE antennas |
 | J5 | Debug | **Tag-Connect TC2030-IDC-NL** footprint | UART0 + EN + IO0 + 3V3 + GND | pads only | Production programming, zero BOM cost |
 | SW1 | Pair | **C&K PTS526 SM15 SMTR2 LFS** ⚠ | 6.2 mm tact, sealed | SMD | Recessed pinhole access |
-| LED1 | Status | **Kingbright APHB1608LZGKSURKC** ⚠ (bi-colour R/G 0603) | — | 0603 | Red/green/amber |
+| LED1 | Status | **Kingbright APHB1608LZGKSURKC** ⚠ (bi-colour R/G 0603) | - | 0603 | Red/green/amber |
 | *Variant C only* ||||||
 | U16 | LTE Cat-1 | **SIMCom A7672S** | LTE-FDD B1/3/5/8, TDD B38/40/41, GSM fallback; India bands | LCC 24×24 | Indian bands, AT-command UART, low cost |
 | U17 | LTE buck 3.8 V | **TI TPS54360B-Q1** | 4.5–60 V, 3.5 A, EN shutdown 2 µA | SO-8 PowerPAD | Handles 2 A GSM bursts |
-| J6 | Nano-SIM | **Amphenol C707 10M006 512 2** ⚠ | Push-push | — | — |
+| J6 | Nano-SIM | **Amphenol C707 10M006 512 2** ⚠ | Push-push | - | - |
 
 ## 2. Power architecture and input protection
 
@@ -90,7 +90,7 @@ the dip, so it survives a reset (doc 07 §5).
 | Input ripple current | I_rms ≈ IOUT·√(D(1−D)), D = 0.24 | 0.64 A → 2 × 4.7 µF X7S + hybrid share |
 | Efficiency | Datasheet curves: ~86 % @ 150 mA, ~80 % @ 10 mA (PFM) | Used in power budget |
 | Bootstrap | 100 nF 16 V X7R | per datasheet |
-| EN | Tie to VIN via 100 k (always on); UVLO internal 3.9 V | — |
+| EN | Tie to VIN via 100 k (always on); UVLO internal 3.9 V | - |
 | Thermal | P_loss ≈ 0.5 W·(1/0.86 − 1) ≈ 0.08 W | ΔT negligible; 4 thermal vias under pad |
 
 ### 2.4 Power budget (B variant)
@@ -99,19 +99,19 @@ the dip, so it survives a reset (doc 07 §5).
 |------|----------------------|------------|-------------------|
 | ESP32-S3 (BLE active, 160 MHz, Wi-Fi off) | 55 | 130 (BLE TX) / 340 (Wi-Fi OTA only) | 10 (deep sleep + ULP @ 1 Hz ADC) |
 | MAX-M10S + active antenna | 8 + 10 | 30 | 30 (V_BCKP, optional jumper R52) |
-| ASM330LHHX (high-perf 104 Hz) | 0.8 | — | 0 (rail off) |
-| AIS2DW12 (LP 12.5 Hz wake) | 0.004 | — | 1 |
+| ASM330LHHX (high-perf 104 Hz) | 0.8 | - | 0 (rail off) |
+| AIS2DW12 (LP 12.5 Hz wake) | 0.004 | - | 1 |
 | SCD41 periodic (5 s) | 15 | 205 | 0 |
 | SGP41 | 3.2 | 4 | 0 |
 | SHT45 | 0.01 | 1 | 0 |
 | W25Q256 | 1 (avg) | 25 (program) | 0 |
-| SN65HVD230 recessive | 10 | — | 0 |
+| SN65HVD230 recessive | 10 | - | 0 |
 | K-line RX comparator + pull-up drive | 0.3 | 24 (line low) | 0 |
-| RV-3028 | — | — | 0.05 |
+| RV-3028 | - | - | 0.05 |
 | LED | 2 | 5 | 0 |
 | **Total 3.3 V** | **≈ 105 mA** | **≈ 450 mA** | **≈ 41 µA (11 µA without GNSS backup)** |
-| Input @ 13.8 V (η 86 %) | **29 mA** (+ dividers) ⇒ **≈ 0.4 W** | — | — |
-| Direct VBAT loads in sleep | — | — | VBAT_SENSE 11 µA, K-RX dividers 22 µA, buck Iq 24 µA, D1 leakage ≤ 5 µA |
+| Input @ 13.8 V (η 86 %) | **29 mA** (+ dividers) ⇒ **≈ 0.4 W** | - | - |
+| Direct VBAT loads in sleep | - | - | VBAT_SENSE 11 µA, K-RX dividers 22 µA, buck Iq 24 µA, D1 leakage ≤ 5 µA |
 | **Sleep at battery (12.6 V)** | | | 41 µA × 3.3/12.6/0.8 ≈ 13 µA + 62 µA ⇒ **≈ 75 µA** (≈ 55 µA w/o GNSS backup) |
 
 Battery impact: 75 µA × 720 h = **54 mAh/month**. A 35 Ah battery loses about 0.15 %/month from the module.
@@ -142,7 +142,7 @@ internal flash. Full table: `hardware/pinmap.csv`.
 | 18 | K_RXD | In | UART1 RX from U14 |
 | 19/20 | USB_D−/D+ | USB | Native USB-Serial-JTAG |
 | 21 | GNSS_EN | Out | U4 ON; 100 k pull-down |
-| 35 | SPARE | — | (free because R2 quad-PSRAM variant is used) |
+| 35 | SPARE | - | (free because R2 quad-PSRAM variant is used) |
 | 36 | LTE_PWRKEY | Out | Variant C, via NPN |
 | 37 | LTE_STATUS | In | Variant C |
 | 38/39 | LED_R / LED_G | Out | 330 Ω / 150 Ω |

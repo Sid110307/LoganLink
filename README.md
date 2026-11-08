@@ -1,4 +1,6 @@
-# LoganLink — Connected-Vehicle System for older OBD-II petrol cars
+# LoganLink
+
+Connected-Vehicle System for OBD-II supported cars.
 
 LoganLink is a small dongle that plugs straight into the car's OBD socket, plus a native Android app. It turns an
 older K-line OBD-II petrol car (developed on a Renault X90-platform sedan with the K7M 1.6) into a connected, self-diagnosing car. The dongle reads the engine ECU over

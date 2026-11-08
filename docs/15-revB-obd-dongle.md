@@ -1,4 +1,4 @@
-# 15 — Rev B: OBD Plug-in Dongle (current hardware baseline)
+# 15. Rev B: OBD Plug-in Dongle (current hardware baseline)
 
 **Engineering change order ECO-002.** Rev B replaces the rev A under-dash module (docs 04, 05, 09, 11 §4–5, 13) as the
 build baseline. Rev A docs stay as reference: their K-line PHY, protection philosophy, protocol, security and verification

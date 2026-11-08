@@ -125,7 +125,7 @@ private fun Grid(tiles: List<Tile>) {
             row.forEach { t ->
                 MetricTile(
                     t.label,
-                    t.v?.let { (if (t.est) "≈" else "") + "%.${t.dec}f".format(it) } ?: "—",
+                    t.v?.let { (if (t.est) "≈" else "") + "%.${t.dec}f".format(it) } ?: "--",
                     Modifier.weight(1f), t.unit, if (t.warn) StateCritical else null,
                 )
             }

@@ -1,4 +1,4 @@
-# 16 — Roadmap: What Can Be Added Next
+# 16. Roadmap: What Can Be Added Next
 
 Phases: **Near** (weeks, firmware/app only, no new hardware) · **Mid** (months, small hardware add-ons or a board rev) ·
 **Long** (major work or new platforms). Effort is for one engineer who already knows this codebase. Costs are hardware per unit (INR).
@@ -20,8 +20,8 @@ narrow capability on top of the read-only guard, never by loosening the guard.
 | Fuel-trim (adaptive) reset | 0x31 / 0x3B | After fixing a vacuum leak or injector | Low–medium | Mid |
 | Actuator tests: radiator fan relay, fuel pump relay, A/C clutch, purge (canister) valve, idle actuator sweep, injector click test, MIL lamp | 0x30 InputOutputControlByLocalId | Find a dead fan, pump or injector without a workshop | Medium: must never run with the engine running or the car moving | Mid |
 | Service-interval reset (if the cluster or UCH supports it on this trim) | ECU-specific | Convenience | Low | Mid |
-| Key/remote programming, immobiliser functions | 0x27 SecurityAccess + proprietary | — | **Never** (theft risk) | Forbidden |
-| ECU reflash / calibration change ("remap") | 0x34–0x37, 0x27 | — | **Never via LoganLink** | Forbidden |
+| Key/remote programming, immobiliser functions | 0x27 SecurityAccess + proprietary | - | **Never** (theft risk) | Forbidden |
+| ECU reflash / calibration change ("remap") | 0x34–0x37, 0x27 | - | **Never via LoganLink** | Forbidden |
 | Coding / configuration writes (variant coding) | 0x3B to coding IDs | Retrofit options | High: wrong coding can disable functions | Long, if ever |
 
 ### 1.2 Safety architecture for writes
@@ -57,9 +57,9 @@ diagnostics, DDT-style community databases (validate every ID on the simulator, 
 | Item | Phase | Effort | HW cost |
 |------|-------|--------|---------|
 | ISO 15765 CAN driver (ISO-TP, 11/29-bit, 250/500 k) for newer cars: same PCB, fit the DNP SN65HVD230Q | Near–Mid | 1–2 weeks | +₹110 |
-| Multi-vehicle profiles in app (switch cars, per-car history) | Near | 1 week | — |
+| Multi-vehicle profiles in app (switch cars, per-car history) | Near | 1 week | - |
 | Generic OBD-II "any car" mode (auto-probe all protocols; J1850 PWM/VPW would need an extra PHY) | Mid | 2 weeks (+HW for J1850) | +₹150 |
-| Renault/Dacia platform library (Duster, Sandero, Kwid K-line/CAN variants) | Long | ongoing | — |
+| Renault/Dacia platform library (Duster, Sandero, Kwid K-line/CAN variants) | Long | ongoing | - |
 
 ## 3. Hardware add-ons (rev C / plug-on pods)
 
@@ -72,8 +72,8 @@ diagnostics, DDT-style community databases (validate every ID on the simulator, 
 | **Coolant/oil temperature probe** inputs | Mid | For data the ECU doesn't expose | ₹200 |
 | **Ignition/reverse/accessory taps** with a short harness (rev A features) | Mid | Accessory switching for a dashcam, reverse detection | ₹300 |
 | **HUD**: small BLE e-paper/OLED or HUD reflector unit on the dash showing speed/RPM/alerts | Long | Phone-independent display | ₹1,500–3,000 |
-| **Dashcam integration**: trigger clip save on harsh/crash events (via the dashcam's Wi-Fi API, or a GPIO on hardwire kits) | Mid | Depends on the dashcam model | — |
-| **Remote start / central locking** | — | Not planned: defeats the immobiliser or adds attack surface (doc 10 §5) | — |
+| **Dashcam integration**: trigger clip save on harsh/crash events (via the dashcam's Wi-Fi API, or a GPIO on hardwire kits) | Mid | Depends on the dashcam model | - |
+| **Remote start / central locking** | - | Not planned: defeats the immobiliser or adds attack surface (doc 10 §5) | - |
 
 ## 4. App and platform
 

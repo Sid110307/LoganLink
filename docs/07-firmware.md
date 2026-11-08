@@ -1,4 +1,4 @@
-# 07 — Firmware and Embedded Software
+# 07. Firmware and Embedded Software
 
 ## 1. Toolchain and frameworks
 
@@ -16,24 +16,24 @@
 
 | Module | Files | Responsibility | Core / prio |
 |--------|-------|----------------|-------------|
-| Board | `board.h` | Pin map, constants (mirrors `hardware/pinmap.csv`) | — |
-| State | `vstate.[ch]` | Shared live state, lock-protected snapshot | — |
-| Config | `config.[ch]` | NVS-backed settings, K_dev, users, vehicle profile, local-ID map | — |
+| Board | `board.h` | Pin map, constants (mirrors `hardware/pinmap.csv`) | - |
+| State | `vstate.[ch]` | Shared live state, lock-protected snapshot | - |
+| Config | `config.[ch]` | NVS-backed settings, K_dev, users, vehicle profile, local-ID map | - |
 | K-line | `kline.[ch]` | ISO 9141-2 / ISO 14230 PHY control, fast/5-baud init, framing, echo check, P-timings, foreign-tester detection | C1 |
-| Guard | `vguard.[ch]` | **Default-deny allow-list** for every vehicle request | — |
+| Guard | `vguard.[ch]` | **Default-deny allow-list** for every vehicle request | - |
 | OBD | `obd.[ch]` | Probe, PID scheduler, decode, DTC read/clear, Renault local-ID mapper | C1 / 10 |
 | Battery | `vbat.[ch]` | 2-channel ADC continuous (40 kS/s each), VBAT filter, crank capture, ripple FFT, RPM estimate, K_rip self-cal | C1 / 12 |
 | Fuel | `fuel.[ch]` | Speed-density fuel model, VE self-calibration from fill-ups | C1 (from power task) |
 | GNSS | `gnss.[ch]` | UBX VALSET config, NAV-PVT parser, speed fallback, parking fix | C1 / 8 |
 | Sensors | `sensors.[ch]` | I²C buses, IMU (crash detection), SHT45, SCD41, wake accelerometer, RTC | C1 / 7 |
 | Trip | `trip.[ch]` | Trip lifecycle, distance, harsh events, 1 Hz history records, AUX output | C1 (power task) |
-| Logger | `logger.[ch]` | 128-byte CRC-protected ring records on the external 32 MB NOR | — |
-| Protocol | `proto.[ch]` | Frame build/parse, CRC-16, LiveV1 packing | — |
-| Auth | `auth.[ch]` | Challenge/response, session key, command MAC + replay protection | — |
+| Logger | `logger.[ch]` | 128-byte CRC-protected ring records on the external 32 MB NOR | - |
+| Protocol | `proto.[ch]` | Frame build/parse, CRC-16, LiveV1 packing | - |
+| Auth | `auth.[ch]` | Challenge/response, session key, command MAC + replay protection | - |
 | BLE link | `ble_link.[ch]` | NimBLE GATT, pairing window, worker task: commands, live stream, log sync, OTA | C0 / 9 |
 | Power | `power.[ch]` | State machine, sleep/hibernate, ULP setup, PAIR button, LED, thermal policy | C1 / 11 |
 | ULP | `ulp/ulp_vbat.c` | Parked VBAT supervision; wakes main CPU on charge or voltage step | ULP |
-| Entry | `app_main.c` | Boot sequence, OTA confirmation | — |
+| Entry | `app_main.c` | Boot sequence, OTA confirmation | - |
 
 ## 3. Boot sequence
 
@@ -62,7 +62,7 @@ Typical time from wake to advertising: ≈ 350 ms. To first live frame on an alr
 | `power` | 1 | 11 | 100 ms | 4 KB | < 1 ms (+ flash write 1 Hz ≈ 0.6 ms) |
 | `vehicle` | 1 | 10 | K-line bound: ≈ 70–110 ms per request | 6 KB | blocks on UART |
 | `link` (BLE worker) | 0 | 9 | queue or 10 ms | 8 KB | notify ≈ 0.2 ms; HMAC ≈ 0.1 ms |
-| NimBLE host | 0 | (IDF) | events | (IDF) | — |
+| NimBLE host | 0 | (IDF) | events | (IDF) | - |
 | `gnss` | 1 | 8 | UART bytes | 4 KB | < 0.2 ms per NAV-PVT |
 | `sensors` | 1 | 7 | 10 ms | 4 KB | I²C 6-byte read ≈ 0.25 ms |
 

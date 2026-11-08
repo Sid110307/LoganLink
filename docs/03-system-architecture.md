@@ -1,4 +1,4 @@
-# 03 — System Architecture
+# 03. System Architecture
 
 ## 1. Architecture options evaluated
 
@@ -92,14 +92,14 @@ band clear for BLE.
 
 | Stream | Producer → consumer | Rate | Latency budget | Notes |
 |--------|---------------------|------|----------------|-------|
-| K-line request/response | `obd` task → ECU | 1 PID per ~70–110 ms (P2 + P3 + bytes) ≈ 10 req/s | — | Scheduler: RPM, speed 5 Hz; MAP, TPS 2 Hz; ECT, IAT, trims 0.5 Hz; DTC/MIL 1/30 s |
+| K-line request/response | `obd` task → ECU | 1 PID per ~70–110 ms (P2 + P3 + bytes) ≈ 10 req/s | - | Scheduler: RPM, speed 5 Hz; MAP, TPS 2 Hz; ECT, IAT, trims 0.5 Hz; DTC/MIL 1/30 s |
 | VBAT | ADC → `vbat` | 100 Hz DC, 1 kS/s on crank, 40 kS/s ripple bursts every 1 s | 10 ms | Crank capture triggered by dV/dt < −2 V/50 ms |
 | GNSS | MAX-M10S → `gnss` | 5 Hz DRIVE, 1 Hz STANDBY | 200 ms | UBX-NAV-PVT only (100 bytes) |
 | IMU | ASM330 FIFO → `imu` | 104 Hz, FIFO batch 26 samples | 250 ms | Crash ring buffer 5 s |
-| Fusion/derived | `fusion`, `fuel`, `trip` | 10 Hz | 100 ms | — |
+| Fusion/derived | `fusion`, `fuel`, `trip` | 10 Hz | 100 ms | - |
 | Live stream to phone | `link` → BLE notify | 10 Hz, 64-byte `LIVE` frame | ≤ 150 ms sensor-to-screen | 2M PHY, 15–30 ms connection interval while app is foreground |
 | Log record | `logger` → NOR flash | 1 Hz (128 B) + events | flush every 10 s or on engine-off | Wear: 32 MB / 128 B/s ≈ 73 h per full cycle → 100k cycles ≫ 10-year life |
-| Log sync | flash → phone | burst, ~40 KB/s effective | — | Resumable by sequence number |
+| Log sync | flash → phone | burst, ~40 KB/s effective | - | Resumable by sequence number |
 
 ## 5. Software partitioning
 

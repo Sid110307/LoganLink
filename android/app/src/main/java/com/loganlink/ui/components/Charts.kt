@@ -67,7 +67,7 @@ fun ArcGauge(
         }
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
-                if (value == null) "—" else (if (estimated) "≈" else "") + String.format(Locale.US, "%.${decimals}f", value),
+                if (value == null) "--" else (if (estimated) "≈" else "") + String.format(Locale.US, "%.${decimals}f", value),
                 style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Light, fontSize = (size.value * 0.22f).sp),
             )
             Text(unit, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)

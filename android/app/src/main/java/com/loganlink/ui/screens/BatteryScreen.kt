@@ -74,7 +74,7 @@ fun BatteryScreen(onBack: () -> Unit) {
             Panel("Right now", icon = R.drawable.flash, subtitle = if (connected) "Live from the OBD port" else "Not connected") {
                 Row(verticalAlignment = Alignment.Bottom) {
                     CountUpText(
-                        vbat?.let { v2(it) } ?: "—",
+                        vbat?.let { v2(it) } ?: "--",
                         MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Bold),
                         statusColor.takeIf { vbat != null } ?: MaterialTheme.colorScheme.onSurfaceVariant,
                         Modifier.weight(1f, fill = false),
@@ -154,10 +154,10 @@ private fun chargeStatus(f: LiveFrame?, connected: Boolean): Pair<String, Color>
     }
     val running = f.rpm?.let { it > 400 } ?: f.engineRunning
     return when {
-        v > 14.9 -> "Over-charging — have the alternator regulator checked" to StateCritical
+        v > 14.9 -> "Over-charging, have the alternator regulator checked" to StateCritical
         running && v >= 13.5 -> "Charging normally" to StateGood
-        running && v >= 13.0 -> "Charging low — alternator not keeping up" to StateWarning
-        running -> "Not charging — check the alternator and belt" to StateCritical
+        running && v >= 13.0 -> "Charging low, alternator not keeping up" to StateWarning
+        running -> "Not charging, check the alternator and belt" to StateCritical
         else -> "Engine off · ≈${Insights.socPercent(v)} % charge" to StateInfo
     }
 }

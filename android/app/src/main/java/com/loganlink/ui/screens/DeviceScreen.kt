@@ -97,7 +97,7 @@ fun DeviceScreen(onBack: () -> Unit) {
         }
 
         Panel("Battery reading", subtitle = "Engine off. Enter your multimeter reading.", icon = R.drawable.battery_car) {
-            Kv("Module reads", live?.vbat?.let { "%.3f V".format(it) } ?: "—")
+            Kv("Module reads", live?.vbat?.let { "%.3f V".format(it) } ?: "--")
             OutlinedTextField(dmm, { dmm = it }, Modifier.fillMaxWidth(), label = { Text("Multimeter reading (V)") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal), singleLine = true)
             Button(enabled = ready && hub.isOwner && (dmm.toDoubleOrNull() ?: 0.0) in 9.0..16.0,

@@ -1,4 +1,4 @@
-# 10 — Robustness, Reliability, Safety and Cybersecurity
+# 10. Robustness, Reliability, Safety and Cybersecurity
 
 ## 1. Environmental profile (passenger compartment, India)
 
@@ -13,8 +13,8 @@
 | Electrical | doc 04 §2.2 | ISO 16750-2, ISO 7637-2 |
 | ESD | ±8 kV contact / ±15 kV air (unpowered and powered) | ISO 10605 |
 | Emissions | CISPR 25 class 3 (conducted + radiated); must not disturb FM radio (76–108 MHz) or GNSS L1 | CISPR 25 |
-| Immunity | ISO 11452-2 (ALSE) 30 V/m, 200 MHz–2 GHz; ISO 11452-4 BCI 60 mA | — |
-| Life | 10 years, 150,000 km, ~6,000 operating hours, ~40,000 sleep/wake cycles | — |
+| Immunity | ISO 11452-2 (ALSE) 30 V/m, 200 MHz–2 GHz; ISO 11452-4 BCI 60 mA | - |
+| Life | 10 years, 150,000 km, ~6,000 operating hours, ~40,000 sleep/wake cycles | - |
 
 ## 2. Derating rules (applied in the BOM)
 

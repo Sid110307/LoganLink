@@ -183,7 +183,7 @@ fun OverviewScreen(go: (String) -> Unit, onTab: (Int) -> Unit) {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 KpiTile("This week", "%.0f".format(week.sumOf { it.km }), Modifier.weight(1f), "km", Signal, onClick = { onTab(2) },
                     deltaPct = pct(week.sumOf { it.km }, prev.sumOf { it.km }), upIsGood = true)
-                KpiTile("Economy", eco(week)?.let { "%.1f".format(it) } ?: "—", Modifier.weight(1f), "km/L", Signal, onClick = { onTab(2) },
+                KpiTile("Economy", eco(week)?.let { "%.1f".format(it) } ?: "--", Modifier.weight(1f), "km/L", Signal, onClick = { onTab(2) },
                     deltaPct = pct(eco(week), eco(prev)))
                 KpiTile("Spend", "%,d".format(week.sumOf { it.costPaise } / 100), Modifier.weight(1f), "₹", Signal, onClick = { go(Routes.FUEL) },
                     deltaPct = pct(week.sumOf { it.costPaise }.toDouble(), prev.sumOf { it.costPaise }.toDouble()), upIsGood = false)

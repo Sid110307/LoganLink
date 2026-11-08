@@ -1,14 +1,14 @@
-# 06 — Wireless Communication Architecture and Protocol
+# 06. Wireless Communication Architecture and Protocol
 
 ## 1. Technology selection
 
 | Link | Use | Decision |
 |------|-----|----------|
 | **BLE 5.0 (LE 2M PHY, DLE 251, MTU 247)** | Primary phone link: live data, commands, log sync, OTA | **Selected.** Native on iOS/Android without MFi, low power, background reconnection supported by both OSes |
-| Bluetooth Classic SPP | — | Rejected: iOS forbids non-MFi SPP; ESP32-S3 has no Classic radio anyway |
+| Bluetooth Classic SPP | - | Rejected: iOS forbids non-MFi SPP; ESP32-S3 has no Classic radio anyway |
 | Wi-Fi 2.4 GHz (SoftAP, WPA2) | Bulk only: OTA images and large log export when parked | Enabled on demand, ≤ 5 min, never in DRIVE |
 | LTE Cat-1 (variant C) | Remote status, alerts, location while away | MQTT 3.1.1 over TLS 1.2 to the owner's broker |
-| NFC/UWB | — | Not needed |
+| NFC/UWB | - | Not needed |
 
 ## 2. GATT design
 
@@ -64,7 +64,7 @@ layer framing and reassembly errors. The HMAC authenticates commands.
 
 | Off | Type | Field | Unit / scaling | Invalid |
 |-----|------|-------|----------------|---------|
-| 0 | u32 | uptime_ms | ms | — |
+| 0 | u32 | uptime_ms | ms | - |
 | 4 | u32 | utc | Unix s | 0 |
 | 8 | u16 | rpm | rpm | 0xFFFF |
 | 10 | u16 | speed | km/h × 10 (fused) | 0xFFFF |
@@ -82,17 +82,17 @@ layer framing and reassembly errors. The HMAC authenticates commands.
 | 32 | i32 | lon | deg × 1e7 | 0x7FFFFFFF |
 | 36 | u16 | gnss_speed | km/h × 10 | 0xFFFF |
 | 38 | u16 | heading | ° × 10 | 0xFFFF |
-| 40 | u8 | sats | count | — |
-| 41 | u8 | fix | 0 none, 2 2D, 3 3D | — |
+| 40 | u8 | sats | count | - |
+| 41 | u8 | fix | 0 none, 2 2D, 3 3D | - |
 | 42 | i16 | accel_x | mg (vehicle frame, +forward) | 0x7FFF |
 | 44 | i16 | accel_y | mg (+left) | 0x7FFF |
 | 46 | u16 | co2 | ppm | 0 |
 | 48 | i16 | cabin_temp | °C × 10 | 0x7FFF |
 | 50 | u8 | cabin_rh | % | 0xFF |
-| 51 | u8 | state | 0 BOOT, 1 STANDBY, 2 DRIVE, 3 SLEEP, 4 SAFE | — |
-| 52 | u16 | source_flags | bit0 rpm from ECU, bit1 rpm estimated (ripple), bit2 speed from ECU, bit3 speed GNSS, bit4 ECU online, bit5 fuel from model, bit6 fuel-level sensor, bit7 GNSS valid | — |
-| 54 | u32 | trip_m | metres this trip | — |
-| 58 | u16 | dtc | bit15 MIL on, bits0–7 count | — |
+| 51 | u8 | state | 0 BOOT, 1 STANDBY, 2 DRIVE, 3 SLEEP, 4 SAFE | - |
+| 52 | u16 | source_flags | bit0 rpm from ECU, bit1 rpm estimated (ripple), bit2 speed from ECU, bit3 speed GNSS, bit4 ECU online, bit5 fuel from model, bit6 fuel-level sensor, bit7 GNSS valid | - |
+| 54 | u32 | trip_m | metres this trip | - |
+| 58 | u16 | dtc | bit15 MIL on, bits0–7 count | - |
 | 60 | u16 | fuel_level | % × 100 (sender or estimate) | 0xFFFF |
 
 The firmware header `firmware/main/proto.h` and the app codec `app/lib/protocol/live_frame.dart` implement this table.
@@ -102,25 +102,25 @@ Each includes a size assertion (62 bytes).
 
 | ID | Name | Args | Role | Notes |
 |----|------|------|------|-------|
-| 0x01 | GET_INFO | — | any | FW/HW version, serial, vehicle profile, probe result, ECU ID and VIN (length-prefixed, VIN read with J1979 mode 09 PID 02 during the probe when the car supports it) |
+| 0x01 | GET_INFO | - | any | FW/HW version, serial, vehicle profile, probe result, ECU ID and VIN (length-prefixed, VIN read with J1979 mode 09 PID 02 during the probe when the car supports it) |
 | 0x02 | SET_TIME | u32 utc, i16 tz_min | any | Used until GNSS time is valid |
 | 0x03 | SET_LIVE_RATE | u8 hz (0–10) | any | 0 stops the stream |
 | 0x10 | READ_DTC | u8 type (stored/pending) | any | Answers with DTC_LIST |
 | 0x11 | CLEAR_DTC | u32 confirm_token | owner | Two-step: first call returns a token; second call within 30 s with the token executes. Refused unless RPM = 0 |
-| 0x12 | RUN_PROBE | — | owner | Vehicle protocol probe (doc 02 §5) |
+| 0x12 | RUN_PROBE | - | owner | Vehicle protocol probe (doc 02 §5) |
 | 0x20 | SYNC_LOG | u32 from_seq, u16 max_records | any | Streams LOG_CHUNKs; resumable |
 | 0x21 | GET_CONFIG / 0x22 SET_CONFIG | u16 key, value | owner (set) | Keys in `config.h` |
-| 0x23 | SET_ODOMETER | u32 km | owner | — |
+| 0x23 | SET_ODOMETER | u32 km | owner | - |
 | 0x24 | CAL_VBAT | u16 measured_mV, u8 point (0/1) | owner | Two-point calibration |
 | 0x25 | CAL_FUEL | u8 percent | owner | Records a fuel-sender calibration point |
 | 0x26 | FILL_UP | u16 litres×100, u32 price_paise | any | Feeds fuel-model self-calibration |
 | 0x30 | AUX_OUT | u8 on, u16 off_after_s | owner | Accessory output |
-| 0x40 | OTA_BEGIN | u32 size, u8 sha256[32] | owner | — |
-| 0x41 | OTA_END | — | owner | Verify hash + signature, set boot partition |
-| 0x42 | WIFI_OTA | — | owner | Starts SoftAP; returns SSID/PSK (random per session) |
-| 0x50 | USER_ADD | u8 user_id, u8 role, u8 key[32] | owner | — |
+| 0x40 | OTA_BEGIN | u32 size, u8 sha256[32] | owner | - |
+| 0x41 | OTA_END | - | owner | Verify hash + signature, set boot partition |
+| 0x42 | WIFI_OTA | - | owner | Starts SoftAP; returns SSID/PSK (random per session) |
+| 0x50 | USER_ADD | u8 user_id, u8 role, u8 key[32] | owner | - |
 | 0x51 | USER_REVOKE | u8 user_id | owner | Deletes the key and the BLE bond |
-| 0x60 | REBOOT | u8 mode (0 normal, 1 safe) | owner | — |
+| 0x60 | REBOOT | u8 mode (0 normal, 1 safe) | owner | - |
 
 Status codes: 0 OK, 1 BAD_ARGS, 2 NOT_AUTH, 3 FORBIDDEN_ROLE, 4 VEHICLE_STATE (e.g., engine running), 5 BUSY, 6 IO_ERROR, 7 UNSUPPORTED.
 

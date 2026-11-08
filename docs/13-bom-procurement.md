@@ -1,4 +1,4 @@
-# 13 — Bill of Materials and Procurement
+# 13. Bill of Materials and Procurement
 
 The line-item BOM is in **`hardware/bom.csv`**: designators, manufacturer, MPN, package, variant and indicative unit prices at
 qty 1 and qty 25. This document gives the roll-up, off-board items, tools, and the sourcing route.
@@ -32,12 +32,12 @@ qty 1 and qty 25. This document gives the roll-up, off-board items, tools, and t
 | Attrition / MOQ overage on passives (turnkey) | +10 % | 990 |
 | PCB (4-layer ENIG, per board from a 5-pc prototype lot) | LionCircuits | 1,100 |
 | Assembly (setup + stencil spread over a small prototype order) | LionCircuits | 2,500 |
-| GNSS active antenna (3 m, U.FL/SMA pigtail) | — | 700 |
-| OBD Y-splitter, pins 4/5/6/7/14/16 | — | 450 |
+| GNSS active antenna (3 m, U.FL/SMA pigtail) | - | 700 |
+| OBD Y-splitter, pins 4/5/6/7/14/16 | - | 450 |
 | Micro-Fit receptacle 43025-1000 + 10 × 43030-0007 crimps | Molex | 150 |
 | Inline fuse holders (3 A, 2 A) + fuses + 2 × 0.5 A PTC | Littelfuse / generic | 200 |
-| Wire TXL 0.5/0.35 mm² (5 m), corrugated loom, fleece tape, ties, tie mounts | — | 400 |
-| Enclosure: ASA (≈ 60 g), 8 heat-set inserts, 8 screws, PTFE vent, light pipe, labels | — | 450 |
+| Wire TXL 0.5/0.35 mm² (5 m), corrugated loom, fleece tape, ties, tie mounts | - | 400 |
+| Enclosure: ASA (≈ 60 g), 8 heat-set inserts, 8 screws, PTFE vent, light pipe, labels | - | 450 |
 | **Total, single unit (B)** | | **≈ ₹16,800** |
 | Option: omit SCD41 (no CO₂ / occupant features) | | −2,900 → ≈ ₹13,900 |
 | Variant C extras: A7672S, TPS54360B-Q1, L3, Q4, J4, nano-SIM holder, caps, LTE antenna | | +2,300 (plus SIM plan ≈ ₹150–300/month) |

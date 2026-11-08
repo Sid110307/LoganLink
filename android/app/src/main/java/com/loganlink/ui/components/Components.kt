@@ -132,7 +132,7 @@ fun KpiTile(
         Column(Modifier.padding(horizontal = 12.dp, vertical = 10.dp)) {
             Text(label, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1)
             Row(verticalAlignment = Alignment.Bottom) {
-                if (estimated && value != "—") Text("≈", style = MaterialTheme.typography.titleLarge, color = accent.copy(alpha = .7f))
+                if (estimated && value != "--") Text("≈", style = MaterialTheme.typography.titleLarge, color = accent.copy(alpha = .7f))
                 CountUpText(value, MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold), accent,
                     Modifier.weight(1f, fill = false))
                 unit?.takeIf { it.isNotBlank() }?.let {

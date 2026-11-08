@@ -35,7 +35,7 @@ object Status {
     fun describe(s: Int): String = when (s) {
         OK -> "Done"
         BAD_ARGS -> "The module rejected the request"
-        NOT_AUTH -> "Not authenticated — reconnect the module"
+        NOT_AUTH -> "Not authenticated, reconnect the module"
         FORBIDDEN -> "Only the owner can do this"
         VEHICLE_STATE -> "Not allowed while the engine is running"
         BUSY -> "The module is busy, try again"
