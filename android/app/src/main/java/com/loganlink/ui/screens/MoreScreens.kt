@@ -2,11 +2,13 @@ package com.loganlink.ui.screens
 
 import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.SelectionContainer
@@ -86,9 +88,27 @@ fun MoreScreen(go: (String) -> Unit) {
         NavRow(R.drawable.wrench, "Maintenance", "Service schedule") { go(Routes.MAINT) }
         NavRow(R.drawable.users, "Drivers", "Share access with family") { go(Routes.DRIVERS) }
         NavRow(R.drawable.settings, "Settings", "Alerts, theme, data") { go(Routes.SETTINGS) }
-        Text("LoganLink ${BuildConfig.VERSION_NAME}",
-            style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(top = 8.dp, start = 4.dp))
+        var about by remember { mutableStateOf(false) }
+        NavRow(R.drawable.info, "About", "LoganLink v${BuildConfig.VERSION_NAME}") { about = true }
+        if (about) {
+            val ctx = LocalContext.current
+            androidx.compose.material3.AlertDialog(
+                onDismissRequest = { about = false },
+                icon = { androidx.compose.foundation.Image(androidx.compose.ui.res.painterResource(R.drawable.ic_launcher_fg), null, Modifier.size(72.dp)) },
+                title = { Text("LoganLink", style = MaterialTheme.typography.headlineMedium) },
+                text = {
+                    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                        Text("v${BuildConfig.VERSION_NAME}", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text("Made by Siddharth Praveen Bharadwaj")
+                        Text("sid110307.github.io/Sid110307", color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.clickable {
+                                ctx.startActivity(Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://sid110307.github.io/Sid110307")))
+                            })
+                    }
+                },
+                confirmButton = { androidx.compose.material3.TextButton(onClick = { about = false }) { Text("Close") } },
+            )
+        }
     }
 }
 
