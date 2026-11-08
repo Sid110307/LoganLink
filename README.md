@@ -7,7 +7,7 @@ The car is read-only except for a guarded two-step fault-code clear.
 
 Developed on a 2008 Renault X90-platform sedan with the K7M 1.6 ("the reference car" in these docs).
 
-Hardware: ESP32-S3-MINI-1 on a 54 x 42 mm 2-layer PCB, flat behind the OBD plug, in a printed front shell, retainer and
+Hardware: ESP32-S3-MINI-1 on a 51 x 40 mm 2-layer PCB, flat behind the OBD plug, in a printed front shell, retainer and
 snap-on rear shell, 27.6 mm out from the socket.
 
 ## Repository

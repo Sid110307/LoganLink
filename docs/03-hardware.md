@@ -1,6 +1,6 @@
 # 03. Hardware
 
-One 2-layer board, 54 x 42 mm, all parts on top, flat behind the OBD-II plug housing (Molex 68503-1602). Six short wires join the
+One 2-layer board, 51 x 40 mm, all parts on top, flat behind the OBD-II plug housing (Molex 68503-1602). Six short wires join the
 housing's crimp pins to pads on the board. Parts: [`hardware/bom.csv`](../hardware/bom.csv). Pins:
 [`hardware/pinmap.csv`](../hardware/pinmap.csv). Netlist and layout: [04](04-kicad.md).
 

@@ -29,7 +29,7 @@ OBD connector.
 | Copper | 1 oz |
 | Finish | Lead-free HASL. Cheaper than ENIG; ask LionCircuits to inspect U3 (LGA) and U4 (QFN) joints, the two parts that like flat pads |
 | Mask / silk | Green / white |
-| Size | 54 x 42 mm |
+| Size | 51 x 40 mm |
 
 | Assembly setting | Value |
 |------------------|-------|

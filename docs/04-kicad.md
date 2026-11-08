@@ -83,8 +83,8 @@ negative y, so type y with the sign flipped.
 
 | Item | Position | Notes |
 |------|----------|-------|
-| Outline (Edge.Cuts) | 54 x 42 mm, corners R3 | |
-| H1 to H4 | (±24, ±18) | `MountingHole:MountingHole_2.2mm_M2`, keep 5 mm diameter clear on both sides |
+| Outline (Edge.Cuts) | 51 x 40 mm, corners R3 | |
+| H1 to H4 | (±23.9, ±17.1) from the board centre | `MountingHole:MountingHole_2.2mm_M2`, keep 5 mm diameter clear on both sides |
 | ESP32 module | centred on x = 0, antenna up, top edge on the board edge | Must be centred: its built-in antenna keepout is 45.4 mm wide and would hit a mounting hole otherwise |
 | J1 wire pads | pin 1 at (-6.35, -4), pin 6 at (6.35, -4), 2.54 pitch | Wires solder from the bottom |
 | LED1, LED2 | (21.0, 9.9), (21.0, 8.1) | Light pipe centre (21, 9). Nothing above 0.8 mm within 2.5 mm of it |
