@@ -5,12 +5,16 @@ from [`hardware/bom.csv`](../hardware/bom.csv), connections from [03](03-hardwar
 
 ## 1. Libraries
 
-Everything is in the stock KiCad libraries except the buck.
+Everything is in the stock libraries except the buck. The project library `loganlink` is already set up
+(`hardware/pcb/lib/`, registered in `sym-lib-table` and `fp-lib-table`) and has the LMR36006 symbol.
 
-1. Download LMR36006AQRNXRQ1 from TI's product page (CAD/CAE symbols, Ultra Librarian), export as KiCad.
-2. Put the symbol in `hardware/pcb/lib/loganlink.kicad_sym` and the footprint in `hardware/pcb/lib/loganlink.pretty/`.
-3. Preferences > Manage Symbol Libraries > Project Specific > add `loganlink` with path `${KIPRJMOD}/lib/loganlink.kicad_sym`.
-   Same for footprints with `${KIPRJMOD}/lib/loganlink.pretty`.
+The footprint still has to come from TI:
+
+1. On TI's LMR36006-Q1 page, CAD/CAE symbols, download the RNX0012A model (Ultra Librarian), export as KiCad.
+2. Copy the `.kicad_mod` into `hardware/pcb/lib/loganlink.pretty/` and rename it `TI_RNX0012A.kicad_mod` (the symbol already
+   points to `loganlink:TI_RNX0012A`). Ignore the downloaded symbol.
+3. Open it in the footprint editor and check it against the datasheet EXAMPLE BOARD LAYOUT page: 11 pads 0.25 x 0.6 mm
+   plus one large pad, 0.5 mm pitch.
 
 If a footprint name in the BOM does not exist in your library version, search the footprint chooser by the package name.
 
@@ -27,7 +31,7 @@ One A3 sheet. Use net labels, not long wires. Set each symbol's Value, Footprint
 | VBAT_F | F1.2, D1 cathode, D2 anode |
 | VBAT_P | D2 cathode, C1, L2.1, R10, R13, R22, C16 |
 | VIN | L2.2, C2, C3+, U2 VIN, U2 EN, D8 cathode |
-| SW | U2 SW, L1.1, C6.2 |
+| SW | U2 SW, U2 NC (pin 3, tie to SW per datasheet), L1.1, C6.2 |
 | BOOT | U2 BOOT, C6.1 |
 | VCC_U2 | U2 VCC, C7 |
 | FB | U2 FB, R2.2, R3.1 |
@@ -60,7 +64,7 @@ One A3 sheet. Use net labels, not long wires. Set each symbol's Value, Footprint
 | CAN_H / CAN_L | J1.5 (OBD 6) / J1.6 (OBD 14), U5 |
 | (U5) | VCC to 3V3 with C19, Rs to GND, Vref open |
 
-Q1 source to GND. TP1 to TP6: 3V3, GND, EN, GPIO0, U0TXD, U0RXD.
+Q1 source to GND. U2 PG (pin 8) unconnected. TP1 to TP6: 3V3, GND, EN, GPIO0, U0TXD, U0RXD.
 
 Run ERC. Fix every error. Accept only "pin not driven" warnings on nets fed through resistors.
 
