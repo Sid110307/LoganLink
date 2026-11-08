@@ -121,14 +121,14 @@ support bitmaps 01-20, 21-40, 41-60, 61-80 (4 x u32); oldest and head log seq (2
 
 | Layer | Mechanism |
 |-------|-----------|
-| Device key | `K_dev`, 32 bytes from the hardware RNG on first boot, in encrypted NVS. Printed once as a QR pairing card `LL1:<device_id hex>:<base32(K_dev)>`, also on a label inside the shell |
+| Device key | `K_dev`, 32 bytes from the hardware RNG on first boot, in NVS. Printed once as a QR pairing card `LL1:<device_id hex>:<base32(K_dev)>`, also on a label inside the shell |
 | Bonding | LE Secure Connections, Just Works, only inside a pairing window: 120 s after a PAIR press with the engine running, or 10 min after a boot with no bonds. Up to 4 bonds |
 | App auth, every connection | Dongle sends `AUTH_CHALLENGE(device_id, Nd)`. Phone answers `tag = HMAC-SHA256(K_user, "LL-AUTH" + device_id + Nd + Np)[0:16]`. `K_user = HMAC-SHA256(K_dev, "LL-USER" + user_id)`, user 0 is the owner. Session key `K_s = HMAC-SHA256(K_user, "LL-SESS" + Nd + Np)`. Constant-time compare |
 | Commands | 32-bit counter, strictly increasing per session, `MAC = HMAC-SHA256(K_s, header + payload)[0:8]`. Replays and reordering rejected |
 | Roles | Owner (user 0): everything. Drivers (1 to 3): view, sync, fill-ups, set time; no clearing codes, firmware, config or user management |
 | Invites | Owner sends `USER_ADD`, shows the returned K_user as a QR code (`LL1U:<device_id hex>:<user_id>:<base32(K_user)>`); the driver scans it and bonds in a pairing window the owner opens |
 | Phone storage | K_user sealed with the Android Keystore; app data private, backup disabled |
-| Firmware | Secure Boot v2, flash encryption, anti-rollback, owner-only OTA with the engine off ([06](06-firmware.md)) |
+| Firmware | Owner-only OTA with the engine off, SHA-256 checked, rollback on a bad image; always reflashable over USB ([06](06-firmware.md)) |
 | Car | Read-only vehicle guard ([02](02-car-interface.md)); a compromised phone still cannot send a write service |
 | Factory reset | Hold PAIR 10 s with the engine running: bonds wiped, K_dev kept, so the card stays valid |
 

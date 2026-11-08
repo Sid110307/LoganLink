@@ -52,7 +52,7 @@ BLE and protocol on core 0; everything that touches the car on core 1.
 
 ## Boot
 
-Bootloader (Secure Boot verify, flash decrypt, OTA slot or rollback), then: log wake cause and reset reason; `AUX_PWR` and LED off;
+Bootloader (OTA slot or rollback), then: log wake cause and reset reason; `AUX_PWR` and LED off;
 `vstate_init`, `config_init` (device key made on the very first boot); `logger_init` (on failure SAFE state: BLE and OTA only);
 start `vbat`, `sensors`, `kline`, `obd`; BLE advertising (10 min pairing window if no bonds); `power` in STANDBY; if the image is
 pending verification, 60 s self-test then confirm or roll back. Wake to advertising about 350 ms, first live frame 2 to 4 s.
@@ -80,7 +80,7 @@ SLEEP wakes (reboot, cause logged) on VBAT > 13.2 V, a VBAT step of 150 mV (door
 
 | Item | Value |
 |------|-------|
-| Storage | `log` partition, 4 MB internal flash, encrypted |
+| Storage | `log` partition, 4 MB internal flash |
 | Record | 128 bytes: `seq, utc, uptime_ms, boot_id, type, len, data[108], crc32` |
 | Capacity | 32,768 records, about 9 h of driving at 1 Hz |
 | Wear | At 2 h a day the ring wraps every 4 to 5 days: about 800 erase cycles in 10 years (100,000 rated) |
@@ -111,24 +111,24 @@ after the first fill, ±3 to 5 % after three.
 
 BLE only (`WIFI_OTA` answers UNSUPPORTED).
 
-1. Owner picks a signed `.bin` in the app (LoganLink module, Firmware update).
+1. Owner picks a `.bin` in the app (LoganLink module, Firmware update).
 2. Dongle checks: engine off (RPM 0, VBAT < 13.0 V), VBAT > 12.2 V, owner session.
 3. `OTA_BEGIN` (size, SHA-256), then 233-byte chunks to the inactive slot, acked every 32 chunks. 1.6 MB takes 30 to 50 s.
-4. `OTA_END`: hash and signature verified, boot partition switched, reboot.
+4. `OTA_END`: SHA-256 verified, boot partition switched, reboot.
 5. After 60 s of passing self-test (BLE up, flash OK, probe OK) it calls `esp_ota_mark_app_valid_cancel_rollback()`; otherwise the
    bootloader rolls back.
 
-## Secure boot (production units)
+## Recovery
 
-eFuse burning is irreversible: keep one development unit unfused and rehearse on a spare board.
+Nothing is ever locked: no secure boot, no flash encryption, no eFuses burned. Every unit can always be reflashed.
 
-1. `espsecure.py generate_signing_key --version 2` (Secure Boot v2, RSA-3072), offline. Store encrypted, two copies. Losing it ends
-   updates for fused units.
-2. Enable `CONFIG_SECURE_BOOT_V2_ENABLED`, `CONFIG_SECURE_FLASH_ENC_ENABLED` (release mode), `CONFIG_NVS_ENCRYPTION`,
-   `CONFIG_SECURE_ENABLE_SECURE_ROM_DL_MODE`, `CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE` and anti-rollback.
-3. Disable JTAG by eFuse.
-4. Flash once over USB; the first boot burns the keys and encrypts flash.
-5. Bump `secure_version` for security fixes so older images cannot be reinstalled.
+| Problem | Fix |
+|---------|-----|
+| Bad OTA image | Bootloader rolls back to the previous slot on its own |
+| Both slots bad, boot loop | Hold PAIR while plugging in USB (ROM download mode, cannot be overwritten), then `idf.py flash` |
+| Corrupt config or log | `idf.py erase-flash`, then flash. The device makes a new key, so pair again with the new card |
+
+An erased or crashed board is harmless to the car: Q1's gate is pulled down (R27), so the K-line is released and nothing is sent.
 
 ## Robustness
 

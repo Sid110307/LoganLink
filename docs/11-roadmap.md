@@ -21,7 +21,7 @@ Writes are a separate, narrow capability on top of the read-only guard; the guar
 Safety rules:
 
 1. **Signed scripts, not free bytes.** Each routine is a CBOR script (target ECU, exact request bytes, expected response, timeouts,
-   preconditions, stop step, undo step), signed with an offline Ed25519 service key separate from the firmware key. The dongle
+   preconditions, stop step, undo step), signed with an offline Ed25519 service key. The dongle
    verifies it and loads it as a one-shot `vguard` extension that allows exactly those bytes once.
 2. **Preconditions on the dongle**, checked just before transmission. Actuator tests: RPM 0, speed 0, ECU answering, VBAT 12.0 to
    14.8 V. Relearns: as the routine needs. A script may tighten limits, never allow anything while the car moves.
@@ -63,7 +63,6 @@ for the framework, 1 to 2 days per routine.
 | Home-screen widgets (battery, fuel, last trip) | Near | 3 to 4 days |
 | Google Assistant App Actions ("where is my car") | Near | 3 days |
 | ECU simulator firmware for CI (needed for section 1) | Near | |
-| Production provisioning script for Secure Boot and flash encryption | Near | |
 | Adaptive PID scheduler (poll faster what the screen shows) | Near | |
 | Android Auto status cards (Car App Library, IoT category) | Mid | 1 to 2 weeks |
 | Wear OS tile | Mid | 1 week |

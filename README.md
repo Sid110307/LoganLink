@@ -29,7 +29,7 @@ snap-on rear shell, 27.6 mm out from the socket.
 | 03 | [Hardware](docs/03-hardware.md) | Schematic blocks, part values, sleep budget |
 | 04 | [KiCad](docs/04-kicad.md) | Netlist, board setup, placement, outputs, bring-up |
 | 05 | [Enclosure](docs/05-enclosure.md) | FreeCAD shell, printing, assembly, fit |
-| 06 | [Firmware](docs/06-firmware.md) | Modules, tasks, power states, logger, fuel model, OTA, secure boot, build |
+| 06 | [Firmware](docs/06-firmware.md) | Modules, tasks, power states, logger, fuel model, OTA, recovery, build |
 | 07 | [Protocol](docs/07-protocol.md) | BLE GATT, frames, LiveV1, commands, log sync, security |
 | 08 | [App](docs/08-app.md) | Screens, automatic features, alerts, permissions, build, pairing |
 | 09 | [Install and test](docs/09-install-and-test.md) | Car install, calibration, acceptance tests |
