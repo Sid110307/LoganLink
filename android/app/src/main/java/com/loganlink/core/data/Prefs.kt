@@ -119,6 +119,9 @@ class Prefs(context: Context) {
     fun setAlerts(on: Boolean) { sp.edit().putBoolean("alerts", on).apply(); _alerts.value = on }
     fun setAutoDriveMode(on: Boolean) { sp.edit().putBoolean("auto_drive", on).apply(); _autoDrive.value = on }
 
+    fun lastAlertAt(key: String): Long = sp.getLong("alert_$key", 0)
+    fun markAlert(key: String, t: Long) = sp.edit().putLong("alert_$key", t).apply()
+
     var lastSeq: Long
         get() = sp.getLong("last_seq", -1)
         set(v) = sp.edit().putLong("last_seq", v).apply()

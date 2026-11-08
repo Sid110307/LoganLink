@@ -90,7 +90,6 @@ class VehicleHub(private val context: Context, val prefs: Prefs, val repo: Repos
     private val routePoints = mutableListOf<TripPoint>()
     private var lastSampleSec = 0L
     private var engineOffSince = 0L
-    private var lastAlert = HashMap<String, Long>()
 
     init {
         scope.launch {
@@ -300,8 +299,8 @@ class VehicleHub(private val context: Context, val prefs: Prefs, val repo: Repos
 
     private fun alert(key: String, sev: Severity, title: String, detail: String, cooldownMs: Long = 10 * 60_000L) {
         val now = System.currentTimeMillis()
-        if (now - (lastAlert[key] ?: 0) < cooldownMs) return
-        lastAlert[key] = now
+        if (now - prefs.lastAlertAt(key) < cooldownMs) return
+        prefs.markAlert(key, now)
         repo.addEvent(key, sev.ordinal, title, detail)
         notifier.alert(key.hashCode(), sev, title, detail)
     }
