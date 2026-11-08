@@ -1,5 +1,6 @@
 package com.loganlink.ui.screens
 
+import com.loganlink.ui.components.fadeScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -63,7 +64,7 @@ fun EngineScreen(onBack: () -> Unit) {
         )
     }) { pad ->
         Column(
-            Modifier.fillMaxSize().padding(pad).verticalScroll(rememberScrollState()).padding(16.dp),
+            Modifier.fillMaxSize().padding(pad).fadeScroll().padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             if (linkState != LinkState.Ready) {

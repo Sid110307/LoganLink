@@ -1,5 +1,6 @@
 package com.loganlink.ui.screens
 
+import com.loganlink.ui.components.fadeScroll
 import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.background
@@ -119,7 +120,7 @@ private fun TripBody(r: TripLoad.Ready, modifier: Modifier) {
     val coolantSeries = remember(r.samples) { r.samples.mapNotNull { s -> s.coolant?.let { s.t to it } } }
 
     Column(
-        modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
+        modifier.fillMaxSize().fadeScroll().padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         if (route.size >= 2) {

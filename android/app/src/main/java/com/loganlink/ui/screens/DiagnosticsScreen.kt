@@ -1,5 +1,6 @@
 package com.loganlink.ui.screens
 
+import com.loganlink.ui.components.fadeScroll
 import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -110,7 +111,7 @@ fun DiagnosticsScreen(onBack: () -> Unit) {
         snackbarHost = { SnackbarHost(snack) },
     ) { pad ->
         Column(
-            Modifier.fillMaxSize().padding(pad).verticalScroll(rememberScrollState()).padding(16.dp),
+            Modifier.fillMaxSize().padding(pad).fadeScroll().padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             Panel(

@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.clipRect
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
@@ -91,6 +92,8 @@ fun TimeSeriesChart(
     val pad = ((vMax0 - vMin0) * 0.12).coerceAtLeast(0.5)
     val vMin = vMin0 - pad; val vMax = vMax0 + pad
     var sel by remember(points) { mutableStateOf<Int?>(null) }
+    val draw = remember { androidx.compose.animation.core.Animatable(0f) }
+    androidx.compose.runtime.LaunchedEffect(Unit) { draw.animateTo(1f, tween(750, easing = androidx.compose.animation.core.FastOutSlowInEasing)) }
     val grid = MaterialTheme.colorScheme.outlineVariant
     val labelColor = MaterialTheme.colorScheme.onSurfaceVariant
     Column(modifier) {
@@ -119,6 +122,7 @@ fun TimeSeriesChart(
                 drawLine(grid, Offset(0f, y), Offset(size.width, y), 1f, pathEffect = PathEffect.dashPathEffect(floatArrayOf(6f, 8f)))
             }
             guide?.let { g -> if (g in vMin..vMax) drawLine(StateWarning.copy(alpha = .7f), Offset(0f, py(g)), Offset(size.width, py(g)), 2f) }
+            clipRect(right = size.width * draw.value) {
             val line = Path(); val fill = Path()
             points.forEachIndexed { i, (t, v) ->
                 val x = px(t); val y = py(v)
@@ -127,6 +131,7 @@ fun TimeSeriesChart(
             fill.lineTo(px(points.last().first), size.height); fill.close()
             drawPath(fill, Brush.verticalGradient(listOf(color.copy(alpha = .28f), Color.Transparent)))
             drawPath(line, color, style = Stroke(4f, cap = StrokeCap.Round, join = StrokeJoin.Round))
+            }
             sel?.let { i ->
                 val (t, v) = points[i]
                 drawLine(labelColor.copy(alpha = .5f), Offset(px(t), 0f), Offset(px(t), size.height), 2f)
@@ -157,11 +162,14 @@ fun BarChart(bars: List<Pair<String, Double>>, color: Color, modifier: Modifier 
     val hi = max(bars.maxOf { it.second }, 1e-6)
     val label = MaterialTheme.colorScheme.onSurfaceVariant
     val track = MaterialTheme.colorScheme.surfaceContainerHighest
+    val grow = remember { androidx.compose.animation.core.Animatable(0f) }
+    androidx.compose.runtime.LaunchedEffect(Unit) { grow.animateTo(1f, tween(900, easing = androidx.compose.animation.core.FastOutSlowInEasing)) }
     Column(modifier) {
         Canvas(Modifier.fillMaxWidth().height(height)) {
             val w = size.width / bars.size
             bars.forEachIndexed { i, (_, v) ->
-                val h = (v / hi).toFloat() * size.height
+                val t = ((grow.value * (bars.size + 2) - i) / 3f).coerceIn(0f, 1f)
+                val h = (v / hi).toFloat() * size.height * t
                 drawRoundRect(track, Offset(i * w + w * .18f, 0f), Size(w * .64f, size.height), CornerRadius(8f))
                 drawRoundRect(color, Offset(i * w + w * .18f, size.height - h), Size(w * .64f, h), CornerRadius(8f))
             }

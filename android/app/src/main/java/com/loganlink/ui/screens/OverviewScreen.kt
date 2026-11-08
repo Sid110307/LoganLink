@@ -1,5 +1,6 @@
 package com.loganlink.ui.screens
 
+import com.loganlink.ui.components.fadeScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
@@ -81,7 +82,13 @@ fun OverviewScreen(go: (String) -> Unit, onTab: (Int) -> Unit) {
 
     Scaffold(topBar = {
         TopAppBar(
-            title = { ScreenTitle(greeting, vehicle.nickname + if (demo) " · demo mode" else "") },
+            title = {
+                Column {
+                    com.loganlink.ui.components.TypewriterText(greeting, MaterialTheme.typography.headlineSmall)
+                    Text(vehicle.nickname + if (demo) " · demo mode" else "", style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+            },
             colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
         )
     }) { pad ->
@@ -95,7 +102,7 @@ fun OverviewScreen(go: (String) -> Unit, onTab: (Int) -> Unit) {
             }
         }, modifier = Modifier.padding(pad)) {
         Column(
-            Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
+            Modifier.fillMaxSize().fadeScroll().padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             HeroCard(vehicle.nickname, subtitle = listOf(vehicle.plate.ifBlank { "Logan 1.6 · K7M" }, "%,d km".format(vehicle.odometerKm)).joinToString("  ·  ")) {

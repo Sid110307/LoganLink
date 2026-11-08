@@ -1,11 +1,13 @@
 package com.loganlink.ui.screens
 
+import com.loganlink.ui.components.fadeScroll
 import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -70,7 +72,7 @@ internal fun Page(title: String, subtitle: String? = null, onBack: (() -> Unit)?
         snackbarHost = { snackbar?.let { SnackbarHost(it) } },
     ) { pad ->
         Column(
-            Modifier.fillMaxSize().padding(pad).verticalScroll(rememberScrollState()).padding(16.dp),
+            Modifier.fillMaxSize().padding(pad).fadeScroll().padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) { content() }
     }
@@ -266,22 +268,32 @@ internal fun Toggle(title: String, subtitle: String, value: Boolean, onChange: (
 
 @Composable
 private fun AboutHeader() {
-    var grin by remember { mutableStateOf(false) }
+    val flip = remember { androidx.compose.animation.core.Animatable(0f) }
+    val scope = rememberCoroutineScope()
     val haptic = androidx.compose.ui.platform.LocalHapticFeedback.current
-    androidx.compose.runtime.LaunchedEffect(grin) { if (grin) { kotlinx.coroutines.delay(1400); grin = false } }
+    val p = flip.value
     Row(verticalAlignment = Alignment.CenterVertically) {
         androidx.compose.foundation.layout.Box(
-            Modifier.size(52.dp).pointerInput(Unit) {
-                detectTapGestures(onLongPress = {
-                    haptic.performHapticFeedback(androidx.compose.ui.hapticfeedback.HapticFeedbackType.LongPress); grin = true
-                })
-            },
+            Modifier.size(52.dp)
+                .graphicsLayer {
+                    rotationY = if (p < 0.5f) p * 180f else (p - 1f) * 180f
+                    cameraDistance = 12f * density
+                }
+                .pointerInput(Unit) {
+                    detectTapGestures(onLongPress = {
+                        if (flip.isRunning || flip.value > 0f) return@detectTapGestures
+                        haptic.performHapticFeedback(androidx.compose.ui.hapticfeedback.HapticFeedbackType.LongPress)
+                        scope.launch {
+                            flip.animateTo(1f, androidx.compose.animation.core.tween(360, easing = androidx.compose.animation.core.FastOutSlowInEasing))
+                            kotlinx.coroutines.delay(1200)
+                            flip.animateTo(0f, androidx.compose.animation.core.tween(300, easing = androidx.compose.animation.core.FastOutSlowInEasing))
+                        }
+                    })
+                },
         ) {
-            androidx.compose.animation.Crossfade(grin, label = "") { g ->
-                if (g) androidx.compose.foundation.Image(androidx.compose.ui.res.painterResource(R.drawable.face), null, Modifier.size(52.dp))
-                else androidx.compose.foundation.Image(androidx.compose.ui.res.painterResource(R.drawable.ic_launcher_fg), null,
-                    Modifier.size(52.dp).scale(1.5f))
-            }
+            if (p < 0.5f) androidx.compose.foundation.Image(androidx.compose.ui.res.painterResource(R.drawable.ic_launcher_fg), null,
+                Modifier.size(52.dp).scale(1.5f))
+            else androidx.compose.foundation.Image(androidx.compose.ui.res.painterResource(R.drawable.face), null, Modifier.size(52.dp))
         }
         Text("LoganLink", style = MaterialTheme.typography.headlineMedium, modifier = Modifier.padding(start = 12.dp))
     }

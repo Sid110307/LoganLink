@@ -24,6 +24,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.togetherWith
+import androidx.compose.animation.core.tween
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -77,7 +84,13 @@ fun AppNav(openDrive: SharedFlow<Unit>) {
     LaunchedEffect(openDrive) { openDrive.collect { nav.navigate(Routes.DRIVE) { launchSingleTop = true } } }
 
     androidx.compose.material3.Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-    NavHost(nav, startDestination = start) {
+    NavHost(
+        nav, startDestination = start,
+        enterTransition = { fadeIn(tween(240)) + slideInHorizontally(tween(280)) { it / 10 } },
+        exitTransition = { fadeOut(tween(160)) },
+        popEnterTransition = { fadeIn(tween(220)) },
+        popExitTransition = { fadeOut(tween(180)) + slideOutHorizontally(tween(240)) { it / 10 } },
+    ) {
         composable(Routes.ONBOARD) {
             OnboardingScreen(onDone = { nav.navigate(Routes.HOME) { popUpTo(Routes.ONBOARD) { inclusive = true } } })
         }
@@ -118,7 +131,11 @@ private fun HomeShell(nav: NavHostController) {
                     tabs.forEachIndexed { i, t ->
                         NavigationBarItem(
                             selected = selected == i, onClick = { selected = i },
-                            icon = { Icon(painterResource(t.icon), t.label, Modifier.size(22.dp)) },
+                            icon = {
+                                val s by androidx.compose.animation.core.animateFloatAsState(if (selected == i) 1.12f else 1f,
+                                    androidx.compose.animation.core.spring(dampingRatio = 0.45f, stiffness = 500f), label = "tab")
+                                Icon(painterResource(t.icon), t.label, Modifier.size(22.dp).graphicsLayer { scaleX = s; scaleY = s })
+                            },
                             label = { Text(t.label, maxLines = 1) },
                         )
                     }
@@ -127,14 +144,16 @@ private fun HomeShell(nav: NavHostController) {
         },
     ) { pad ->
         Box(Modifier.fillMaxSize().padding(pad).consumeWindowInsets(pad)) {
-            holder.SaveableStateProvider(selected) {
-                when (selected) {
+            androidx.compose.animation.AnimatedContent(selected, transitionSpec = { fadeIn(tween(220)) togetherWith fadeOut(tween(140)) }, label = "tabs") { tab ->
+            holder.SaveableStateProvider(tab) {
+                when (tab) {
                     0 -> OverviewScreen(go, onTab = { selected = it })
                     1 -> LiveScreen(go)
                     2 -> TripsScreen(go)
                     3 -> HealthScreen(go)
                     else -> MoreScreen(go)
                 }
+            }
             }
         }
     }

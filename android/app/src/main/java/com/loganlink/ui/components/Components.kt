@@ -75,7 +75,10 @@ fun SectionLabel(text: String, modifier: Modifier = Modifier) = Text(
 internal fun Modifier.tappable(shape: Shape, onClick: (() -> Unit)?): Modifier {
     if (onClick == null) return this
     val haptic = androidx.compose.ui.platform.LocalHapticFeedback.current
-    return clip(shape).clickable { haptic.performHapticFeedback(androidx.compose.ui.hapticfeedback.HapticFeedbackType.TextHandleMove); onClick() }
+    val source = androidx.compose.runtime.remember { androidx.compose.foundation.interaction.MutableInteractionSource() }
+    return pressScale(source).clip(shape).clickable(source, androidx.compose.material3.ripple()) {
+        haptic.performHapticFeedback(androidx.compose.ui.hapticfeedback.HapticFeedbackType.TextHandleMove); onClick()
+    }
 }
 
 @Composable
@@ -89,7 +92,7 @@ fun Panel(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     Card(
-        modifier = modifier.fillMaxWidth().tappable(MaterialTheme.shapes.large, onClick),
+        modifier = modifier.reveal().fillMaxWidth().tappable(MaterialTheme.shapes.large, onClick),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
         shape = MaterialTheme.shapes.large,
     ) {
@@ -122,7 +125,7 @@ fun KpiTile(
     deltaPct: Double? = null, upIsGood: Boolean = true,
 ) {
     Card(
-        modifier = modifier.tappable(MaterialTheme.shapes.medium, onClick),
+        modifier = modifier.reveal().tappable(MaterialTheme.shapes.medium, onClick),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
         shape = MaterialTheme.shapes.medium,
     ) {
@@ -167,19 +170,18 @@ fun CountUpText(text: String, style: TextStyle, color: Color, modifier: Modifier
 
 @Composable
 fun StatusChip(label: String, color: Color, modifier: Modifier = Modifier, textColor: Color = color) =
-    Text(label, modifier.padding(vertical = 2.dp), style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Medium,
-        color = textColor, maxLines = 1)
+    MorphText(label, MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Medium), modifier.padding(vertical = 2.dp), textColor)
 
 @Composable
 fun MetricTile(label: String, value: String, modifier: Modifier = Modifier, unit: String? = null, emphasis: Color? = null) {
     Column(
-        modifier.background(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f), RoundedCornerShape(10.dp))
+        modifier.reveal().background(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f), RoundedCornerShape(10.dp))
             .padding(horizontal = 12.dp, vertical = 10.dp),
         verticalArrangement = Arrangement.spacedBy(2.dp),
     ) {
         Text(label, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = .65f), maxLines = 1)
         Row(verticalAlignment = Alignment.Bottom) {
-            Text(value, style = MaterialTheme.typography.titleMedium, color = emphasis ?: MaterialTheme.colorScheme.onSurface, maxLines = 1)
+            CountUpText(value, MaterialTheme.typography.titleMedium, emphasis ?: MaterialTheme.colorScheme.onSurface, durationMs = 320)
             unit?.let { Text(" $it", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurface.copy(alpha = .65f)) }
         }
     }
@@ -191,7 +193,7 @@ fun AlertBanner(
     actionLabel: String? = null, onAction: (() -> Unit)? = null,
 ) {
     Column(
-        modifier.fillMaxWidth().background(severity.color.copy(alpha = 0.14f), RoundedCornerShape(16.dp)).padding(16.dp),
+        modifier.reveal().fillMaxWidth().background(severity.color.copy(alpha = 0.14f), RoundedCornerShape(16.dp)).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -230,8 +232,11 @@ fun IconBadge(@DrawableRes icon: Int, tint: Color = MaterialTheme.colorScheme.on
 
 @Composable
 fun NavRow(@DrawableRes icon: Int, title: String, subtitle: String? = null, trailing: (@Composable () -> Unit)? = null, onClick: () -> Unit) {
+    val navSource = remember { androidx.compose.foundation.interaction.MutableInteractionSource() }
+    val navHaptic = androidx.compose.ui.platform.LocalHapticFeedback.current
     Card(
-        onClick = onClick, modifier = Modifier.fillMaxWidth(), shape = MaterialTheme.shapes.large,
+        onClick = { navHaptic.performHapticFeedback(androidx.compose.ui.hapticfeedback.HapticFeedbackType.TextHandleMove); onClick() },
+        modifier = Modifier.reveal().fillMaxWidth().pressScale(navSource), shape = MaterialTheme.shapes.large, interactionSource = navSource,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
     ) {
         Row(Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -295,7 +300,7 @@ fun HeroCard(
     content: @Composable ColumnScope.() -> Unit = {},
 ) {
     Card(
-        modifier = modifier.fillMaxWidth().tappable(RoundedCornerShape(28.dp), onClick),
+        modifier = modifier.reveal().fillMaxWidth().tappable(RoundedCornerShape(28.dp), onClick),
         colors = CardDefaults.cardColors(containerColor = container, contentColor = com.loganlink.ui.theme.BlockInk),
         shape = RoundedCornerShape(28.dp),
     ) {

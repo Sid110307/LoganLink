@@ -1,5 +1,6 @@
 package com.loganlink.ui.screens
 
+import com.loganlink.ui.components.fadeScroll
 import android.annotation.SuppressLint
 import android.companion.AssociationInfo
 import android.companion.AssociationRequest
@@ -73,14 +74,14 @@ fun OnboardingScreen(onDone: () -> Unit) {
     var error by remember { mutableStateOf<String?>(null) }
 
     Column(
-        Modifier.fillMaxSize().safeDrawingPadding().verticalScroll(rememberScrollState()).padding(24.dp),
+        Modifier.fillMaxSize().safeDrawingPadding().fadeScroll().padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp),
     ) {
         Spacer(Modifier.height(24.dp))
         Image(painterResource(R.drawable.ic_launcher_fg), null, Modifier.size(84.dp))
         when (step) {
             0 -> {
-                Text("Your Logan, connected.", style = MaterialTheme.typography.headlineLarge)
+                com.loganlink.ui.components.TypewriterText("Your Logan, connected.", MaterialTheme.typography.headlineLarge, perCharMs = 40)
                 Text("Live data, trips, fault codes and battery health for your car.",
                     style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Spacer(Modifier.height(8.dp))

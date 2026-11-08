@@ -1,5 +1,6 @@
 package com.loganlink.ui.screens
 
+import com.loganlink.ui.components.fadeScroll
 import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
@@ -82,7 +83,7 @@ fun ParkingScreen(onBack: () -> Unit) {
                 )
             }
             else -> Column(
-                Modifier.fillMaxSize().padding(pad).verticalScroll(rememberScrollState()).padding(16.dp),
+                Modifier.fillMaxSize().padding(pad).fadeScroll().padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 RouteMap(emptyList(), Modifier.height(320.dp), marker = park.lat to park.lon, markerAccuracyM = park.accuracyM)
