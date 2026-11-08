@@ -278,7 +278,7 @@ private fun AboutHeader() {
             },
         ) {
             androidx.compose.animation.Crossfade(grin, label = "") { g ->
-                if (g) Grin(Modifier.size(52.dp))
+                if (g) androidx.compose.foundation.Image(androidx.compose.ui.res.painterResource(R.drawable.face), null, Modifier.size(52.dp))
                 else androidx.compose.foundation.Image(androidx.compose.ui.res.painterResource(R.drawable.ic_launcher_fg), null,
                     Modifier.size(52.dp).scale(1.5f))
             }
@@ -287,35 +287,3 @@ private fun AboutHeader() {
     }
 }
 
-@Composable
-private fun Grin(modifier: Modifier) {
-    val ink = MaterialTheme.colorScheme.onSurface
-    androidx.compose.foundation.Canvas(modifier) {
-        val w = size.width; val h = size.height
-        val s = androidx.compose.ui.graphics.drawscope.Stroke(width = w * 0.045f, cap = androidx.compose.ui.graphics.StrokeCap.Round,
-            join = androidx.compose.ui.graphics.StrokeJoin.Round)
-        val face = androidx.compose.ui.graphics.Path().apply {
-            moveTo(w * .14f, h * .30f); cubicTo(w * .22f, h * .04f, w * .80f, h * .02f, w * .90f, h * .32f)
-            cubicTo(w * .98f, h * .58f, w * .86f, h * .92f, w * .52f, h * .96f)
-            cubicTo(w * .20f, h * .98f, w * .04f, h * .62f, w * .14f, h * .30f)
-        }
-        drawPath(face, ink, style = s)
-        drawPath(androidx.compose.ui.graphics.Path().apply {
-            moveTo(w * .26f, h * .34f); quadraticTo(w * .36f, h * .24f, w * .46f, h * .36f)
-            moveTo(w * .58f, h * .36f); quadraticTo(w * .68f, h * .24f, w * .78f, h * .34f)
-        }, ink, style = s)
-        drawCircle(ink, w * .03f, androidx.compose.ui.geometry.Offset(w * .38f, h * .36f))
-        drawCircle(ink, w * .03f, androidx.compose.ui.geometry.Offset(w * .70f, h * .36f))
-        val mouth = androidx.compose.ui.graphics.Path().apply {
-            moveTo(w * .18f, h * .52f); quadraticTo(w * .52f, h * .62f, w * .86f, h * .48f)
-            quadraticTo(w * .76f, h * .90f, w * .48f, h * .88f); quadraticTo(w * .24f, h * .84f, w * .18f, h * .52f)
-        }
-        drawPath(mouth, ink, style = s)
-        for (i in 1..5) {
-            val x = w * (.18f + i * .115f)
-            drawLine(ink, androidx.compose.ui.geometry.Offset(x, h * (.55f - (if (i in 2..4) .02f else 0f))),
-                androidx.compose.ui.geometry.Offset(x - w * .02f, h * .85f - kotlin.math.abs(i - 3) * h * .04f), w * .025f)
-        }
-        drawLine(ink, androidx.compose.ui.geometry.Offset(w * .20f, h * .70f), androidx.compose.ui.geometry.Offset(w * .82f, h * .62f), w * .025f)
-    }
-}
