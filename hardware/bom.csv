@@ -48,6 +48,6 @@ TP1-TP6,6,Test pads,-,-,TestPoint:TestPoint_Pad_D1.5mm,Pads only,0,0
 P1,1,OBD-II plug housing,Molex,68503-1602,-,Off-board,140,110
 P2,6,OBD-II male crimp pin,Molex,57964-9702,-,Off-board,25,18
 W1,1,22 AWG wire 6 x 25 mm,-,-,-,Off-board,10,5
-PCB,1,2-layer 54 x 42 mm 1.6 mm ENIG,LionCircuits,-,-,-,200,60
+PCB,1,2-layer 54 x 42 mm 1.6 mm lead-free HASL,LionCircuits,-,-,-,200,60
 PCBA,1,Turnkey SMT top side,LionCircuits,-,-,-,1500,300
 ENCL,1,Front + retainer + rear + light pipe + 4 x M2x18 self-tapping,Self-print,-,-,-,120,80

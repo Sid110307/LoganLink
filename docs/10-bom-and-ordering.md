@@ -9,7 +9,7 @@ LionCircuits; check before ordering.
 |------|--------|-----------|
 | Board parts (SMT) | about ₹1,155 | about ₹820 |
 | OBD housing, pins, wire | about ₹300 | about ₹225 |
-| PCB, 2-layer ENIG | ₹200 | ₹60 |
+| PCB, 2-layer HASL | ₹200 | ₹60 |
 | Assembly, top side | ₹1,500 | ₹300 |
 | Enclosure print + screws | ₹120 | ₹80 |
 | Total | about ₹3,275 | about ₹1,485 |
@@ -27,7 +27,7 @@ OBD connector.
 | Layers | 2 |
 | Material | FR4, 1.6 mm |
 | Copper | 1 oz |
-| Finish | ENIG (flat pads for the LGA accelerometer and the buck's QFN) |
+| Finish | Lead-free HASL. Cheaper than ENIG; ask LionCircuits to inspect U3 (LGA) and U4 (QFN) joints, the two parts that like flat pads |
 | Mask / silk | Green / white |
 | Size | 54 x 42 mm |
 
