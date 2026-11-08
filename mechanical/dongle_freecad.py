@@ -9,7 +9,7 @@ OUT = os.path.dirname(os.path.abspath(__file__)) if "__file__" in globals() else
 P = dict(
     plug_w=39.0, plug_w_bot=33.0, plug_h=17.0, plug_r=2.5, plug_out=16.0,
     flange_t=3.0, flange_ext=1.2, plug_body=8.0, wire_gap=5.0,
-    pcb_w=54.0, pcb_h=42.0, pcb_t=1.6, comp_top=6.0, hole_inset=3.5,
+    pcb_w=54.0, pcb_h=42.0, pcb_t=1.6, comp_top=6.0, hole_inset=3.0,
     face_t=2.0, ret_t=2.0, wall=1.6, roof=1.5, gap=0.3, r_out=3.0,
     boss_d=5.0, pilot_d=1.6, clear_d=2.4, lip_h=3.0, lip_t=0.8,
     led_x=21.0, led_y=9.0, btn_x=22.0, btn_y=3.0,
