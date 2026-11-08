@@ -8,118 +8,89 @@ OUT = os.path.dirname(os.path.abspath(__file__)) if "__file__" in globals() else
 
 P = dict(
     plug_w=39.0, plug_w_bot=33.0, plug_h=17.0, plug_r=2.5, plug_out=16.0,
-    flange_t=3.0, flange_ext=1.2, plug_body=8.0,
-    pcb_w=38.0, pcb_l=46.0, pcb_t=1.6, comp_top=7.0, under=2.0, ant_len=8.0,
-    wall=1.5, gap=0.3, r_out=3.0,
-    hook_w=5.0, hook_len=5.0, hook_t=1.0, barb=0.6,
+    flange_t=3.0, flange_ext=1.2, plug_body=8.0, wire_gap=5.0,
+    pcb_w=54.0, pcb_h=42.0, pcb_t=1.6, comp_top=6.0, hole_inset=3.5,
+    face_t=2.0, ret_t=2.0, wall=1.6, roof=1.5, gap=0.3, r_out=3.0,
+    boss_d=5.0, pilot_d=1.6, clear_d=2.4, lip_h=3.0, lip_t=0.8,
+    led_x=21.0, led_y=9.0, btn_x=22.0, btn_y=3.0,
 )
-
 p = type("P", (), P)
-z_pcb_bot = p.wall + p.under
-z_pcb_mid = z_pcb_bot + p.pcb_t / 2
-hb_in = p.under + p.pcb_t + p.comp_top
-wb_in = p.pcb_w + 2 * p.gap
-ha_in = p.plug_h + 2 * p.flange_ext + 2 * p.gap
-wa_in = p.plug_w + 2 * p.flange_ext + 2 * p.gap
-la = p.wall + p.flange_t + p.plug_body
-pcb_x0 = la + 3.0
-l_tot = pcb_x0 + p.pcb_l + p.gap + p.wall
-y_c = max(wa_in, wb_in) / 2 + p.wall
-zA = z_pcb_mid
-zB = p.wall + hb_in / 2
+
+z_flange = p.face_t
+z_ret = z_flange + p.flange_t
+z_body_end = z_ret + p.plug_body
+z_pcb = z_body_end + p.wire_gap
+z_pcb_top = z_pcb + p.pcb_t
+z_roof_in = z_pcb_top + p.comp_top + 0.5
+z_top = z_roof_in + p.roof
+
+in_w, in_h = p.pcb_w + 2 * p.gap, p.pcb_h + 2 * p.gap
+out_w, out_h = in_w + 2 * p.wall, in_h + 2 * p.wall
+hx, hy = p.pcb_w / 2 - p.hole_inset, p.pcb_h / 2 - p.hole_inset
+holes = [(sx * hx, sy * hy) for sx in (-1, 1) for sy in (-1, 1)]
 
 
-def rrect(x, w, h, zc, r):
-    r = min(r, w / 2 - 0.01, h / 2 - 0.01)
-    y0, y1, z0, z1 = y_c - w / 2, y_c + w / 2, zc - h / 2, zc + h / 2
-    k = r * (1 - 0.70710678)
-    e = [
-        Part.LineSegment(V(x, y0 + r, z0), V(x, y1 - r, z0)).toShape(),
-        Part.Arc(V(x, y1 - r, z0), V(x, y1 - k, z0 + k), V(x, y1, z0 + r)).toShape(),
-        Part.LineSegment(V(x, y1, z0 + r), V(x, y1, z1 - r)).toShape(),
-        Part.Arc(V(x, y1, z1 - r), V(x, y1 - k, z1 - k), V(x, y1 - r, z1)).toShape(),
-        Part.LineSegment(V(x, y1 - r, z1), V(x, y0 + r, z1)).toShape(),
-        Part.Arc(V(x, y0 + r, z1), V(x, y0 + k, z1 - k), V(x, y0, z1 - r)).toShape(),
-        Part.LineSegment(V(x, y0, z1 - r), V(x, y0, z0 + r)).toShape(),
-        Part.Arc(V(x, y0, z0 + r), V(x, y0 + k, z0 + k), V(x, y0 + r, z0)).toShape(),
-    ]
-    return Part.Wire(e)
+def rbox(w, h, z0, dz, r):
+    b = Part.makeBox(w, h, dz, V(-w / 2, -h / 2, z0))
+    if r <= 0:
+        return b
+    e = [x for x in b.Edges if abs((x.Vertexes[1].Point - x.Vertexes[0].Point).normalize().z) > 0.99]
+    return b.makeFillet(min(r, w / 2 - 0.01, h / 2 - 0.01), e)
 
 
-def prism(x0, length, w, h, zc, r):
-    return Part.Face(rrect(x0, w, h, zc, r)).extrude(V(length, 0, 0))
-
-
-def body(xa, lA, wa, ha, xb, lB, wb, hb, r):
-    a = prism(xa, lA, wa, ha, zA, r)
-    b = prism(xb, lB, wb, hb, zB, r)
-    t = Part.makeLoft([rrect(xa + lA, wa, ha, zA, r), rrect(xb, wb, hb, zB, r)], True, False)
-    return a.fuse(t).fuse(b).removeSplitter()
-
-
-def shroud(extra, x0, length):
+def trap(extra, z0, dz):
     w1, w0, h = p.plug_w + 2 * extra, p.plug_w_bot + 2 * extra, p.plug_h + 2 * extra
-    pts = [V(x0, y_c - w0 / 2, zA - h / 2), V(x0, y_c + w0 / 2, zA - h / 2),
-           V(x0, y_c + w1 / 2, zA + h / 2), V(x0, y_c - w1 / 2, zA + h / 2)]
-    s = Part.Face(Part.makePolygon(pts + [pts[0]])).extrude(V(length, 0, 0))
-    edges = [e for e in s.Edges if abs((e.Vertexes[1].Point - e.Vertexes[0].Point).normalize().x) > 0.99]
-    return s.makeFillet(p.plug_r, edges)
+    pts = [V(-w0 / 2, -h / 2, z0), V(w0 / 2, -h / 2, z0), V(w1 / 2, h / 2, z0), V(-w1 / 2, h / 2, z0)]
+    s = Part.Face(Part.makePolygon(pts + [pts[0]])).extrude(V(0, 0, dz))
+    e = [x for x in s.Edges if abs((x.Vertexes[1].Point - x.Vertexes[0].Point).normalize().z) > 0.99]
+    return s.makeFillet(p.plug_r + extra, e)
 
 
-def box(l, w, h, x, y, z):
-    return Part.makeBox(l, w, h, V(x, y, z))
+def cyl(d, x, y, z0, dz):
+    return Part.makeCylinder(d / 2, dz, V(x, y, z0))
 
 
-outer = body(0, la, wa_in + 2 * p.wall, ha_in + 2 * p.wall, la + 4, l_tot - la - 4,
-             wb_in + 2 * p.wall, hb_in + 2 * p.wall, p.r_out)
-inner = body(p.wall, la - p.wall, wa_in, ha_in, la + 4, l_tot - la - 4 - p.wall,
-             wb_in, hb_in, max(0.6, p.r_out - p.wall))
+front = rbox(out_w, out_h, 0, z_pcb_top, p.r_out).cut(rbox(in_w, in_h, p.face_t, z_pcb_top, p.r_out - p.wall))
+front = front.cut(trap(p.gap, -1, p.face_t + 2))
+for x, y in holes:
+    front = front.fuse(cyl(p.boss_d, x, y, p.face_t - 0.01, p.flange_t + 0.01))
+rab = rbox(out_w + 2, out_h + 2, z_pcb_top - p.lip_h, p.lip_h + 1, 0).cut(
+    rbox(out_w - 2 * p.lip_t, out_h - 2 * p.lip_t, z_pcb_top - p.lip_h - 1, p.lip_h + 3, p.r_out - p.lip_t))
+front = front.cut(rab)
+for s in (-1, 1):
+    y = s * (out_h / 2 - p.lip_t)
+    front = front.fuse(Part.makeBox(12, 0.35, 0.8, V(-6, y if s > 0 else y - 0.35, z_pcb_top - p.lip_h / 2 - 0.4)))
+for x, y in holes:
+    front = front.cut(cyl(p.pilot_d, x, y, 0.6, 10))
+front = front.removeSplitter()
 
-shell = outer.cut(inner)
-for cut in (
-    shroud(p.gap, -1, p.wall + 2),
-    shroud(p.flange_ext + p.gap, p.wall, p.flange_t + p.gap),
-    shroud(p.gap, p.wall + p.flange_t, p.plug_body + 1),
-    box(10.0, p.wall + 2, 3.6, pcb_x0 + 15, y_c + wb_in / 2 - 1, z_pcb_bot + p.pcb_t - 0.2),
-    Part.makeCylinder(1.55, 20, V(pcb_x0 + 28, y_c - 8, z_pcb_bot)),
-    Part.makeCylinder(0.8, 20, V(pcb_x0 + 28, y_c + 8, z_pcb_bot)),
-):
-    shell = shell.cut(cut)
+ret = rbox(in_w - 0.4, in_h - 0.4, z_ret, p.ret_t, p.r_out - p.wall).cut(trap(p.gap, z_ret - 1, p.ret_t + 2))
+for x, y in holes:
+    ret = ret.fuse(cyl(p.boss_d, x, y, z_ret + p.ret_t - 0.01, z_pcb - z_ret - p.ret_t + 0.01))
+for x, y in holes:
+    ret = ret.cut(cyl(p.clear_d, x, y, z_ret - 1, 30))
+ret = ret.removeSplitter()
 
-lower = box(200, 200, 50 + z_pcb_bot, -50, -50, -50)
-upper = box(200, 200, 200, -50, -50, z_pcb_bot)
-hook_x = [la + 6, l_tot - p.ant_len - 8]
+rear = rbox(out_w, out_h, z_pcb_top, z_top - z_pcb_top, p.r_out).cut(
+    rbox(in_w, in_h, z_pcb_top - 1, z_roof_in - z_pcb_top + 1, p.r_out - p.wall))
+lip = rbox(out_w, out_h, z_pcb_top - p.lip_h, p.lip_h + 0.01, p.r_out).cut(
+    rbox(out_w - 2 * p.lip_t + 0.2, out_h - 2 * p.lip_t + 0.2, z_pcb_top - p.lip_h - 1, p.lip_h + 2, p.r_out - p.lip_t))
+rear = rear.fuse(lip)
+for s in (-1, 1):
+    y = s * (out_h / 2 - p.lip_t + 0.1)
+    rear = rear.cut(Part.makeBox(13, 0.5, 1.0, V(-6.5, y if s > 0 else y - 0.5, z_pcb_top - p.lip_h / 2 - 0.5)))
+rear = rear.cut(cyl(3.0, p.led_x, p.led_y, z_roof_in - 1, 5))
+rear = rear.cut(cyl(1.6, p.btn_x, p.btn_y, z_roof_in - 1, 5))
+rear = rear.removeSplitter()
 
-extras = []
-for x in (pcb_x0 + 10, l_tot - p.ant_len - 4):
-    for s in (-1, 1):
-        extras.append(box(4, 3, p.under + 0.01, x - 2, y_c + s * (p.pcb_w / 2 - 1.5) - 1.5, p.wall - 0.01))
-eye = box(7, 10, 3.2, l_tot - 9, y_c - 5, -3).cut(box(4, 12, 1.6, l_tot - 7.5, y_c - 6, -2.2))
-extras.append(eye)
-for x in hook_x:
-    for s in (-1, 1):
-        yi = y_c + s * (wb_in / 2 - p.hook_t / 2 - 0.05)
-        extras.append(box(p.hook_w, p.hook_t, p.hook_len, x - p.hook_w / 2, yi - p.hook_t / 2, z_pcb_bot - 0.01))
-        yb = yi + p.hook_t / 2 if s > 0 else yi - p.hook_t / 2 - p.barb
-        extras.append(box(p.hook_w, p.barb, 1.0, x - p.hook_w / 2, yb, z_pcb_bot + p.hook_len - 1.5))
+pipe_len = z_top - (z_pcb_top + 1.0)
+pipe = Part.makeCylinder(1.45, pipe_len).fuse(Part.makeCylinder(2.0, 0.8, V(0, 0, z_roof_in - (z_pcb_top + 1.0) - 0.8)))
 
-bottom = shell.common(lower)
-for e in extras:
-    bottom = bottom.fuse(e)
-bottom = bottom.removeSplitter()
-
-top = shell.common(upper)
-for x in (pcb_x0 + 10, l_tot - p.ant_len - 4):
-    top = top.fuse(box(3, 3, p.comp_top + 0.2, x - 1.5, y_c - 1.5, z_pcb_bot + p.pcb_t - 0.15))
-for x in hook_x:
-    for s in (-1, 1):
-        top = top.cut(box(p.hook_w + 0.4, 2 * p.wall, 1.4, x - (p.hook_w + 0.4) / 2,
-                          y_c + s * (wb_in / 2 + p.wall / 2) - p.wall, z_pcb_bot + p.hook_len - 1.7))
-top = top.removeSplitter()
-
-pipe = Part.makeCylinder(1.45, p.wall + p.comp_top - 1.0).fuse(Part.makeCylinder(2.0, 0.8))
-pcb = box(p.pcb_l, p.pcb_w, p.pcb_t, pcb_x0, y_c - p.pcb_w / 2, z_pcb_bot)
-plug = shroud(0, -p.plug_out, p.plug_out + p.wall + p.flange_t + p.plug_body)
+pcb = rbox(p.pcb_w, p.pcb_h, z_pcb, p.pcb_t, 3.0)
+for x, y in holes:
+    pcb = pcb.cut(cyl(p.clear_d, x, y, z_pcb - 1, 4))
+plug = trap(0, -p.plug_out, p.plug_out + p.face_t).fuse(trap(p.flange_ext, z_flange, p.flange_t)).fuse(
+    trap(0, z_ret, p.plug_body))
 
 name = "LoganLink_Dongle"
 if name in App.listDocuments():
@@ -130,8 +101,9 @@ for i, (k, v) in enumerate(P.items(), start=1):
     sheet.set(f"A{i}", k)
     sheet.set(f"B{i}", str(v))
 parts = {}
-for label, shp, col, tr in (("Bottom", bottom, (0.17, 0.18, 0.21), 0), ("Top", top, (0.23, 0.25, 0.29), 45),
-                            ("LightPipe", pipe.translated(V(pcb_x0 + 28, y_c - 8, z_pcb_bot + p.pcb_t + 0.5)), (0.95, 0.95, 0.95), 30),
+for label, shp, col, tr in (("Front", front, (0.17, 0.18, 0.21), 0), ("Retainer", ret, (0.85, 0.65, 0.1), 0),
+                            ("Rear", rear, (0.23, 0.25, 0.29), 45),
+                            ("LightPipe", pipe.translated(V(p.led_x, p.led_y, z_pcb_top + 1.0)), (0.95, 0.95, 0.95), 30),
                             ("PCB_ref", pcb, (0.1, 0.37, 0.13), 0), ("OBDPlug_ref", plug, (0.55, 0.55, 0.55), 60)):
     o = doc.addObject("Part::Feature", label)
     o.Shape = shp
@@ -143,10 +115,11 @@ doc.recompute()
 doc.saveAs(os.path.join(OUT, "LoganLink-dongle.FCStd"))
 
 import Import
-Import.export([parts["Bottom"], parts["Top"], parts["LightPipe"]], os.path.join(OUT, "dongle.step"))
-top_print = top.copy()
-top_print.rotate(V(0, 0, 0), V(1, 0, 0), 180)
-for fname, shp in (("dongle-bottom.stl", bottom), ("dongle-top.stl", top_print), ("dongle-pipe.stl", pipe)):
+Import.export([parts["Front"], parts["Retainer"], parts["Rear"], parts["LightPipe"]], os.path.join(OUT, "dongle.step"))
+rear_print = rear.copy()
+rear_print.rotate(V(0, 0, 0), V(1, 0, 0), 180)
+for fname, shp in (("dongle-front.stl", front), ("dongle-retainer.stl", ret), ("dongle-rear.stl", rear_print),
+                   ("dongle-pipe.stl", pipe)):
     MeshPart.meshFromShape(Shape=shp, LinearDeflection=0.05, AngularDeflection=0.3).write(os.path.join(OUT, fname))
 
 if App.GuiUp:
@@ -154,6 +127,8 @@ if App.GuiUp:
     FreeCADGui.ActiveDocument.ActiveView.viewIsometric()
     FreeCADGui.SendMsgToActiveView("ViewFit")
 
-bb = bottom.fuse(top).BoundBox
-print(f"Shell {bb.XLength:.1f} x {bb.YLength:.1f} x {bb.ZLength:.1f} mm, valid={bottom.isValid() and top.isValid()}, "
-      f"bottom {bottom.Volume / 1000:.1f} cm3, top {top.Volume / 1000:.1f} cm3")
+bb = front.fuse(rear).BoundBox
+print(f"Shell {bb.XLength:.1f} x {bb.YLength:.1f} x {bb.ZLength:.1f} mm, protrusion {z_top:.1f} mm, "
+      f"valid={front.isValid() and rear.isValid() and ret.isValid()}, "
+      f"front {front.Volume / 1000:.1f} cm3, retainer {ret.Volume / 1000:.1f} cm3, rear {rear.Volume / 1000:.1f} cm3, "
+      f"pcb z {z_pcb:.1f}..{z_pcb_top:.1f}")
