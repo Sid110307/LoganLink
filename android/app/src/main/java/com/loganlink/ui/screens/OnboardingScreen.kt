@@ -1,5 +1,11 @@
 package com.loganlink.ui.screens
 
+import androidx.compose.runtime.LaunchedEffect
+import com.loganlink.ui.components.reveal
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.unit.sp
 import com.loganlink.ui.components.fadeScroll
 import android.annotation.SuppressLint
 import android.companion.AssociationInfo
@@ -73,23 +79,22 @@ fun OnboardingScreen(onDone: () -> Unit) {
     var manual by remember { mutableStateOf("") }
     var error by remember { mutableStateOf<String?>(null) }
 
+    if (step == 0) {
+        Welcome(
+            onPair = { (ctx as? MainActivity)?.requestRuntimePermissions(); step = 1 },
+            onDemo = { app.prefs.setDemo(true); onDone() },
+        )
+        return
+    }
+
     Column(
         Modifier.fillMaxSize().safeDrawingPadding().fadeScroll().padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp),
     ) {
-        Spacer(Modifier.height(24.dp))
-        Image(painterResource(R.drawable.ic_launcher_fg), null, Modifier.size(84.dp))
+        Spacer(Modifier.height(12.dp))
+        Text("STEP $step OF 2", style = MaterialTheme.typography.labelMedium, letterSpacing = 2.sp,
+            color = MaterialTheme.colorScheme.onSurfaceVariant)
         when (step) {
-            0 -> {
-                com.loganlink.ui.components.TypewriterText("Your car, connected.", MaterialTheme.typography.headlineLarge, perCharMs = 40)
-                Text("Live data, trips, fault codes and battery health for your car.",
-                    style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                Spacer(Modifier.height(8.dp))
-                Button(onClick = { (ctx as? MainActivity)?.requestRuntimePermissions(); step = 1 }, Modifier.fillMaxWidth().height(54.dp), shape = androidx.compose.foundation.shape.RoundedCornerShape(14.dp)) { Text("Pair my module", style = MaterialTheme.typography.titleMedium) }
-                OutlinedButton(onClick = {
-                    app.prefs.setDemo(true); onDone()
-                }, Modifier.fillMaxWidth().height(54.dp), shape = androidx.compose.foundation.shape.RoundedCornerShape(14.dp)) { Text("Explore with a simulated car") }
-            }
             1 -> {
                 Text("Scan the pairing card", style = MaterialTheme.typography.headlineMedium)
                 Text("Scan the card from the box, or a driver invite.",
@@ -165,4 +170,86 @@ private fun FindModule(creds: Creds, onPaired: () -> Unit, onBack: () -> Unit) {
         NavRow(R.drawable.bluetooth, m.name, "${m.address} · ${m.rssi} dBm" + (m.vbat?.let { " · battery %.1f V".format(it) } ?: "")) { finish(m) }
     }
     TextButton(onClick = onBack) { Text("Back") }
+}
+
+@Composable
+private fun Welcome(onPair: () -> Unit, onDemo: () -> Unit) {
+    val needle = remember { androidx.compose.animation.core.Animatable(0f) }
+    var ready by remember { mutableStateOf(false) }
+    LaunchedEffect(Unit) {
+        kotlinx.coroutines.delay(250)
+        needle.animateTo(1f, androidx.compose.animation.core.tween(750, easing = androidx.compose.animation.core.FastOutSlowInEasing))
+        needle.animateTo(0.115f, androidx.compose.animation.core.tween(900, easing = androidx.compose.animation.core.FastOutSlowInEasing))
+        ready = true
+    }
+    Column(Modifier.fillMaxSize().safeDrawingPadding().padding(horizontal = 24.dp, vertical = 16.dp)) {
+        Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+            Text("LOGANLINK", style = MaterialTheme.typography.labelLarge, letterSpacing = 3.sp)
+            Spacer(Modifier.weight(1f))
+            Text("v${com.loganlink.BuildConfig.VERSION_NAME}", style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+        Box(Modifier.fillMaxWidth().weight(1f), contentAlignment = androidx.compose.ui.Alignment.Center) {
+            IgnitionGauge(needle.value, ready, Modifier.size(280.dp))
+        }
+        Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
+            SetupStep(1, "Plug into the OBD port", "Under the dash or in the glovebox")
+            SetupStep(2, "Start the engine", "The module wakes up by itself")
+            SetupStep(3, "Pair your phone", "Scan the card that came with it")
+        }
+        Spacer(Modifier.height(24.dp))
+        Button(onClick = onPair, Modifier.fillMaxWidth().height(56.dp)) {
+            Text("Pair module", style = MaterialTheme.typography.titleMedium)
+        }
+        TextButton(onClick = onDemo, Modifier.fillMaxWidth()) {
+            Text("Try without a car", color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+    }
+}
+
+@Composable
+private fun IgnitionGauge(p: Float, ready: Boolean, modifier: Modifier) {
+    val accent = MaterialTheme.colorScheme.primary
+    val tick = MaterialTheme.colorScheme.outline
+    val red = com.loganlink.ui.theme.StateCritical
+    val textColor = MaterialTheme.colorScheme.onSurface
+    Box(modifier, contentAlignment = androidx.compose.ui.Alignment.Center) {
+        androidx.compose.foundation.Canvas(Modifier.fillMaxSize()) {
+            val c = center; val r = size.minDimension / 2f
+            val start = 135f; val sweep = 270f
+            for (i in 0..56) {
+                val f = i / 56f
+                val major = i % 8 == 0
+                val a = Math.toRadians((start + sweep * f).toDouble())
+                val outer = r * 0.98f; val inner = r * if (major) 0.84f else 0.91f
+                val col = when { f > 0.82f -> red; f <= p -> accent; else -> tick }
+                drawLine(col, androidx.compose.ui.geometry.Offset(c.x + inner * kotlin.math.cos(a).toFloat(), c.y + inner * kotlin.math.sin(a).toFloat()),
+                    androidx.compose.ui.geometry.Offset(c.x + outer * kotlin.math.cos(a).toFloat(), c.y + outer * kotlin.math.sin(a).toFloat()),
+                    strokeWidth = if (major) 5f else 3f, cap = androidx.compose.ui.graphics.StrokeCap.Round)
+            }
+            val na = Math.toRadians((start + sweep * p).toDouble())
+            drawLine(accent, c, androidx.compose.ui.geometry.Offset(c.x + r * 0.78f * kotlin.math.cos(na).toFloat(), c.y + r * 0.78f * kotlin.math.sin(na).toFloat()),
+                strokeWidth = 7f, cap = androidx.compose.ui.graphics.StrokeCap.Round)
+            drawCircle(accent, r * 0.05f, c)
+        }
+        Column(horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally, modifier = Modifier.padding(top = 120.dp)) {
+            Text("%,d".format((p * 7000).toInt()), style = MaterialTheme.typography.headlineMedium, color = textColor)
+            com.loganlink.ui.components.MorphText(if (ready) "Ready" else "Self-test", MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+    }
+}
+
+@Composable
+private fun SetupStep(n: Int, title: String, detail: String) {
+    Row(Modifier.reveal(), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+        Box(Modifier.size(34.dp).background(MaterialTheme.colorScheme.surfaceContainerHigh, androidx.compose.foundation.shape.RoundedCornerShape(10.dp)),
+            contentAlignment = androidx.compose.ui.Alignment.Center) {
+            Text("$n", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
+        }
+        Column(Modifier.padding(start = 14.dp)) {
+            Text(title, style = MaterialTheme.typography.titleMedium)
+            Text(detail, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+    }
 }
