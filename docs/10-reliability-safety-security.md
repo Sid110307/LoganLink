@@ -51,7 +51,7 @@ failure: the CO₂ features just disappear.
 
 ## 5. Vehicle safety and cybersecurity architecture
 
-The 2008 Logan has no gateway, no secure diagnostics and no intrusion detection. Anything that can talk on the K-line can,
+Cars of this era have no gateway, no secure diagnostics and no intrusion detection. Anything that can talk on the K-line can,
 in principle, use any diagnostic service the ECUs implement. So the module is the security boundary, and it's built
 around **defence in depth**:
 

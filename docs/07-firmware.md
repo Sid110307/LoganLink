@@ -182,7 +182,7 @@ Production programming over Tag-Connect: `esptool.py --chip esp32s3 -p COMx writ
 | BLE GATT, auth, commands, live stream, log sync, BLE OTA | Implemented |
 | GNSS, IMU, SHT45, SCD41, RTC, wake accelerometer | Implemented (register values per datasheets, to be confirmed on first boards) |
 | SGP41 gas index; fuel-sender ADC; coolant NTC; REV input | Hooks present, drivers to finish during bring-up |
-| CAN (ISO 15765) | Hardware fitted; driver deferred because the Phase-1 Logan has no CAN on the OBD socket (V1) |
+| CAN (ISO 15765) | Hardware fitted; driver deferred because the reference car has no CAN on the OBD socket (V1) |
 | Wi-Fi SoftAP OTA (`CMD_WIFI_OTA`) and LTE/MQTT (variant C) | Returns `RS_UNSUPPORTED` in v1.0; planned for v1.1 |
 
 **This code has not yet been compiled.** It was written against the ESP-IDF v5.3 APIs. Expect a short round of compile fixes on

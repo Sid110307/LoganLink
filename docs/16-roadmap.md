@@ -10,7 +10,7 @@ configuration ("coding"). Workshop tools such as Renault CLIP do this over the s
 write can stall an engine in traffic, leave the idle unstable, or brick an ECU**. So writing is added as a separate, deliberately
 narrow capability on top of the read-only guard, never by loosening the guard.
 
-### 1.1 Candidate functions for a K7M Logan (verify each against the ECU's actual service set; IDs are ECU-specific)
+### 1.1 Candidate functions for a K7M car (verify each against the ECU's actual service set; IDs are ECU-specific)
 
 | Function | Typical KWP2000 service | Use | Risk | Phase |
 |----------|-------------------------|-----|------|-------|

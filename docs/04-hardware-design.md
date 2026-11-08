@@ -188,7 +188,7 @@ K-line chip, but it needs 5 V logic. The discrete PHY below is fully characteris
   K shorted to GND → R10 dissipates 0.29 W continuous (0.5 W part) ✓. Firmware sees a stuck-dominant line and raises an alarm.
 - The ECU receives our own transmitted bytes back as an echo. The firmware reads and checks each echo.
 
-### 4.2 CAN (fitted for portability; inactive on Phase-1 Logan)
+### 4.2 CAN (fitted for portability; inactive on the reference car)
 
 SN65HVD230Q with RS → GND (high-speed). Split termination **not fitted** (vehicle bus is already terminated). ESD
 NUP2105L. 0 Ω jumpers R20/R21 in CANH/CANL, so they can be removed if the pins are used for something else.

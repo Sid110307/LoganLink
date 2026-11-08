@@ -1,4 +1,4 @@
-# 11 — Installation and Vehicle Integration (2008 Mahindra Renault Logan 1.6)
+# 11 — Installation and Vehicle Integration (reference car: Renault X90, K7M 1.6)
 
 > **Safety first.** Work with the ignition off and the key out. For the optional taps (§6), disconnect the battery negative terminal
 > first. Before you do, make sure you have the radio security code if your head unit needs one. Stay clear of yellow airbag
@@ -74,7 +74,7 @@ clicks, then tug-test. Sleeve the whole harness in corrugated loom, with tape at
 
 All taps use **solder + adhesive-lined heat-shrink** or a Posi-Tap-type connector. Never use scotch-lock IDC clips.
 
-| Tap | Where (Logan Phase-1) | How to identify | Protection |
+| Tap | Where (reference car) | How to identify | Protection |
 |-----|----------------------|------------------|------------|
 | IGN (+APC) | Cabin fuse box: an ignition-switched fuse output (e.g., the radio's switched feed or cluster feed) | Multimeter: 0 V key off, 12 V key on, stays at ≥ 9 V while cranking | 0.5 A PTC at the tap point |
 | REV | Reverse-lamp feed: at the reverse switch harness on the gearbox, or the rear lamp connector | 12 V only in reverse with ignition on | 0.5 A PTC |

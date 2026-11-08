@@ -81,7 +81,7 @@ fun OnboardingScreen(onDone: () -> Unit) {
         Image(painterResource(R.drawable.ic_launcher_fg), null, Modifier.size(84.dp))
         when (step) {
             0 -> {
-                com.loganlink.ui.components.TypewriterText("Your Logan, connected.", MaterialTheme.typography.headlineLarge, perCharMs = 40)
+                com.loganlink.ui.components.TypewriterText("Your car, connected.", MaterialTheme.typography.headlineLarge, perCharMs = 40)
                 Text("Live data, trips, fault codes and battery health for your car.",
                     style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Spacer(Modifier.height(8.dp))

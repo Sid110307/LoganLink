@@ -6,7 +6,7 @@
 |------|---------------|
 | Product | LoganLink Vehicle Module (LL-VM1) and LoganLink app |
 | Variants | **LL-VM1-B** Base (BLE + Wi-Fi, GNSS, sensors). **LL-VM1-C** Connected (adds LTE Cat-1 for remote functions) |
-| Vehicle | 2008 Mahindra Renault Logan 1.6 petrol (K7M 8-valve MPFI, 1598 cc), Phase-1 (X90) platform, RHD India |
+| Vehicle | Older K-line/OBD-II petrol cars. Reference car: Renault X90-platform sedan, K7M 1.6 8-valve MPFI (1598 cc), RHD India |
 | Interface to car | J1962 OBD socket via pass-through splitter; optional 4 analog/digital taps |
 | Interface to user | iOS 15+ / Android 9+ app over BLE 5; RGB status LED; recessed PAIR button |
 | Supply | 12 V nominal, operating 6–16 V, survives 4.5 V cranking dip (reset allowed below 6 V), 24 V jump-start for 60 s, −14 V reverse, suppressed and unsuppressed load dump with clamp |
@@ -25,7 +25,7 @@ Every feature lists which data paths it depends on (see doc 02 §5):
 - **P**: phone: location, notifications, voice, network
 - **L**: LTE (variant C only)
 
-Each feature also has a **Tier**. **T1** works with B alone, so it is guaranteed on any Logan.
+Each feature also has a **Tier**. **T1** works with B alone, so it is guaranteed on any car.
 **T2** needs A or C. **T3** needs L.
 
 ## 3. Feature specification

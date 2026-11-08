@@ -17,7 +17,7 @@ import javax.crypto.spec.GCMParameterSpec
 data class Pairing(val address: String, val deviceId: String, val userId: Int, val kUser: ByteArray, val name: String)
 
 data class VehicleProfile(
-    val nickname: String = "My Logan",
+    val nickname: String = "My car",
     val plate: String = "",
     val odometerKm: Int = 0,
     val fuelPricePaise: Int = 10500,
@@ -99,7 +99,7 @@ class Prefs(context: Context) {
     fun setDemo(on: Boolean) { sp.edit().putBoolean("demo", on).apply(); _demo.value = on }
 
     private fun readVehicle() = VehicleProfile(
-        sp.getString("v_nick", "My Logan")!!, sp.getString("v_plate", "")!!, sp.getInt("v_odo", 0),
+        sp.getString("v_nick", "My car")!!, sp.getString("v_plate", "")!!, sp.getInt("v_odo", 0),
         sp.getInt("v_price", 10500), sp.getInt("v_tank", 50),
     )
 

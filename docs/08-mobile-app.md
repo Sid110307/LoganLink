@@ -51,7 +51,7 @@
 4. "Start the engine and press PAIR on the module" (an animated illustration shows where).
 5. Scan, filtered by service UUID → match the `device_id` from the card against the device's advertised MAC suffix → connect →
    OS pairing dialog (Android "Pair?" / iOS "Bluetooth Pairing Request") → AUTH succeeds.
-6. Vehicle setup: confirm the car (Logan 1.6 petrol preset), enter the odometer reading from the cluster and the fuel price.
+6. Vehicle setup: confirm the car (petrol preset), enter the odometer reading from the cluster and the fuel price.
    Optional: say which taps are fitted.
 7. The module runs the **vehicle probe**, with live progress ("Talking to engine computer… found KWP2000 fast-init, 11 data
    items"). If no ECU answers, the app explains Tier-1 mode clearly and offers the Signal Mapper later.
@@ -99,7 +99,7 @@ Implemented in `app/lib/theme/tokens.dart`.
 ┌───────────────────────────────────────┐
 │ Good evening                   ⚙︎      │
 │ ┌───────────────────────────────────┐ │
-│ │   [ Logan line illustration ]     │ │  hero card: car silhouette (vector), plate, odometer
+│ │   [ car line illustration ]       │ │  hero card: car silhouette (vector), plate, odometer
 │ │   MH 12 AB 1234 · 84,212 km       │ │
 │ │  ● Connected   ● Battery 12.6 V   │ │  status chips
 │ └───────────────────────────────────┘ │

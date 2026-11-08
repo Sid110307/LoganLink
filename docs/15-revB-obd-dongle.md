@@ -18,7 +18,7 @@ methods still apply unless this document says otherwise. The wire protocol (doc 
 | Log storage | External 32 MB NOR | **4 MB `log` partition in the module's internal flash** (≈ 9 h of 1 Hz driving) | The phone syncs every drive. Saves a chip and 4 GPIO |
 | Supply chain | LMR36015 + SM8S26A + STPS3H100 | **LMR36006-Q1 + SMCJ33A + STPS2H100A + on-board 2 A NANO2 fuse** | Sized for a 0.6 A board; see §4 for the honest protection trade-off |
 | Load switches | 2 × TPS22918 | **None**: the K-line comparator and ripple bias (< 1 mA) are powered directly from GPIO21 (`AUX_PWR`) | Cheaper, simpler, same sleep result |
-| CAN | Fitted | **Footprint only (DNP)** | The Phase-1 Logan has no CAN on its OBD socket |
+| CAN | Fitted | **Footprint only (DNP)** | The reference car has no CAN on its OBD socket |
 | AUX output, taps, LTE variant | Present | **Removed** (optional IGN pad kept, DNP) | Cost. Moved to the roadmap (doc 16) |
 | Enclosure | 86 × 61 × 19.5 mm box with ears | **Thin-wall (1.5 mm) snap-fit dongle shell**, `mechanical/dongle.scad` | Fits the plug body snugly. No screws in the antenna zone |
 | Cost (1 unit) | ≈ ₹16,800 | **≈ ₹3,300** | §8 |
@@ -147,7 +147,7 @@ Still, for Indian roads: **tie the dongle's eye to the socket bracket or a nearb
 fretting of the plug contacts over years, and stops glovebox contents from knocking it out.
 
 ### 6.3 Location: verify on your car before ordering
-I could not confirm from service data where the diagnostic socket is on the Indian-market RHD Logan. You think it's in the glovebox.
+I could not confirm from service data where the diagnostic socket is on the RHD reference car (it varies by model). You think it's in the glovebox.
 Before finalising the length parameters:
 1. Find the socket and photograph it. Measure the free depth in front of it (need ≥ 75 mm), and whether the glovebox lid closes
    and the box empties without hitting the dongle.

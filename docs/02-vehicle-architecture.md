@@ -1,7 +1,7 @@
 # 02 — Target Vehicle Electrical/Electronic Architecture and Integration Design
 
-> **Evidence level.** The Indian-market Mahindra Renault Logan (2007–2010) is the Renault/Dacia
-> **X90 Phase-1 Logan** built at Nashik. Facts below are marked: **[D]** documented in Renault/Dacia
+> **Evidence level.** The reference car is a 2007–2010 Indian-market Renault X90 (Phase-1) sedan built at Nashik with the K7M 1.6.
+> Other X90/K7M-family cars and most K-line OBD-II petrol cars of that era share this architecture. Facts below are marked: **[D]** documented in Renault/Dacia
 > X90 service literature or component datasheets; **[C]** common across the platform but varies by
 > market/trim, so confirm on the car; **[M]** must be measured (see README “Items to verify”).
 
@@ -40,11 +40,11 @@ high-impedance input. It never takes load current from +APC circuits.
 
 ## 3. Diagnostic socket (SAE J1962 / ISO 15031-3)
 
-Location **[C → V4]**: Logan Phase-1 has the 16-pin socket in the lower dashboard on the driver's
+Location **[C → V4]**: on the reference car the 16-pin socket is in the lower dashboard on the driver's
 side, near the cabin fuse box, behind a small cover or open under the fascia. Before you
 connect anything, confirm its position and the pin population with a multimeter (doc 11 §3).
 
-| Pin | ISO function | Expected on Logan Phase-1 | LoganLink use |
+| Pin | ISO function | Expected on the reference car | LoganLink use |
 |-----|--------------|---------------------------|---------------|
 | 4 | Chassis ground | Present | GND (power return) |
 | 5 | Signal ground | Present | GND_SIG (joined to GND at module star point) |

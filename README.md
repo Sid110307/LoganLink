@@ -1,7 +1,7 @@
-# LoganLink — Connected-Vehicle System for the 2008 Mahindra Renault Logan 1.6 (K7M)
+# LoganLink — Connected-Vehicle System for older OBD-II petrol cars
 
-LoganLink is a small dongle that plugs straight into the car's OBD socket, plus a native Android app. It turns a
-2008 Mahindra Renault Logan 1.6 petrol into a connected, self-diagnosing car. The dongle reads the engine ECU over
+LoganLink is a small dongle that plugs straight into the car's OBD socket, plus a native Android app. It turns an
+older K-line OBD-II petrol car (developed on a Renault X90-platform sedan with the K7M 1.6) into a connected, self-diagnosing car. The dongle reads the engine ECU over
 the K-line. It also measures the 12 V system itself (battery health, cranking, charging, and RPM from alternator
 ripple) and records driving events with an accelerometer. It logs everything locally and streams it to the phone
 over Bluetooth LE. The phone adds location (parking spot, routes), the UI, analytics and long-term storage.
@@ -13,7 +13,7 @@ Where doc 15 differs, doc 15 wins.
 | # | Document | Contents |
 |---|----------|----------|
 | 01 | [docs/01-product-and-features.md](docs/01-product-and-features.md) | Product definition and feature specification (rev B drops the GNSS/cabin features; see doc 15 §1) |
-| 02 | [docs/02-vehicle-architecture.md](docs/02-vehicle-architecture.md) | Logan Phase-1 E/E architecture, diagnostic protocols, signals, acquisition strategy |
+| 02 | [docs/02-vehicle-architecture.md](docs/02-vehicle-architecture.md) | Reference-car E/E architecture, diagnostic protocols, signals, acquisition strategy |
 | 03 | [docs/03-system-architecture.md](docs/03-system-architecture.md) | System block diagram, data flows, timing, operating states |
 | 04 | [docs/04-hardware-design.md](docs/04-hardware-design.md) | *Rev A* hardware design (K-line PHY and protection rationale still apply) |
 | 05 | [docs/05-pcb-design.md](docs/05-pcb-design.md) | *Rev A* PCB (4-layer); LionCircuits/turnkey notes still apply |

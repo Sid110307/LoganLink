@@ -3,7 +3,7 @@ U1,1,Espressif,ESP32-S3-MINI-1-N8,"BLE5/WiFi module, 8 MB flash, pre-certified, 
 U2,1,Texas Instruments,LMR36006-Q1 (adjustable; confirm orderable suffix),"Buck 4.2-60V 0.6A AEC-Q100",WSON/SOT-23-THN,Fit,Mouser/DigiKey,170,125,400 kHz variant preferred
 U3,1,STMicroelectronics,LIS2DW12TR,"3-axis accel, ultra-low-power, wake-up INT",LGA-12 2x2,Fit,Mouser/DigiKey,130,95,
 U4,1,Texas Instruments,LMV331IDBVR (or LMV331QDCKRQ1),"Comparator open-drain, K-line RX",SOT-23-5,Fit,Mouser/DigiKey,35,20,
-U5,1,Texas Instruments,SN65HVD230QDRQ1,"CAN transceiver 3.3V",SOIC-8,DNP,Mouser/DigiKey,0,0,footprint only (Logan has no CAN on OBD)
+U5,1,Texas Instruments,SN65HVD230QDRQ1,"CAN transceiver 3.3V",SOIC-8,DNP,Mouser/DigiKey,0,0,footprint only (reference car has no CAN on OBD)
 Q1,1,Diodes Inc,2N7002KQ-7,"N-MOSFET 60V, K-line driver",SOT-23,Fit,Mouser/DigiKey,10,5,
 Q2,1,Diodes Inc,2N7002KQ-7,"IGN buffer",SOT-23,DNP,Mouser/DigiKey,0,0,optional IGN pad
 F1,1,Littelfuse,0451002.MRL,"NANO2 fuse 2 A 125 V",SMD 2410,Fit,Mouser/DigiKey,45,30,

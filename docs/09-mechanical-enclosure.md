@@ -101,7 +101,7 @@ recommended hole (Ø3.6 mm is typical for M2.5 × 5.7).
 
 - An active patch antenna (e.g., 28 × 24 mm, adhesive, 3 m RG174) sits **on the dash top, centred, ≥ 50 mm behind the
   windscreen base**, under the dark frit band if possible, so it's invisible from outside.
-- The cable is routed down the A-pillar trim edge or the dash-centre gap, away from airbag deployment paths (the 2008 Logan
+- The cable is routed down the A-pillar trim edge or the dash-centre gap, away from airbag deployment paths (the reference car
   has a driver airbag only, in the steering wheel. Still keep the A-pillar route behind trim, not over it).
 - Athermal (metallised heat-reflective) windscreen films attenuate GNSS by 10–20 dB. If one is fitted, test the fix time before
   finalising the location.

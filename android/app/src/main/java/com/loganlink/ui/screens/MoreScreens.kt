@@ -127,7 +127,7 @@ fun VehicleScreen(onBack: () -> Unit) {
     var tank by rememberSaveable { mutableStateOf(v.tankLitres.toString()) }
     val scope = rememberCoroutineScope()
     val snack = remember { SnackbarHostState() }
-    Page("Vehicle", "Mahindra Renault Logan 1.6", onBack, snack) {
+    Page("Vehicle", null, onBack, snack) {
         Panel("Details") {
             OutlinedTextField(nick, { nick = it }, Modifier.fillMaxWidth(), label = { Text("Nickname") }, singleLine = true)
             OutlinedTextField(plate, { plate = it.uppercase() }, Modifier.fillMaxWidth(), label = { Text("Registration") }, singleLine = true)
@@ -139,19 +139,13 @@ fun VehicleScreen(onBack: () -> Unit) {
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), singleLine = true)
             Button(onClick = {
                 val odoKm = odo.toIntOrNull() ?: v.odometerKm
-                app.prefs.saveVehicle(v.copy(nickname = nick.ifBlank { "My Logan" }, plate = plate.trim(), odometerKm = odoKm,
+                app.prefs.saveVehicle(v.copy(nickname = nick.ifBlank { "My car" }, plate = plate.trim(), odometerKm = odoKm,
                     fuelPricePaise = ((price.toDoubleOrNull() ?: 105.0) * 100).toInt(), tankLitres = tank.toIntOrNull() ?: 50))
                 scope.launch {
                     if (odoKm != v.odometerKm) { app.hub.setOdometer(odoKm); app.repo.rebaseService(odoKm) }
                     snack.showSnackbar("Saved")
                 }
             }, Modifier.fillMaxWidth()) { Text("Save") }
-        }
-        Panel("Specification") {
-            listOf("Engine" to "1.6 L petrol (K7M)",
-                "Gearbox" to "5-speed manual", "Tank" to "50 L").forEach { (k, x) ->
-                Row { Text(k, Modifier.weight(.4f), color = MaterialTheme.colorScheme.onSurfaceVariant); Text(x, Modifier.weight(.6f)) }
-            }
         }
     }
 }

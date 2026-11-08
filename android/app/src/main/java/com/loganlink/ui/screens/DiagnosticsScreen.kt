@@ -235,7 +235,7 @@ private fun Stamp(label: String, t: Long, modifier: Modifier = Modifier) = Colum
 private fun buildReport(nick: String, plate: String, mil: Boolean, active: List<DtcEntry>, past: List<DtcEntry>): String =
     buildString {
         appendLine("LoganLink fault code report")
-        appendLine("Vehicle: $nick${if (plate.isNotBlank()) " ($plate)" else ""} — Mahindra Renault Logan 1.6 (K7M)")
+        appendLine("Vehicle: $nick${if (plate.isNotBlank()) " ($plate)" else ""}")
         appendLine("Generated: ${fmtDate(System.currentTimeMillis(), "d MMM yyyy, HH:mm")}")
         appendLine("Check-engine light: ${if (mil) "ON" else "off / unknown"}")
         appendLine()

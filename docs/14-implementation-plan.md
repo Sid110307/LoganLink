@@ -96,5 +96,5 @@
 - Molex Micro-Fit 3.0 product specification (PS-43045, crimp specification for 43030)
 
 **Vehicle**
-- Renault/Dacia X90 (Logan Phase-1) workshop manual sections for injection (K7M), wiring diagrams (cabin fuse box, diagnostic socket) and
-  the UCH. Use the version for your build year and market; Mahindra Renault dealers' service documentation for the Indian-market specifics.
+- Renault/Dacia X90 workshop manual sections for injection (K7M), wiring diagrams (cabin fuse box, diagnostic socket) and
+  the UCH. Use the version for your build year and market; your dealer's service documentation for market-specific details.

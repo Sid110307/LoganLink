@@ -105,7 +105,7 @@ fun OverviewScreen(go: (String) -> Unit, onTab: (Int) -> Unit) {
             Modifier.fillMaxSize().fadeScroll().padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            HeroCard(vehicle.nickname, subtitle = listOf(vehicle.plate.ifBlank { "Logan 1.6 · K7M" }, "%,d km".format(vehicle.odometerKm)).joinToString("  ·  ")) {
+            HeroCard(vehicle.nickname, subtitle = listOf(vehicle.plate.ifBlank { "No plate set" }, "%,d km".format(vehicle.odometerKm)).joinToString("  ·  ")) {
                 val link = when (state) {
                     LinkState.Ready -> "Connected"
                     else -> state.label
