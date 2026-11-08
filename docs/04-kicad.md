@@ -6,15 +6,9 @@ from [`hardware/bom.csv`](../hardware/bom.csv), connections from [03](03-hardwar
 ## 1. Libraries
 
 Everything is in the stock libraries except the buck. The project library `loganlink` is already set up
-(`hardware/pcb/lib/`, registered in `sym-lib-table` and `fp-lib-table`) and has the LMR36006 symbol.
-
-The footprint still has to come from TI:
-
-1. On TI's LMR36006-Q1 page, CAD/CAE symbols, download the RNX0012A model (Ultra Librarian), export as KiCad.
-2. Copy the `.kicad_mod` into `hardware/pcb/lib/loganlink.pretty/` and rename it `TI_RNX0012A.kicad_mod` (the symbol already
-   points to `loganlink:TI_RNX0012A`). Ignore the downloaded symbol.
-3. Open it in the footprint editor and check it against the datasheet EXAMPLE BOARD LAYOUT page: 11 pads 0.25 x 0.6 mm
-   plus one large pad, 0.5 mm pitch.
+(`hardware/pcb/lib/`, registered in `sym-lib-table` and `fp-lib-table`) and has the LMR36006 symbol
+and the TI footprint `loganlink:TI_RNX0012A` (from TI's Ultra Librarian RNX0012B model, checked against the datasheet land
+pattern: 11 pads 0.25 x 0.6 mm, 0.5 mm pitch, 0.65 mm next to pin 1/11, SW pad 1.825 x 0.25 with split paste).
 
 If a footprint name in the BOM does not exist in your library version, search the footprint chooser by the package name.
 
