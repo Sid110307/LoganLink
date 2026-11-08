@@ -55,7 +55,7 @@ import com.loganlink.ui.components.SectionLabel
 import com.loganlink.ui.components.StatusChip
 import com.loganlink.ui.components.fmtDate
 import com.loganlink.ui.components.fmtRupees
-import com.loganlink.ui.theme.Ember
+import com.loganlink.ui.theme.Signal
 import com.loganlink.ui.theme.StateGood
 import com.loganlink.ui.theme.StateIdle
 import kotlinx.coroutines.Dispatchers
@@ -137,7 +137,7 @@ fun FuelScreen(onBack: () -> Unit) {
                 subtitle = if (stats.trackedKm > 0) String.format(Locale.US, "Mileage from %,d km between full tanks", stats.trackedKm)
                 else "Log two \"filled to full\" fill-ups to see real mileage") {
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    KpiTile("Average", stats.kmPerL?.let { f1(it) } ?: "—", Modifier.weight(1f), unit = "km/L", accent = Ember)
+                    KpiTile("Average", stats.kmPerL?.let { f1(it) } ?: "—", Modifier.weight(1f), unit = "km/L", accent = Signal)
                     KpiTile("Cost per km", stats.paisePerKm?.let { String.format(Locale.US, "%.2f", it / 100) }?.let { "₹$it" } ?: "—",
                         Modifier.weight(1f))
                 }
@@ -212,7 +212,7 @@ private fun FillRow(f: Fill, kmPerL: Double?, onDelete: () -> Unit) {
                 )
                 Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     StatusChip(if (f.full) "Full tank" else "Partial", if (f.full) StateGood else StateIdle)
-                    kmPerL?.let { StatusChip("${f1(it)} km/L", Ember) }
+                    kmPerL?.let { StatusChip("${f1(it)} km/L", Signal) }
                 }
             }
             IconButton(onClick = onDelete) { Icon(painterResource(R.drawable.trash), "Delete", Modifier.size(20.dp)) }

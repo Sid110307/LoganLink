@@ -35,7 +35,7 @@ import com.loganlink.core.service.DriveService
 import com.loganlink.core.service.OverlayControl
 import com.loganlink.ui.components.OutlinedButton
 import com.loganlink.ui.theme.BlockCharcoal
-import com.loganlink.ui.theme.BlockPeach
+import com.loganlink.ui.theme.BlockSignal
 import androidx.compose.foundation.layout.size
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -100,7 +100,7 @@ fun DriveModeScreen(onExit: () -> Unit) {
                 ) {
                     n.arrow?.let { Image(it.asImageBitmap(), null, Modifier.size(40.dp)) }
                     Column(Modifier.padding(start = 10.dp)) {
-                        Text(n.primary, color = BlockPeach, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
+                        Text(n.primary, color = BlockSignal, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
                         listOfNotNull(n.secondary, n.eta).joinToString("  ·  ").takeIf { it.isNotEmpty() }?.let { Text(it, color = Color.White) }
                     }
                 }

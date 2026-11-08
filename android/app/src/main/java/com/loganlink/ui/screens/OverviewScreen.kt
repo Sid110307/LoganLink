@@ -47,7 +47,7 @@ import com.loganlink.ui.components.StatusChip
 import com.loganlink.ui.components.ago
 import com.loganlink.ui.components.fmtDuration
 import com.loganlink.ui.components.fmtRupees
-import com.loganlink.ui.theme.Ember
+import com.loganlink.ui.theme.Signal
 import com.loganlink.ui.theme.StateConnected
 import com.loganlink.ui.theme.StateCritical
 import com.loganlink.ui.theme.StateGood
@@ -128,9 +128,9 @@ fun OverviewScreen(go: (String) -> Unit, onTab: (Int) -> Unit) {
             active?.let { t ->
                 Panel("Driving now", subtitle = "Started ${ago(t.startMs)}", icon = R.drawable.steering, onClick = { onTab(1) }) {
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        KpiTile("Distance", "%.1f".format(t.distanceKm), Modifier.weight(1f), "km", Ember)
-                        KpiTile("Fuel", "%.2f".format(t.fuelL), Modifier.weight(1f), "L", Ember, estimated = true)
-                        KpiTile("Top", "%.0f".format(t.maxSpeed), Modifier.weight(1f), "km/h", Ember)
+                        KpiTile("Distance", "%.1f".format(t.distanceKm), Modifier.weight(1f), "km", Signal)
+                        KpiTile("Fuel", "%.2f".format(t.fuelL), Modifier.weight(1f), "L", Signal, estimated = true)
+                        KpiTile("Top", "%.0f".format(t.maxSpeed), Modifier.weight(1f), "km/h", Signal)
                     }
                 }
             }
@@ -154,7 +154,7 @@ fun OverviewScreen(go: (String) -> Unit, onTab: (Int) -> Unit) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Column(Modifier.weight(1f)) {
                             Row(verticalAlignment = Alignment.Bottom) {
-                                CountUpText("%.1f".format(t.km), MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold), Ember)
+                                CountUpText("%.1f".format(t.km), MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold), Signal)
                                 Text(" km", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onSurfaceVariant,
                                     modifier = Modifier.padding(bottom = 6.dp))
                             }
@@ -174,11 +174,11 @@ fun OverviewScreen(go: (String) -> Unit, onTab: (Int) -> Unit) {
             fun eco(l: List<com.loganlink.core.data.Trip>) = l.filter { it.fuelMl > 50 }.let { f -> if (f.isEmpty()) null else f.sumOf { it.km } / f.sumOf { it.litres } }
             fun pct(a: Double?, b: Double?) = if (a == null || b == null || b == 0.0) null else (a - b) / b * 100
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                KpiTile("This week", "%.0f".format(week.sumOf { it.km }), Modifier.weight(1f), "km", Ember, onClick = { onTab(2) },
+                KpiTile("This week", "%.0f".format(week.sumOf { it.km }), Modifier.weight(1f), "km", Signal, onClick = { onTab(2) },
                     deltaPct = pct(week.sumOf { it.km }, prev.sumOf { it.km }), upIsGood = true)
-                KpiTile("Economy", eco(week)?.let { "%.1f".format(it) } ?: "—", Modifier.weight(1f), "km/L", Ember, onClick = { onTab(2) },
+                KpiTile("Economy", eco(week)?.let { "%.1f".format(it) } ?: "—", Modifier.weight(1f), "km/L", Signal, onClick = { onTab(2) },
                     deltaPct = pct(eco(week), eco(prev)))
-                KpiTile("Spend", "%,d".format(week.sumOf { it.costPaise } / 100), Modifier.weight(1f), "₹", Ember, onClick = { go(Routes.FUEL) },
+                KpiTile("Spend", "%,d".format(week.sumOf { it.costPaise } / 100), Modifier.weight(1f), "₹", Signal, onClick = { go(Routes.FUEL) },
                     deltaPct = pct(week.sumOf { it.costPaise }.toDouble(), prev.sumOf { it.costPaise }.toDouble()), upIsGood = false)
             }
 

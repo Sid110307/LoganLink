@@ -39,7 +39,7 @@ import com.loganlink.ui.components.StatusChip
 import com.loganlink.ui.components.TimeSeriesChart
 import com.loganlink.ui.components.ago
 import com.loganlink.ui.components.fmtDate
-import com.loganlink.ui.theme.Ember
+import com.loganlink.ui.theme.Signal
 import com.loganlink.ui.theme.StateCritical
 import com.loganlink.ui.theme.StateGood
 import com.loganlink.ui.theme.StateIdle
@@ -113,7 +113,7 @@ fun BatteryScreen(onBack: () -> Unit) {
                 val pts = cranks.reversed().map { it.t to it.minMv / 1000.0 }
                 Panel("Cranking voltage", icon = R.drawable.analytics,
                     subtitle = "Lowest voltage during each start · line at 9.6 V") {
-                    TimeSeriesChart(pts, Ember, "V", decimals = 2, timePattern = "d MMM, HH:mm", guide = 9.6)
+                    TimeSeriesChart(pts, Signal, "V", decimals = 2, timePattern = "d MMM, HH:mm", guide = 9.6)
                 }
 
                 Panel("Recent starts", icon = R.drawable.list, subtitle = "Last ${minOf(10, cranks.size)}") {

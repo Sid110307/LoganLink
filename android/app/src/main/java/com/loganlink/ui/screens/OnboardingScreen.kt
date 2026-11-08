@@ -52,7 +52,7 @@ import com.loganlink.core.protocol.deriveUserKey
 import com.loganlink.core.service.DriveService
 import com.loganlink.ui.components.NavRow
 import com.loganlink.ui.components.StatusChip
-import com.loganlink.ui.theme.Ember
+import com.loganlink.ui.theme.Signal
 import com.loganlink.ui.theme.StateConnected
 import java.util.concurrent.Executor
 import java.util.regex.Pattern
@@ -152,7 +152,7 @@ private fun FindModule(creds: Creds, onPaired: () -> Unit, onBack: () -> Unit) {
     Text("Start the engine and press PAIR on the module, then accept the pairing request.", color = MaterialTheme.colorScheme.onSurfaceVariant)
     if (found.isEmpty()) {
         Column(horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth().padding(24.dp)) {
-            CircularProgressIndicator(color = Ember)
+            CircularProgressIndicator(color = Signal)
             Text("Searching…", Modifier.padding(top = 12.dp), color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }

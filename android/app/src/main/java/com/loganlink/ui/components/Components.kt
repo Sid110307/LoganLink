@@ -46,6 +46,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.loganlink.R
 import com.loganlink.ui.theme.Severity
 import java.util.Locale
@@ -288,7 +289,7 @@ fun HeroCard(
     title: String,
     subtitle: String? = null,
     modifier: Modifier = Modifier,
-    container: Color = com.loganlink.ui.theme.BlockPeach,
+    container: Color = com.loganlink.ui.theme.BlockSignal,
     accent: Color = com.loganlink.ui.theme.BlockInk,
     onClick: (() -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit = {},
@@ -299,7 +300,7 @@ fun HeroCard(
         shape = RoundedCornerShape(28.dp),
     ) {
         Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            Text(title, style = MaterialTheme.typography.displaySmall.copy(fontFamily = com.loganlink.ui.theme.InstrumentSerif),
+            Text(title, style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold, letterSpacing = (-1).sp),
                 color = accent, maxLines = 2, overflow = TextOverflow.Ellipsis)
             subtitle?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = com.loganlink.ui.theme.BlockInk.copy(alpha = .7f)) }
             content()
@@ -323,7 +324,7 @@ fun TextTabs(options: List<String>, selected: Int, onSelect: (Int) -> Unit, modi
                     fontWeight = if (on) FontWeight.SemiBold else FontWeight.Normal,
                     color = if (on) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant)
                 Box(Modifier.padding(top = 4.dp).size(width = if (on) 18.dp else 0.dp, height = 2.dp)
-                    .background(com.loganlink.ui.theme.Ember, RoundedCornerShape(1.dp)))
+                    .background(com.loganlink.ui.theme.Signal, RoundedCornerShape(1.dp)))
             }
         }
     }

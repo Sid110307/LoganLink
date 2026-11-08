@@ -33,8 +33,7 @@ import com.loganlink.R
 import com.loganlink.core.VehicleHub
 import com.loganlink.core.nav.MapsNav
 import com.loganlink.ui.theme.BlockCharcoal
-import com.loganlink.ui.theme.BlockPeach
-import com.loganlink.ui.theme.InstrumentSerif
+import com.loganlink.ui.theme.BlockSignal
 import com.loganlink.ui.theme.LoganTheme
 import com.loganlink.ui.theme.StateCritical
 import com.loganlink.ui.theme.StateWarning
@@ -62,7 +61,7 @@ fun CarPanel(hub: VehicleHub, onDrag: (Float, Float) -> Unit, onClose: () -> Uni
                     n.arrow?.let { Image(it.asImageBitmap(), null, Modifier.size(34.dp)) }
                     if (n.arrow != null) Spacer(Modifier.width(10.dp))
                     Column(Modifier.weight(1f, fill = false)) {
-                        Text(n.primary, color = BlockPeach, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold,
+                        Text(n.primary, color = BlockSignal, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold,
                             maxLines = 1, overflow = TextOverflow.Ellipsis)
                         n.secondary?.let { Text(it, color = Color.White, style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis) }
                         n.eta?.let { Text(it, color = Color.White.copy(alpha = .7f), style = MaterialTheme.typography.labelSmall, maxLines = 1) }
@@ -70,7 +69,7 @@ fun CarPanel(hub: VehicleHub, onDrag: (Float, Float) -> Unit, onClose: () -> Uni
                 }
             }
             Row(verticalAlignment = Alignment.Bottom) {
-                Text(f?.speed?.let { "%.0f".format(it) } ?: "—", style = MaterialTheme.typography.displaySmall.copy(fontFamily = InstrumentSerif, fontSize = 52.sp), color = Color.White)
+                Text(f?.speed?.let { "%.0f".format(it) } ?: "—", style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Light, fontSize = 52.sp), color = Color.White)
                 Text(" km/h", color = Color.White.copy(alpha = .6f), modifier = Modifier.padding(bottom = 10.dp))
                 Spacer(Modifier.weight(1f))
                 Icon(painterResource(R.drawable.xmark), "Close", Modifier.size(22.dp).clickable(onClick = onClose), tint = Color.White.copy(alpha = .6f))

@@ -64,7 +64,7 @@ import com.loganlink.ui.components.SectionLabel
 import com.loganlink.ui.components.fmtDate
 import com.loganlink.ui.components.fmtDuration
 import com.loganlink.ui.components.fmtRupees
-import com.loganlink.ui.theme.Ember
+import com.loganlink.ui.theme.Signal
 import com.loganlink.ui.theme.StateCritical
 import com.loganlink.ui.theme.StateGood
 import com.loganlink.ui.theme.StateWarning
@@ -150,7 +150,7 @@ fun TripsScreen(go: (String) -> Unit) {
             item(key = "kpis") {
                 Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                        KpiTile("This week", "%.0f".format(Locale.US, weekKm), Modifier.weight(1f), unit = "km", accent = Ember)
+                        KpiTile("This week", "%.0f".format(Locale.US, weekKm), Modifier.weight(1f), unit = "km", accent = Signal)
                         KpiTile("Economy", weekKmPerL?.let { "%.1f".format(Locale.US, it) } ?: "—", Modifier.weight(1f), unit = "km/L")
                     }
                     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -164,7 +164,7 @@ fun TripsScreen(go: (String) -> Unit) {
             item(key = "chart") {
                 Panel("Distance per day", subtitle = "Last 7 days · %.0f km".format(Locale.US, bars.sumOf { it.second }),
                     icon = R.drawable.analytics) {
-                    BarChart(bars, Ember, Modifier.fillMaxWidth(), height = 120.dp)
+                    BarChart(bars, Signal, Modifier.fillMaxWidth(), height = 120.dp)
                 }
             }
 
@@ -209,10 +209,10 @@ fun TripsScreen(go: (String) -> Unit) {
 private fun DrivingNowCard(a: ActiveTrip, now: Long, onClick: () -> Unit) {
     Card(
         onClick = onClick, modifier = Modifier.fillMaxWidth(), shape = MaterialTheme.shapes.large,
-        colors = CardDefaults.cardColors(containerColor = Ember.copy(alpha = .14f)),
+        colors = CardDefaults.cardColors(containerColor = Signal.copy(alpha = .14f)),
     ) {
         Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-            IconBadge(R.drawable.steering, tint = Ember, bg = Ember.copy(alpha = .18f))
+            IconBadge(R.drawable.steering, tint = Signal, bg = Signal.copy(alpha = .18f))
             Column(Modifier.padding(start = 14.dp).weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                 Text("Driving now", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                 Text(

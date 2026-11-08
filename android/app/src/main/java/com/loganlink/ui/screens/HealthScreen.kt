@@ -44,7 +44,7 @@ import com.loganlink.ui.components.Sparkline
 import com.loganlink.ui.components.StatusChip
 import com.loganlink.ui.components.ago
 import com.loganlink.ui.components.fmtRupees
-import com.loganlink.ui.theme.Ember
+import com.loganlink.ui.theme.Signal
 import com.loganlink.ui.theme.StateCritical
 import com.loganlink.ui.theme.StateGood
 import com.loganlink.ui.theme.StateWarning
@@ -134,7 +134,7 @@ fun HealthScreen(go: (String) -> Unit) {
                     }
                     val mins = cranks.take(30).reversed().map { it.minMv / 1000.0 }
                     if (mins.size >= 2) {
-                        Sparkline(mins, Ember, Modifier.fillMaxWidth().height(36.dp))
+                        Sparkline(mins, Signal, Modifier.fillMaxWidth().height(36.dp))
                         Text("Cranking voltage, last ${mins.size} starts", style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }

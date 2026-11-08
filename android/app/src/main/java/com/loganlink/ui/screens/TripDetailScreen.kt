@@ -52,7 +52,7 @@ import com.loganlink.ui.components.fmtDate
 import com.loganlink.ui.components.fmtDuration
 import com.loganlink.ui.components.fmtRupees
 import com.loganlink.ui.map.RouteMap
-import com.loganlink.ui.theme.Ember
+import com.loganlink.ui.theme.Signal
 import com.loganlink.ui.theme.StateCritical
 import com.loganlink.ui.theme.StateGood
 import com.loganlink.ui.theme.StateInfo
@@ -159,7 +159,7 @@ private fun TripBody(r: TripLoad.Ready, modifier: Modifier) {
         ScorePanel(t)
 
         Panel("Speed", icon = R.drawable.gauge) {
-            TimeSeriesChart(speedSeries, Ember, "km/h", decimals = 0, height = 150.dp)
+            TimeSeriesChart(speedSeries, Signal, "km/h", decimals = 0, height = 150.dp)
         }
         if (rpmSeries.isNotEmpty()) Panel("Engine speed", icon = R.drawable.engine) {
             TimeSeriesChart(rpmSeries, StateInfo, "rpm", decimals = 0, height = 150.dp)

@@ -35,7 +35,7 @@ import com.loganlink.ui.components.ScreenTitle
 import com.loganlink.ui.components.SectionLabel
 import com.loganlink.ui.components.Sparkline
 import com.loganlink.ui.components.StatusChip
-import com.loganlink.ui.theme.Ember
+import com.loganlink.ui.theme.Signal
 import com.loganlink.ui.theme.StateConnected
 import com.loganlink.ui.theme.StateCritical
 import com.loganlink.ui.theme.StateInfo
@@ -100,7 +100,7 @@ fun LiveScreen(go: (String) -> Unit) {
             ))
 
             Panel("Last minute", subtitle = "Speed · RPM · battery") {
-                Sparkline(history.mapNotNull { it.speed }, Ember)
+                Sparkline(history.mapNotNull { it.speed }, Signal)
                 Sparkline(history.mapNotNull { it.rpm?.toDouble() }, StateWarning)
                 Sparkline(history.mapNotNull { it.vbat }, StateConnected)
             }

@@ -35,8 +35,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.loganlink.ui.theme.Ember
-import com.loganlink.ui.theme.EmberDeep
+import com.loganlink.ui.theme.Signal
+import com.loganlink.ui.theme.SignalDeep
 import com.loganlink.ui.theme.StateCritical
 import com.loganlink.ui.theme.StateWarning
 import java.util.Locale
@@ -60,7 +60,7 @@ fun ArcGauge(
             red?.let { drawArc(StateCritical.copy(alpha = .3f), 150f + 240f * it, 240f * (1 - it), false, tl, arcSize, style = Stroke(sw, cap = StrokeCap.Round)) }
             val over = red != null && f >= red
             if (f > 0.003f) drawArc(
-                Brush.sweepGradient(if (over) listOf(StateWarning, StateCritical, StateWarning) else listOf(EmberDeep, Ember, EmberDeep), center),
+                Brush.sweepGradient(if (over) listOf(StateWarning, StateCritical, StateWarning) else listOf(SignalDeep, Signal, SignalDeep), center),
                 150f, 240f * f, false, tl, arcSize, style = Stroke(sw, cap = StrokeCap.Round),
             )
         }
@@ -176,7 +176,7 @@ fun BarChart(bars: List<Pair<String, Double>>, color: Color, modifier: Modifier 
 }
 
 @Composable
-fun ScoreRing(score: Int, modifier: Modifier = Modifier, size: Dp = 64.dp, color: Color = Ember) {
+fun ScoreRing(score: Int, modifier: Modifier = Modifier, size: Dp = 64.dp, color: Color = Signal) {
     val f by animateFloatAsState(score / 100f, tween(700), label = "ring")
     val track = MaterialTheme.colorScheme.outlineVariant
     Box(modifier.size(size), contentAlignment = Alignment.Center) {

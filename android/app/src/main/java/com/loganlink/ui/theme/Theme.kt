@@ -13,7 +13,6 @@ import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontVariation
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -24,18 +23,15 @@ val BackgroundDark = Color(0xFF0E0E0E)
 val ErrorRed = Color(0xFFFF5E72)
 val StateIdle = Color(0xFF8A8F98)
 val StateGood = Color(0xFF35C759)
-val StateWarning = Color(0xFFFF9F0A)
+val StateWarning = Color(0xFFFF7A00)
 val StateCritical = Color(0xFFFF3B4E)
 val StateConnected = Color(0xFF2EC4B6)
 val StateInfo = Color(0xFF5AA9FF)
-val Ember = Color(0xFFFF8A5B)
-val EmberDeep = Color(0xFFC2512A)
+val Signal = Color(0xFFFFD21F)
+val SignalDeep = Color(0xFFE0A800)
 
 val BlockCharcoal = Color(0xFF262626)
-val BlockPeach = Color(0xFFFF9A6B)
-val BlockBlush = Color(0xFFE6C7C2)
-val BlockMint = Color(0xFFE6F7EC)
-val BlockTeal = Color(0xFF2E7D6E)
+val BlockSignal = Color(0xFFFFD21F)
 val BlockInk = Color(0xFF111111)
 
 enum class Severity(val color: Color, val label: String) {
@@ -43,12 +39,12 @@ enum class Severity(val color: Color, val label: String) {
 }
 
 private val Light = lightColorScheme(
-    primary = Color(0xFFD9541F), onPrimary = Color.White,
-    primaryContainer = Color(0xFFFFE1D3), onPrimaryContainer = Color(0xFF3A1200),
+    primary = Color(0xFF111111), onPrimary = Signal,
+    primaryContainer = Signal, onPrimaryContainer = Color(0xFF111111),
     secondary = Color(0xFF0E8C82), onSecondary = Color.White,
     secondaryContainer = Color(0xFFCDEFEA), onSecondaryContainer = Color(0xFF00201D),
-    tertiary = Color(0xFFE85F1F), onTertiary = Color.White,
-    tertiaryContainer = Color(0xFFFFDBCB), onTertiaryContainer = Color(0xFF360F00),
+    tertiary = Color(0xFFB38600), onTertiary = Color.White,
+    tertiaryContainer = Color(0xFFFFF1B8), onTertiaryContainer = Color(0xFF2A2000),
     error = ErrorRed,
     background = Color(0xFFF7F7FB), onBackground = Color(0xFF1A1B22),
     surface = Color(0xFFF7F7FB), onSurface = Color(0xFF1A1B22),
@@ -60,12 +56,12 @@ private val Light = lightColorScheme(
 )
 
 private val Dark = darkColorScheme(
-    primary = Ember, onPrimary = Color(0xFF2B1104),
-    primaryContainer = Color(0xFF3D2418), onPrimaryContainer = Color(0xFFFFDCCB),
+    primary = Signal, onPrimary = Color(0xFF111111),
+    primaryContainer = Color(0xFF3A3210), onPrimaryContainer = Color(0xFFFFE680),
     secondary = Color(0xFF6FD8CC), onSecondary = Color(0xFF003732),
     secondaryContainer = Color(0xFF00504A), onSecondaryContainer = Color(0xFFCDEFEA),
-    tertiary = Ember, onTertiary = Color(0xFF3A1200),
-    tertiaryContainer = Color(0xFF5A2208), onTertiaryContainer = Color(0xFFFFDBCB),
+    tertiary = Signal, onTertiary = Color(0xFF111111),
+    tertiaryContainer = Color(0xFF3A3210), onTertiaryContainer = Color(0xFFFFE680),
     error = ErrorRed,
     background = BackgroundDark, onBackground = Color(0xFFE4E4EE),
     surface = BackgroundDark, onSurface = Color(0xFFE4E4EE),
@@ -89,18 +85,14 @@ val Outfit = FontFamily(
     listOf(FontWeight.Light, FontWeight.Normal, FontWeight.Medium, FontWeight.SemiBold, FontWeight.Bold, FontWeight.ExtraBold)
         .map(::outfit)
 )
-val InstrumentSerif = FontFamily(
-    Font(R.font.instrument_serif, FontWeight.Normal),
-    Font(R.font.instrument_serif_italic, FontWeight.Normal, FontStyle.Italic),
-)
 
 private val base = Typography()
 private fun TextStyle.sans() = copy(fontFamily = Outfit, fontFeatureSettings = "tnum")
-private fun TextStyle.serif() = copy(fontFamily = InstrumentSerif, fontWeight = FontWeight.Normal, letterSpacing = 0.sp)
+private fun TextStyle.head() = copy(fontFamily = Outfit, fontWeight = FontWeight.SemiBold, letterSpacing = (-0.4).sp, fontFeatureSettings = "tnum")
 
 val AppTypography = Typography(
     displayLarge = base.displayLarge.sans(), displayMedium = base.displayMedium.sans(), displaySmall = base.displaySmall.sans(),
-    headlineLarge = base.headlineLarge.serif(), headlineMedium = base.headlineMedium.serif(), headlineSmall = base.headlineSmall.serif(),
+    headlineLarge = base.headlineLarge.head(), headlineMedium = base.headlineMedium.head(), headlineSmall = base.headlineSmall.head(),
     titleLarge = base.titleLarge.sans(), titleMedium = base.titleMedium.sans().copy(fontWeight = FontWeight.Medium),
     titleSmall = base.titleSmall.sans(), bodyLarge = base.bodyLarge.sans(), bodyMedium = base.bodyMedium.sans(),
     bodySmall = base.bodySmall.sans(), labelLarge = base.labelLarge.sans(), labelMedium = base.labelMedium.sans(),

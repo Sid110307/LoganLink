@@ -29,7 +29,7 @@ import com.loganlink.ui.components.ScreenTitle
 import com.loganlink.ui.components.SectionLabel
 import com.loganlink.ui.components.StatusChip
 import com.loganlink.ui.components.TimeSeriesChart
-import com.loganlink.ui.theme.Ember
+import com.loganlink.ui.theme.Signal
 import com.loganlink.ui.theme.Severity
 import com.loganlink.ui.theme.StateConnected
 import com.loganlink.ui.theme.StateCritical
@@ -104,7 +104,7 @@ fun EngineScreen(onBack: () -> Unit) {
 
             SectionLabel("Last minute")
             Panel("Coolant temperature", icon = R.drawable.thermometer, subtitle = "Line at 105 °C") {
-                TimeSeriesChart(coolantPts, Ember, "°C", decimals = 0, timePattern = "HH:mm:ss", guide = 105.0)
+                TimeSeriesChart(coolantPts, Signal, "°C", decimals = 0, timePattern = "HH:mm:ss", guide = 105.0)
             }
             Panel("Long-term fuel trim", icon = R.drawable.fuel, subtitle = "Within ±10 % is normal") {
                 TimeSeriesChart(ltftPts, StateConnected, "%", decimals = 0, timePattern = "HH:mm:ss")

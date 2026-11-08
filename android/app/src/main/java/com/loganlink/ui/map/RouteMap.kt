@@ -19,7 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.viewinterop.AndroidView
-import com.loganlink.ui.theme.Ember
+import com.loganlink.ui.theme.Signal
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.Locale
@@ -93,7 +93,7 @@ private fun buildHtml(
         put("marker", marker?.takeIf { valid(it.first, it.second) }?.let { JSONArray().put(it.first).put(it.second) } ?: JSONObject.NULL)
         put("acc", accuracy?.takeIf { it.isFinite() && it > 0f }?.toDouble() ?: JSONObject.NULL)
         put("dark", dark)
-        put("accent", cssColor(Ember.toArgb()))
+        put("accent", cssColor(Signal.toArgb()))
     }.toString()
     return TEMPLATE
         .replace("__BG__", cssColor(bg))
@@ -122,7 +122,7 @@ private val TEMPLATE = """
   body.dark .leaflet-control-attribution a { color: #c9d1d9; }
   .msg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center;
          font: 14px sans-serif; color: #8a8f98; z-index: 500; pointer-events: none; padding: 24px; }
-  .car { width: 22px; height: 22px; border-radius: 50%; background: #FF7A3D; border: 3px solid #fff;
+  .car { width: 22px; height: 22px; border-radius: 50%; background: #FFD21F; border: 3px solid #111;
          box-shadow: 0 1px 6px rgba(0,0,0,.45); box-sizing: border-box; }
 </style>
 </head>
