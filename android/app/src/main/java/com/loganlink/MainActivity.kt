@@ -50,6 +50,8 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    override fun onStart() { super.onStart(); (application as LoganApp).hub.setForeground(true) }
+    override fun onStop() { (application as LoganApp).hub.setForeground(false); super.onStop() }
     override fun onDestroy() { unregisterReceiver(driveReceiver); super.onDestroy() }
 
     fun requestRuntimePermissions() {

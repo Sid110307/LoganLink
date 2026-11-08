@@ -89,6 +89,15 @@ class VehicleHub(private val context: Context, val prefs: Prefs, val repo: Repos
     private var phoneLoc: Location? = null
     private val routePoints = mutableListOf<TripPoint>()
     private var lastSampleSec = 0L
+    private var lastHistAt = 0L
+    private var lastFrameAt = 0L
+    private var foreground = true
+
+    fun setForeground(fg: Boolean) {
+        foreground = fg
+        _link.value?.setForeground(fg)
+        scope.launch { if (state.value == LinkState.Ready) command(Cmd.SET_LIVE_RATE, byteArrayOf(if (fg) 10 else 2)) }
+    }
     private var engineOffSince = 0L
 
     init {
@@ -118,6 +127,8 @@ class VehicleHub(private val context: Context, val prefs: Prefs, val repo: Repos
 
     private suspend fun onReady(l: VehicleLink) {
         endJob?.cancel()
+        l.setForeground(foreground)
+        l.command(Cmd.SET_LIVE_RATE, byteArrayOf(if (foreground) 10 else 2))
         val tz = java.util.TimeZone.getDefault().rawOffset / 60_000
         l.command(Cmd.SET_TIME, le32(System.currentTimeMillis() / 1000) + le16(tz))
         refreshInfo()
@@ -166,16 +177,18 @@ class VehicleHub(private val context: Context, val prefs: Prefs, val repo: Repos
             speed = f0.speed ?: if (loc.hasSpeed()) loc.speed * 3.6 else null,
         ) else f0
         _live.value = f
-        _history.value = (_history.value + f).takeLast(600)
+        if (f.receivedAt - lastHistAt >= 200) { lastHistAt = f.receivedAt; _history.value = (_history.value + f).takeLast(300) }
 
         val now = System.currentTimeMillis()
-        if (now / 1000 != lastSampleSec) { lastSampleSec = now / 1000; scope.launch(Dispatchers.IO) { repo.insertSample(now, f) } }
+        if (f.engineRunning && now / 1000 != lastSampleSec) { lastSampleSec = now / 1000; scope.launch(Dispatchers.IO) { repo.insertSample(now, f) } }
 
         trackTrip(f, now)
         checkAlerts(f)
     }
 
     private fun trackTrip(f: LiveFrame, now: Long) {
+        val dt = if (lastFrameAt == 0L) 0.1 else ((f.receivedAt - lastFrameAt).coerceIn(20, 1000)) / 1000.0
+        lastFrameAt = f.receivedAt
         val running = f.engineRunning
         val t = _trip.value
         if (running) {
@@ -185,7 +198,7 @@ class VehicleHub(private val context: Context, val prefs: Prefs, val repo: Repos
                 routePoints.clear(); startLocation()
                 if (prefs.autoDriveMode.value) context.sendBroadcast(android.content.Intent(ACTION_OPEN_DRIVE).setPackage(context.packageName))
             } else {
-                val dt = 0.1
+                val need = (0.3 / dt).toInt().coerceAtLeast(1)
                 val ax = f.accelX ?: 0.0
                 brakeRun = if (ax < -0.40) brakeRun + 1 else 0
                 accelRun = if (ax > 0.35) accelRun + 1 else 0
@@ -194,8 +207,8 @@ class VehicleHub(private val context: Context, val prefs: Prefs, val repo: Repos
                     distanceKm = if (f.tripM > 0) f.tripM / 1000.0 else t.distanceKm + (f.speed ?: 0.0) * dt / 3600,
                     fuelL = t.fuelL + (f.fuelRate ?: 0.0) * dt / 3600,
                     maxSpeed = maxOf(t.maxSpeed, f.speed ?: 0.0),
-                    harshBrake = t.harshBrake + if (brakeRun == 3) 1 else 0,
-                    harshAccel = t.harshAccel + if (accelRun == 3) 1 else 0,
+                    harshBrake = t.harshBrake + if (brakeRun == need) 1 else 0,
+                    harshAccel = t.harshAccel + if (accelRun == need) 1 else 0,
                     idleS = t.idleS + if (idle) dt else 0.0,
                 )
             }

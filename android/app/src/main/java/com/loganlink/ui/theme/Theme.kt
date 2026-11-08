@@ -31,7 +31,7 @@ val StateInfo = Color(0xFF5AA9FF)
 val Ember = Color(0xFFFF8A5B)
 val EmberDeep = Color(0xFFC2512A)
 
-val BlockIndigo = Color(0xFF4B2BE0)
+val BlockCharcoal = Color(0xFF262626)
 val BlockPeach = Color(0xFFFF9A6B)
 val BlockBlush = Color(0xFFE6C7C2)
 val BlockMint = Color(0xFFE6F7EC)
@@ -43,8 +43,8 @@ enum class Severity(val color: Color, val label: String) {
 }
 
 private val Light = lightColorScheme(
-    primary = Color(0xFF4B2BE0), onPrimary = Color.White,
-    primaryContainer = Color(0xFFE2DFFF), onPrimaryContainer = Color(0xFF16104F),
+    primary = Color(0xFFD9541F), onPrimary = Color.White,
+    primaryContainer = Color(0xFFFFE1D3), onPrimaryContainer = Color(0xFF3A1200),
     secondary = Color(0xFF0E8C82), onSecondary = Color.White,
     secondaryContainer = Color(0xFFCDEFEA), onSecondaryContainer = Color(0xFF00201D),
     tertiary = Color(0xFFE85F1F), onTertiary = Color.White,
@@ -60,8 +60,8 @@ private val Light = lightColorScheme(
 )
 
 private val Dark = darkColorScheme(
-    primary = Color(0xFF8C7BFF), onPrimary = Color(0xFF14085C),
-    primaryContainer = Color(0xFF4B2BE0), onPrimaryContainer = Color(0xFFEDE9FF),
+    primary = Ember, onPrimary = Color(0xFF2B1104),
+    primaryContainer = Color(0xFF3D2418), onPrimaryContainer = Color(0xFFFFDCCB),
     secondary = Color(0xFF6FD8CC), onSecondary = Color(0xFF003732),
     secondaryContainer = Color(0xFF00504A), onSecondaryContainer = Color(0xFFCDEFEA),
     tertiary = Ember, onTertiary = Color(0xFF3A1200),

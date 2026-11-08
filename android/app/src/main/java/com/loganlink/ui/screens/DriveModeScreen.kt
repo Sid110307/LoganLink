@@ -34,7 +34,7 @@ import com.loganlink.core.nav.MapsNav
 import com.loganlink.core.service.DriveService
 import com.loganlink.core.service.OverlayControl
 import com.loganlink.ui.components.OutlinedButton
-import com.loganlink.ui.theme.BlockIndigo
+import com.loganlink.ui.theme.BlockCharcoal
 import com.loganlink.ui.theme.BlockPeach
 import androidx.compose.foundation.layout.size
 import androidx.compose.ui.graphics.asImageBitmap
@@ -94,7 +94,7 @@ fun DriveModeScreen(onExit: () -> Unit) {
             }
             nav?.let { n ->
                 Row(
-                    Modifier.align(Alignment.TopStart).background(BlockIndigo, RoundedCornerShape(16.dp))
+                    Modifier.align(Alignment.TopStart).background(BlockCharcoal, RoundedCornerShape(16.dp))
                         .padding(horizontal = 14.dp, vertical = 10.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {

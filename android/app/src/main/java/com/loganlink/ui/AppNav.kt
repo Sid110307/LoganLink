@@ -64,7 +64,7 @@ object Routes {
 private data class Tab(val label: String, val icon: Int)
 private val tabs = listOf(
     Tab("Car", R.drawable.car), Tab("Live", R.drawable.gauge), Tab("Trips", R.drawable.route),
-    Tab("Health", R.drawable.heart), Tab("More", R.drawable.apps),
+    Tab("Health", R.drawable.heart), Tab("Garage", R.drawable.tools),
 )
 
 @Composable

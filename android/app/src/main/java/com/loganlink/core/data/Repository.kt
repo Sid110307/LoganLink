@@ -227,6 +227,10 @@ class Repository(private val context: Context, private val prefs: Prefs) {
 
     fun deleteService(id: Long) { db.delete("service", "id=?", arrayOf("$id")); bump() }
 
+    fun rebaseService(odoKm: Int) {
+        db.execSQL("UPDATE service SET last_km=? WHERE last_km=0", arrayOf<Any>(odoKm)); bump()
+    }
+
     fun ensureDefaultService(odoKm: Int) {
         val n = db.rawQuery("SELECT COUNT(*) FROM service", null).use { it.moveToFirst(); it.getInt(0) }
         if (n > 0) return
@@ -275,7 +279,7 @@ class Repository(private val context: Context, private val prefs: Prefs) {
         if (prefs.demoSeeded) return
         val r = Random(7)
         val now = System.currentTimeMillis()
-        val home = 18.5362 to 73.8937
+        val home = 12.9352 to 77.6245
         db.beginTransaction()
         try {
             for (day in 30 downTo 0) {
@@ -319,8 +323,9 @@ class Repository(private val context: Context, private val prefs: Prefs) {
             db.setTransactionSuccessful()
         } finally { db.endTransaction() }
         prefs.demoSeeded = true
-        if (prefs.vehicle.value.odometerKm == 0) prefs.saveVehicle(prefs.vehicle.value.copy(odometerKm = 85_240, plate = "MH 12 AB 1234"))
+        if (prefs.vehicle.value.odometerKm == 0) prefs.saveVehicle(prefs.vehicle.value.copy(odometerKm = 85_240, plate = "KA 01 MK 1234"))
         ensureDefaultService(prefs.vehicle.value.odometerKm - 6_400)
+        db.execSQL("UPDATE service SET last_km=? WHERE last_km=0", arrayOf<Any>(prefs.vehicle.value.odometerKm - 6_400))
         bump()
     }
 }

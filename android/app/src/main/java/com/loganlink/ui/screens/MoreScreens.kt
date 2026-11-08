@@ -3,6 +3,9 @@ package com.loganlink.ui.screens
 import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.draw.scale
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -79,7 +82,7 @@ fun MoreScreen(go: (String) -> Unit) {
     val pairing by app.prefs.pairing.collectAsStateWithLifecycle()
     val demo by app.prefs.demo.collectAsStateWithLifecycle()
     val vehicle by app.prefs.vehicle.collectAsStateWithLifecycle()
-    Page("More", onBack = null) {
+    Page("Garage", onBack = null) {
         NavRow(R.drawable.car, "Vehicle", "${vehicle.nickname} · %,d km".format(vehicle.odometerKm)) { go(Routes.VEHICLE) }
         NavRow(R.drawable.bluetooth, "LoganLink module",
             if (demo) "Demo mode (simulated car)" else pairing?.name ?: "Not paired") { go(Routes.DEVICE) }
@@ -94,8 +97,7 @@ fun MoreScreen(go: (String) -> Unit) {
             val ctx = LocalContext.current
             androidx.compose.material3.AlertDialog(
                 onDismissRequest = { about = false },
-                icon = { androidx.compose.foundation.Image(androidx.compose.ui.res.painterResource(R.drawable.ic_launcher_fg), null, Modifier.size(72.dp)) },
-                title = { Text("LoganLink", style = MaterialTheme.typography.headlineMedium) },
+                title = { AboutHeader() },
                 text = {
                     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                         Text("v${BuildConfig.VERSION_NAME}", color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -138,7 +140,7 @@ fun VehicleScreen(onBack: () -> Unit) {
                 app.prefs.saveVehicle(v.copy(nickname = nick.ifBlank { "My Logan" }, plate = plate.trim(), odometerKm = odoKm,
                     fuelPricePaise = ((price.toDoubleOrNull() ?: 105.0) * 100).toInt(), tankLitres = tank.toIntOrNull() ?: 50))
                 scope.launch {
-                    if (odoKm != v.odometerKm) app.hub.setOdometer(odoKm)
+                    if (odoKm != v.odometerKm) { app.hub.setOdometer(odoKm); app.repo.rebaseService(odoKm) }
                     snack.showSnackbar("Saved")
                 }
             }, Modifier.fillMaxWidth()) { Text("Save") }
@@ -259,5 +261,61 @@ internal fun Toggle(title: String, subtitle: String, value: Boolean, onChange: (
             Text(subtitle, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
         Switch(value, onChange)
+    }
+}
+
+@Composable
+private fun AboutHeader() {
+    var grin by remember { mutableStateOf(false) }
+    val haptic = androidx.compose.ui.platform.LocalHapticFeedback.current
+    androidx.compose.runtime.LaunchedEffect(grin) { if (grin) { kotlinx.coroutines.delay(1400); grin = false } }
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        androidx.compose.foundation.layout.Box(
+            Modifier.size(52.dp).pointerInput(Unit) {
+                detectTapGestures(onLongPress = {
+                    haptic.performHapticFeedback(androidx.compose.ui.hapticfeedback.HapticFeedbackType.LongPress); grin = true
+                })
+            },
+        ) {
+            androidx.compose.animation.Crossfade(grin, label = "") { g ->
+                if (g) Grin(Modifier.size(52.dp))
+                else androidx.compose.foundation.Image(androidx.compose.ui.res.painterResource(R.drawable.ic_launcher_fg), null,
+                    Modifier.size(52.dp).scale(1.5f))
+            }
+        }
+        Text("LoganLink", style = MaterialTheme.typography.headlineMedium, modifier = Modifier.padding(start = 12.dp))
+    }
+}
+
+@Composable
+private fun Grin(modifier: Modifier) {
+    val ink = MaterialTheme.colorScheme.onSurface
+    androidx.compose.foundation.Canvas(modifier) {
+        val w = size.width; val h = size.height
+        val s = androidx.compose.ui.graphics.drawscope.Stroke(width = w * 0.045f, cap = androidx.compose.ui.graphics.StrokeCap.Round,
+            join = androidx.compose.ui.graphics.StrokeJoin.Round)
+        val face = androidx.compose.ui.graphics.Path().apply {
+            moveTo(w * .14f, h * .30f); cubicTo(w * .22f, h * .04f, w * .80f, h * .02f, w * .90f, h * .32f)
+            cubicTo(w * .98f, h * .58f, w * .86f, h * .92f, w * .52f, h * .96f)
+            cubicTo(w * .20f, h * .98f, w * .04f, h * .62f, w * .14f, h * .30f)
+        }
+        drawPath(face, ink, style = s)
+        drawPath(androidx.compose.ui.graphics.Path().apply {
+            moveTo(w * .26f, h * .34f); quadraticTo(w * .36f, h * .24f, w * .46f, h * .36f)
+            moveTo(w * .58f, h * .36f); quadraticTo(w * .68f, h * .24f, w * .78f, h * .34f)
+        }, ink, style = s)
+        drawCircle(ink, w * .03f, androidx.compose.ui.geometry.Offset(w * .38f, h * .36f))
+        drawCircle(ink, w * .03f, androidx.compose.ui.geometry.Offset(w * .70f, h * .36f))
+        val mouth = androidx.compose.ui.graphics.Path().apply {
+            moveTo(w * .18f, h * .52f); quadraticTo(w * .52f, h * .62f, w * .86f, h * .48f)
+            quadraticTo(w * .76f, h * .90f, w * .48f, h * .88f); quadraticTo(w * .24f, h * .84f, w * .18f, h * .52f)
+        }
+        drawPath(mouth, ink, style = s)
+        for (i in 1..5) {
+            val x = w * (.18f + i * .115f)
+            drawLine(ink, androidx.compose.ui.geometry.Offset(x, h * (.55f - (if (i in 2..4) .02f else 0f))),
+                androidx.compose.ui.geometry.Offset(x - w * .02f, h * .85f - kotlin.math.abs(i - 3) * h * .04f), w * .025f)
+        }
+        drawLine(ink, androidx.compose.ui.geometry.Offset(w * .20f, h * .70f), androidx.compose.ui.geometry.Offset(w * .82f, h * .62f), w * .025f)
     }
 }

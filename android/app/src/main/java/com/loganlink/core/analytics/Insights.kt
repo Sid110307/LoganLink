@@ -78,7 +78,7 @@ object Insights {
         val km = due.kmLeft(odo); val days = due.daysLeft(now)
         return Insight(
             "${due.name} ${if (over) "overdue" else "due soon"}",
-            listOfNotNull(km?.let { if (it < 0) "${-it} km over" else "$it km left" },
+            listOfNotNull(km?.let { if (it < 0) "%,d km over".format(-it) else "%,d km left".format(it) },
                 days?.let { if (it < 0) "${-it} days over" else "$it days left" }).joinToString(" · "),
             "Mark it done in Maintenance after servicing.", if (over) Severity.CheckSoon else Severity.Info, "maintenance")
     }

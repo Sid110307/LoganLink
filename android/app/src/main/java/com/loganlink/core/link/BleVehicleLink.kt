@@ -75,12 +75,18 @@ class BleVehicleLink(
     private val opLock = Mutex()
     @Volatile private var opDone: CompletableDeferred<Int>? = null
     private var running = false
+    @Volatile private var foreground = true
+
+    override fun setForeground(fg: Boolean) {
+        foreground = fg
+        gatt?.requestConnectionPriority(if (fg) BluetoothGatt.CONNECTION_PRIORITY_HIGH else BluetoothGatt.CONNECTION_PRIORITY_BALANCED)
+    }
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     private val rssiPoll = object : Runnable {
         override fun run() {
-            if (_state.value == LinkState.Ready) gatt?.readRemoteRssi()
-            if (running) main.postDelayed(this, 3000)
+            if (_state.value == LinkState.Ready && foreground) gatt?.readRemoteRssi()
+            if (running) main.postDelayed(this, 10_000)
         }
     }
 
@@ -108,7 +114,7 @@ class BleVehicleLink(
             Log.i(tag, "conn state=$newState status=$status")
             if (newState == BluetoothProfile.STATE_CONNECTED) {
                 _state.value = LinkState.Authenticating
-                g.requestConnectionPriority(BluetoothGatt.CONNECTION_PRIORITY_HIGH)
+                g.requestConnectionPriority(if (foreground) BluetoothGatt.CONNECTION_PRIORITY_HIGH else BluetoothGatt.CONNECTION_PRIORITY_BALANCED)
                 main.postDelayed({ g.requestMtu(247) }, 300)
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                 session.reset(); failPending(); _rssi.value = null

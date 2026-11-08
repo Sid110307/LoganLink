@@ -108,19 +108,19 @@ fun OverviewScreen(go: (String) -> Unit, onTab: (Int) -> Unit) {
                     live?.coolant?.let { "engine %.0f °C".format(it) },
                 ).joinToString(", ")
                 Text(if (readings.isEmpty()) link else "$link, $readings", style = MaterialTheme.typography.bodyLarge,
-                    color = androidx.compose.ui.graphics.Color.White)
+                    color = com.loganlink.ui.theme.BlockInk)
                 if (live?.milOn == true) Text("Check-engine light is on", style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.SemiBold, color = com.loganlink.ui.theme.BlockPeach)
-                sync?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = androidx.compose.ui.graphics.Color.White.copy(alpha = .7f)) }
+                    fontWeight = FontWeight.SemiBold, color = androidx.compose.ui.graphics.Color(0xFF8A1C0A))
+                sync?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = com.loganlink.ui.theme.BlockInk.copy(alpha = .7f)) }
                 if (state == LinkState.Ready) Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     com.loganlink.ui.components.Button(
                         onClick = { onTab(1) }, Modifier.weight(1f).height(48.dp),
-                        colors = androidx.compose.material3.ButtonDefaults.buttonColors(containerColor = com.loganlink.ui.theme.BlockPeach,
-                            contentColor = com.loganlink.ui.theme.BlockInk),
+                        colors = androidx.compose.material3.ButtonDefaults.buttonColors(containerColor = com.loganlink.ui.theme.BlockInk,
+                            contentColor = androidx.compose.ui.graphics.Color.White),
                     ) { Text("Open live", fontWeight = FontWeight.SemiBold) }
                     com.loganlink.ui.components.OutlinedButton(
                         onClick = { go(Routes.DRIVE) }, Modifier.weight(1f).height(48.dp),
-                        colors = androidx.compose.material3.ButtonDefaults.outlinedButtonColors(contentColor = androidx.compose.ui.graphics.Color.White),
+                        colors = androidx.compose.material3.ButtonDefaults.outlinedButtonColors(contentColor = com.loganlink.ui.theme.BlockInk),
                     ) { Text("Drive mode") }
                 }
             }

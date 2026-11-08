@@ -30,4 +30,5 @@ interface VehicleLink {
     fun stop()
     suspend fun command(cmd: Int, args: ByteArray = ByteArray(0), timeoutMs: Long = 5000): CmdResult
     suspend fun writeOta(offset: Long, chunk: ByteArray)
+    fun setForeground(fg: Boolean) {}
 }

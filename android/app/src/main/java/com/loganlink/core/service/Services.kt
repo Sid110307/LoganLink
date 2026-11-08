@@ -27,6 +27,7 @@ import com.loganlink.core.data.Trip
 import com.loganlink.core.link.LinkState
 import com.loganlink.ui.theme.Severity
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.MutableStateFlow
 import android.graphics.PixelFormat
@@ -110,12 +111,13 @@ class DriveService : LifecycleService(), SavedStateRegistryOwner {
         val type = if (Build.VERSION.SDK_INT >= 29) ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE else 0
         ServiceCompat.startForeground(this, 7, notifier.linkNotification("Waiting for your car…"), type)
         lifecycleScope.launch {
-            combine(hub.state, hub.activeTrip) { s, t -> s to t }.collect { (s, t) ->
-                val text = when {
-                    t != null -> "Driving · %.1f km".format(t.distanceKm)
+            combine(hub.state, hub.activeTrip) { s, t ->
+                when {
+                    t != null -> "Driving · %.1f km".format(kotlin.math.floor(t.distanceKm * 2) / 2)
                     s == LinkState.Ready -> "Connected to your car"
                     else -> s.label
                 }
+            }.distinctUntilChanged().collect { text ->
                 getSystemService(NotificationManager::class.java).notify(7, notifier.linkNotification(text))
             }
         }

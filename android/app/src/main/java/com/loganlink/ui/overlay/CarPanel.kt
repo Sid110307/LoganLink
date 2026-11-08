@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.sp
 import com.loganlink.R
 import com.loganlink.core.VehicleHub
 import com.loganlink.core.nav.MapsNav
-import com.loganlink.ui.theme.BlockIndigo
+import com.loganlink.ui.theme.BlockCharcoal
 import com.loganlink.ui.theme.BlockPeach
 import com.loganlink.ui.theme.InstrumentSerif
 import com.loganlink.ui.theme.LoganTheme
@@ -56,7 +56,7 @@ fun CarPanel(hub: VehicleHub, onDrag: (Float, Float) -> Unit, onClose: () -> Uni
         ) {
             nav?.let { n ->
                 Row(
-                    Modifier.background(BlockIndigo, RoundedCornerShape(14.dp)).padding(horizontal = 10.dp, vertical = 8.dp),
+                    Modifier.background(BlockCharcoal, RoundedCornerShape(14.dp)).padding(horizontal = 10.dp, vertical = 8.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     n.arrow?.let { Image(it.asImageBitmap(), null, Modifier.size(34.dp)) }

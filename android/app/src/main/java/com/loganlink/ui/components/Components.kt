@@ -288,20 +288,20 @@ fun HeroCard(
     title: String,
     subtitle: String? = null,
     modifier: Modifier = Modifier,
-    container: Color = com.loganlink.ui.theme.BlockIndigo,
-    accent: Color = com.loganlink.ui.theme.BlockPeach,
+    container: Color = com.loganlink.ui.theme.BlockPeach,
+    accent: Color = com.loganlink.ui.theme.BlockInk,
     onClick: (() -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit = {},
 ) {
     Card(
         modifier = modifier.fillMaxWidth().tappable(RoundedCornerShape(28.dp), onClick),
-        colors = CardDefaults.cardColors(containerColor = container, contentColor = Color.White),
+        colors = CardDefaults.cardColors(containerColor = container, contentColor = com.loganlink.ui.theme.BlockInk),
         shape = RoundedCornerShape(28.dp),
     ) {
         Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Text(title, style = MaterialTheme.typography.displaySmall.copy(fontFamily = com.loganlink.ui.theme.InstrumentSerif),
                 color = accent, maxLines = 2, overflow = TextOverflow.Ellipsis)
-            subtitle?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = Color.White.copy(alpha = .75f)) }
+            subtitle?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = com.loganlink.ui.theme.BlockInk.copy(alpha = .7f)) }
             content()
         }
     }
