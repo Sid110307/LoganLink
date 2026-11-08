@@ -1,23 +1,19 @@
 # 04. KiCad
 
-KiCad 10. The project already exists at `hardware/pcb/` (`pcb.kicad_pro`, `.kicad_sch`, `.kicad_pcb`). Parts and values come
-from [`hardware/bom.csv`](../hardware/bom.csv), connections from [03](03-hardware.md) and the netlist below.
+KiCad 10. Project: `hardware/pcb/` (`pcb.kicad_pro`, `.kicad_sch`, `.kicad_pcb`). Values from
+[`hardware/bom.csv`](../hardware/bom.csv), connections below.
 
 ## 1. Libraries
 
-Everything is in the stock libraries except the buck. The project library `loganlink` is already set up
-(`hardware/pcb/lib/`, registered in `sym-lib-table` and `fp-lib-table`) and has the LMR36006 symbol
-and the TI footprint `loganlink:TI_RNX0012A` (from TI's Ultra Librarian RNX0012B model, checked against the datasheet land
-pattern: 11 pads 0.25 x 0.6 mm, 0.5 mm pitch, 0.65 mm next to pin 1/11, SW pad 1.825 x 0.25 with split paste).
-
-If a footprint name in the BOM does not exist in your library version, search the footprint chooser by the package name.
+All stock except the buck. The project library `loganlink` (`hardware/pcb/lib/`, already in `sym-lib-table` and `fp-lib-table`)
+holds the LMR36006 symbol and footprint `loganlink:TI_RNX0012A` (TI Ultra Librarian RNX0012B model, checked against the datasheet:
+11 pads 0.25 x 0.6 mm, 0.5 mm pitch, 0.65 mm next to pin 1/11, SW pad 1.825 x 0.25 with split paste). If a BOM footprint name is
+missing in your library version, search the chooser by package name.
 
 ## 2. Schematic
 
-One A3 sheet. Use net labels, not long wires. Set each symbol's Value, Footprint, `MPN` and `Manufacturer` fields from the BOM
-(add the two fields once in Schematic Setup > Field Name Templates). Set `Exclude from board` off and `DNP` on for U5.
-
-### Netlist
+One A3 sheet, net labels. Set Value, Footprint, `MPN` and `Manufacturer` from the BOM (add the two fields in Schematic Setup >
+Field Name Templates). U5: `Exclude from board` off, `DNP` on.
 
 | Net | Connects |
 |-----|----------|
@@ -60,11 +56,9 @@ One A3 sheet. Use net labels, not long wires. Set each symbol's Value, Footprint
 
 Q1 source to GND. U2 PG (pin 8) unconnected. TP1 to TP6: 3V3, GND, EN, GPIO0, U0TXD, U0RXD.
 
-Run ERC. Fix every error. Accept only "pin not driven" warnings on nets fed through resistors.
+Run ERC and fix every error. Only "pin not driven" warnings on nets fed through resistors are acceptable.
 
 ## 3. Board setup
-
-Board Setup, before placing anything:
 
 | Setting | Value |
 |---------|-------|
@@ -75,10 +69,8 @@ Board Setup, before placing anything:
 | Copper to edge | 0.3 mm |
 | Silk | 0.15 mm line, 0.8 mm text |
 
-Net classes:
-
-| Class | Nets | Track |
-|-------|------|-------|
+| Net class | Nets | Track |
+|-----------|------|-------|
 | Default | everything else | 0.2 |
 | Power | VBAT_IN, VBAT_F, VBAT_P, VIN, SW, 3V3, GND, VBUS | 0.5 |
 | KLine | K_LINE, K_PU, K_DRAIN | 0.4 |
@@ -86,8 +78,8 @@ Net classes:
 
 ## 4. Outline and fixed positions
 
-Origin: board centre. Place > Grid Origin at the centre after drawing the outline. In this table +y is up (towards the antenna);
-KiCad shows up as negative y, so type y with the sign flipped.
+Origin at the board centre (Place > Grid Origin after drawing the outline). +y is up, towards the antenna; KiCad shows up as
+negative y, so type y with the sign flipped.
 
 | Item | Position | Notes |
 |------|----------|-------|
@@ -103,7 +95,7 @@ KiCad shows up as negative y, so type y with the sign flipped.
 
 ## 5. Placement zones
 
-All on the top. Tallest part 6.0 mm (C3 is 5.8).
+All on top. Tallest part 6.0 mm (C3 is 5.8).
 
 | Zone | Area (x, y) | Parts |
 |------|-------------|-------|
@@ -114,42 +106,42 @@ All on the top. Tallest part 6.0 mm (C3 is 5.8).
 | USB | 9 to 21, -21 to -9 | J2, D4, R6, R7, D8 |
 | UI | 18 to 27, 0 to 14 | LED1, LED2, R8, R9, SW1, R4, R5, C10 |
 
-C9 sits at the module 3V3 pin. Keep the buck (SW node, L1) as far from the antenna as the zone allows.
-
-Bottom side: only J1 joints and test pads. Inside the plug housing outline (39 x 17 mm trapezoid centred on the board,
-wide side up) keep it flat; the housing's rear face is 5 mm away.
+C9 at the module 3V3 pin. Keep the SW node and L1 as far from the antenna as the zone allows. Bottom side: only J1 joints and test
+pads; keep the area inside the plug housing outline (39 x 17 mm trapezoid centred on the board, wide side up) flat, the housing's
+rear face is 5 mm away.
 
 ## 6. Routing order
 
 1. Buck: C2/C3 to VIN and GND pins first, shortest loop. SW node small. FB trace short, away from SW and L1.
 2. Power path J1.1 to F1, D1, D2, L2 in 0.5 mm.
-3. K-line: J1.4 to D3, D7, R19 in 0.4 mm. Keep U4 inputs away from SW.
+3. K-line: J1.4 to D3, D7, R19 in 0.4 mm. U4 inputs away from SW.
 4. USB pair, then I2C, ADC, LEDs.
-5. Ground pour on both layers. Stitch with vias every 5 mm along the edges and around U2 and U1's ground pads.
-6. Fill zones (press B), run DRC, fix everything.
+5. Ground pour both layers, stitching vias every 5 mm along the edges and around U2 and U1's ground pads.
+6. Fill zones (B), run DRC, fix everything.
 
-## 7. Check the fit
+## 7. Fit check
 
-File > Export > STEP. In FreeCAD open `mechanical/LoganLink-dongle.FCStd`, import the STEP, and line its bottom face up with
-`PCB_ref`. Nothing may touch the rear shell, the retainer posts or the light pipe.
+File > Export > STEP. In FreeCAD open `mechanical/LoganLink-dongle.FCStd`, import the STEP, align its bottom face with `PCB_ref`.
+Nothing may touch the rear shell, retainer posts or light pipe.
 
 ## 8. Outputs
 
+Set the drill/place origin at the bottom-left corner of the outline first.
+
 | File | Settings |
 |------|----------|
-| Gerbers | F.Cu, B.Cu, F.Mask, B.Mask, F.Silkscreen, B.Silkscreen, F.Paste, Edge.Cuts. Use drill/place origin, Protel extensions |
+| Gerbers | F.Cu, B.Cu, F.Mask, B.Mask, F.Silkscreen, B.Silkscreen, F.Paste, Edge.Cuts. Drill/place origin, Protel extensions |
 | Drill | Excellon, mm, PTH and NPTH in one file, same origin |
 | BOM | From the schematic: Reference, Value, Footprint, MPN, Manufacturer, DNP excluded |
 | Placement | File > Fabrication Outputs > Component Placement: CSV, mm, top only, same origin |
 
-Set the drill/place origin at the bottom-left corner of the outline before exporting. Zip the Gerbers and drill file.
-Ordering is in [10](10-bom-and-ordering.md).
+Zip the Gerbers and drill file. Ordering: [10](10-bom-and-ordering.md).
 
 ## 9. Bring-up
 
-1. Before power: check VBAT_P to GND and 3V3 to GND are not shorts.
-2. Bench supply 12 V, 100 mA limit, into J1.1/J1.2. Expect 3.3 V on TP 3V3 and under 30 mA.
-3. USB-C to the PC. Hold the button, tap power: the board enumerates for flashing.
-4. Flash ([06](06-firmware.md)). Check the LEDs, battery reading against a meter, and accelerometer wake.
-5. Scope the K-line against a dummy 510R pull-up: low under 2.9 V, clean edges at 10.4 kbaud.
-6. Sleep current with the board idle: under 150 µA.
+1. Unpowered: VBAT_P to GND and 3V3 to GND are not shorts.
+2. Bench supply 12 V, 100 mA limit, into J1.1/J1.2: 3.3 V on TP 3V3, under 30 mA.
+3. USB-C to the PC, hold the button, tap power: the board enumerates for flashing.
+4. Flash ([06](06-firmware.md)). Check LEDs, battery reading against a meter, accelerometer wake.
+5. Scope the K-line with a dummy 510R pull-up: low under 2.9 V, clean edges at 10.4 kbaud.
+6. Idle sleep current under 150 µA.

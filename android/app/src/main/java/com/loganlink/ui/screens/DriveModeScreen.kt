@@ -84,7 +84,7 @@ fun DriveModeScreen(onExit: () -> Unit) {
                 Side("Coolant", f?.coolant?.let { "%.0f°".format(it) } ?: "--", "Battery", f?.vbat?.let { "%.1f V".format(it) } ?: "--")
                 ArcGauge(f?.rpm?.toDouble(), 7000.0, "rpm ×1", "", size = 150.dp, redline = 5750.0)
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    val est = f?.speedSource == Source.Phone || f?.speedSource == Source.Gnss
+                    val est = f?.speedSource == Source.Phone
                     Text((if (est) "≈" else "") + (f?.speed?.let { "%.0f".format(it) } ?: "--"),
                         style = MaterialTheme.typography.displayLarge.copy(fontSize = 120.sp, fontWeight = FontWeight.Light))
                     Text("km/h", color = MaterialTheme.colorScheme.onSurfaceVariant)

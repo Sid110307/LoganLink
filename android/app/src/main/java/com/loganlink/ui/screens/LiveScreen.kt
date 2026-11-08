@@ -72,7 +72,7 @@ fun LiveScreen(go: (String) -> Unit) {
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-                ArcGauge(f.speed, 160.0, "Speed", "km/h", estimated = f.speedSource == Source.Phone || f.speedSource == Source.Gnss)
+                ArcGauge(f.speed, 160.0, "Speed", "km/h", estimated = f.speedSource == Source.Phone)
                 ArcGauge(f.rpm?.toDouble(), 7000.0, "Engine", "rpm", redline = 5750.0, estimated = f.rpmSource == Source.Estimated)
             }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {

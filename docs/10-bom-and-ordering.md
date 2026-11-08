@@ -1,7 +1,7 @@
-# 10. BOM and ordering
+# 10. BOM and Ordering
 
-The full list with MPNs and footprints is [`hardware/bom.csv`](../hardware/bom.csv). Prices are indicative INR from Mouser,
-DigiKey and LionCircuits listings; check before ordering.
+Full list with MPNs and footprints: [`hardware/bom.csv`](../hardware/bom.csv). Prices are indicative INR from Mouser, DigiKey and
+LionCircuits; check before ordering.
 
 ## Cost
 
@@ -14,28 +14,16 @@ DigiKey and LionCircuits listings; check before ordering.
 | Enclosure print + screws | ₹120 | ₹80 |
 | Total | about ₹3,275 | about ₹1,485 |
 
-At one unit the assembly setup cost dominates. Order at least 5 boards: the per-board price falls fast and you get spares for
-bring-up.
+Assembly setup dominates at one unit. Order at least 5 boards for price and bring-up spares.
 
-## Choices made for cost
-
-| Part | Choice | Saved against the obvious pick |
-|------|--------|-------------------------------|
-| Radio | ESP32-S3-MINI-1 module | Pre-certified, no RF layout or antenna tuning |
-| K-line | 2N7002K + LMV331 | A dedicated LIN/K-line transceiver costs more and still needs the pull-up |
-| RTC crystal | None, internal oscillator | Time comes from the phone |
-| Button | C&K PTS810 | About half the price of an E-Switch TL3342 |
-| Buck inductor | Bourns SRN4018 | About a third of a Coilcraft XGL4030 |
-| Buck feedback | 1 % resistors | 0.1 % is not needed for a 3.3 V rail |
-| CAN | Footprint only (DNP) | Fit only for a CAN car |
-| OBD connection | Wires from the housing to pads | No board-mount OBD connector |
+Cost choices: ESP32-S3-MINI-1 module (pre-certified, no RF tuning); 2N7002K + LMV331 instead of a K-line transceiver; no RTC crystal;
+C&K PTS810 button; Bourns SRN4018 inductor; 1 % feedback resistors; CAN footprint only (DNP); wires to pads instead of a board-mount
+OBD connector.
 
 ## LionCircuits order
 
-PCB:
-
-| Setting | Value |
-|---------|-------|
+| PCB setting | Value |
+|-------------|-------|
 | Layers | 2 |
 | Material | FR4, 1.6 mm |
 | Copper | 1 oz |
@@ -43,18 +31,14 @@ PCB:
 | Mask / silk | Green / white |
 | Size | 54 x 42 mm |
 
-Assembly:
-
-| Setting | Value |
-|---------|-------|
+| Assembly setting | Value |
+|------------------|-------|
 | Type | Turnkey, top side only |
 | Files | Gerber zip, BOM CSV, placement CSV ([04](04-kicad.md) section 8) |
-| DNP | U5 (and CAN-only parts if you add any) |
+| DNP | U5 (and any CAN-only parts you add) |
 | Not assembled | J1 and TP1 to TP6 are pads only |
 
-Order the OBD housing, crimp pins and screws yourself; they are not on the board.
+Buy the OBD housing (Molex 68503-1602), crimp pins (57964-9702), wire and screws yourself.
 
-## Tools
-
-Open-barrel crimp tool for the Molex pins, soldering iron, multimeter, bench supply with
-current limit, USB-C cable, oscilloscope for the K-line check.
+Tools: open-barrel crimp tool for the Molex pins, soldering iron, multimeter, current-limited bench supply, USB-C cable,
+oscilloscope for the K-line check.

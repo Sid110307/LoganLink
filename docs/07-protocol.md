@@ -1,30 +1,29 @@
 # 07. Protocol
 
-BLE 5 (LE 2M PHY, data length 251, MTU 247) is the only link between dongle and phone. Wi-Fi is not used. Implemented in
-`firmware/main/proto.[ch]`, `ble_link.c`, `auth.c` and in the app under `core/protocol/` and `core/link/`.
+BLE 5 (LE 2M PHY, data length 251, MTU 247) is the only link; no Wi-Fi. Code: `firmware/main/proto.[ch]`, `ble_link.c`, `auth.c`;
+app `core/protocol/`, `core/link/`.
 
 ## GATT
 
-Service `4c4c0001-6c6f-6761-6e6c-696e6b000000`.
+Service `4c4c0001-6c6f-6761-6e6c-696e6b000000`. All characteristics require an encrypted LESC bond.
 
-| Characteristic | UUID | Properties | Direction | Security |
-|----------------|------|------------|-----------|----------|
-| TX | `4c4c0002-...` | Notify | Dongle to phone: LIVE, EVENT, DTC_LIST, RSP, LOG_CHUNK, AUTH_* | Encrypted (LESC bond) |
-| RX | `4c4c0003-...` | Write, Write Without Response | Phone to dongle: CMD, AUTH_RESPONSE | Encrypted |
-| OTA | `4c4c0004-...` | Write Without Response | Phone to dongle: OTA_DATA | Encrypted, owner session |
+| Characteristic | UUID | Properties | Carries |
+|----------------|------|------------|---------|
+| TX | `4c4c0002-...` | Notify | Dongle to phone: LIVE, EVENT, DTC_LIST, RSP, LOG_CHUNK, AUTH_* |
+| RX | `4c4c0003-...` | Write, Write Without Response | Phone to dongle: CMD, AUTH_RESPONSE |
+| OTA | `4c4c0004-...` | Write Without Response | Phone to dongle: OTA_DATA (owner session only) |
 
-Also Device Information (0x180A) and Battery Service (0x180F, reporting the car battery).
+Also Device Information (0x180A) and Battery Service (0x180F, the car battery).
 
-Advertising: name `LoganLink-XXXX` (last two MAC bytes), the service UUID, and manufacturer data `[ver][state][vbat/100]` so the
-app shows battery voltage before connecting. Interval 100 to 300 ms. No advertising in SLEEP. Two simultaneous connections; the
-live stream goes to both, commands are serialised.
-
-Connection interval: 15 to 30 ms while the app shows live data, 100 to 200 ms with latency 4 in the background. The app sends
-`SET_LIVE_RATE` when it changes.
+- Advertising: name `LoganLink-XXXX` (last two MAC bytes), service UUID, manufacturer data `[ver][state][vbat/100]` (battery shown
+  before connecting). Interval 100 to 300 ms. None in SLEEP.
+- Two simultaneous connections; both get the live stream, commands are serialised.
+- Connection interval 15 to 30 ms while showing live data, 100 to 200 ms with latency 4 in the background (app sends
+  `SET_LIVE_RATE` on change).
 
 ## Frame format
 
-Little-endian. Same for all characteristics.
+Little-endian, same on all characteristics.
 
 ```
 Offset  Size  Field
@@ -40,7 +39,7 @@ Offset  Size  Field
 
 | Type | Name | Payload |
 |------|------|---------|
-| 0x01 | LIVE | LiveV1, 62 bytes |
+| 0x01 | LIVE | LiveV1, 43 bytes |
 | 0x02 | EVENT | `u32 log_seq, u32 utc, u8 event_id, u8 severity, u16 len, data` |
 | 0x03 | DTC_LIST | `u8 count, u8 source, count x {u16 code, u8 status}` |
 | 0x10 | CMD | `u32 counter, u8 cmd, args` + 8-byte MAC |
@@ -51,10 +50,7 @@ Offset  Size  Field
 | 0x32 | AUTH_RESULT | `u8 status, u8 role` |
 | 0x40 | OTA_DATA | `u32 offset, data` |
 
-The BLE link layer protects each packet (CRC-24, AES-CCM). CRC-16 catches framing and reassembly errors. The HMAC authenticates
-commands.
-
-## LiveV1 (62 bytes, up to 10 Hz)
+## LiveV1 (43 bytes, up to 10 Hz)
 
 | Off | Type | Field | Unit | Invalid |
 |-----|------|-------|------|---------|
@@ -72,25 +68,15 @@ commands.
 | 23 | u8 | load | % | 0xFF |
 | 24 | u16 | vbat | mV | 0 |
 | 26 | u16 | fuel_rate | L/h x 100 | 0xFFFF |
-| 28 | i32 | lat | unused | 0x7FFFFFFF |
-| 32 | i32 | lon | unused | 0x7FFFFFFF |
-| 36 | u16 | gnss_speed | unused | 0xFFFF |
-| 38 | u16 | heading | unused | 0xFFFF |
-| 40 | u8 | sats | unused | 0 |
-| 41 | u8 | fix | unused | 0 |
-| 42 | i16 | accel_x | mg, + forward | 0x7FFF |
-| 44 | i16 | accel_y | mg, + left | 0x7FFF |
-| 46 | u16 | co2 | unused | 0 |
-| 48 | i16 | cabin_temp | unused | 0x7FFF |
-| 50 | u8 | cabin_rh | unused | 0xFF |
-| 51 | u8 | state | 0 BOOT, 1 STANDBY, 2 DRIVE, 3 SLEEP, 4 SAFE | |
-| 52 | u16 | source_flags | bit0 rpm ECU, bit1 rpm ripple, bit2 speed ECU, bit4 ECU online, bit5 fuel from model | |
-| 54 | u32 | trip_m | m this trip | |
-| 58 | u16 | dtc | bit15 MIL, bits 0 to 7 count | |
-| 60 | u16 | fuel_level | % x 100 | 0xFFFF |
+| 28 | i16 | accel_x | mg, + forward | 0x7FFF |
+| 30 | i16 | accel_y | mg, + left | 0x7FFF |
+| 32 | u8 | state | 0 BOOT, 1 STANDBY, 2 DRIVE, 3 SLEEP, 4 SAFE | |
+| 33 | u16 | source_flags | bit0 rpm ECU, bit1 rpm ripple, bit2 speed ECU, bit4 ECU online, bit5 fuel from model | |
+| 35 | u32 | trip_m | m this trip | |
+| 39 | u16 | dtc | bit15 MIL, bits 0 to 7 count | |
+| 41 | u16 | fuel_level | % x 100 | 0xFFFF |
 
-Location comes from the phone. Speed comes from the ECU; the app substitutes phone GPS speed when the ECU does not report it.
-Firmware and app both assert the 62-byte size.
+Location comes from the phone. When the ECU gives no speed, the app uses GPS speed. Firmware and app both assert the 43-byte size.
 
 ## Commands
 
@@ -119,24 +105,15 @@ Firmware and app both assert the 62-byte size.
 
 Status: 0 OK, 1 BAD_ARGS, 2 NOT_AUTH, 3 FORBIDDEN_ROLE, 4 VEHICLE_STATE, 5 BUSY, 6 IO_ERROR, 7 UNSUPPORTED.
 
-GET_INFO response:
-
-| Field | Size |
-|-------|------|
-| fw major, minor, patch, hw revision | 4 x u8 |
-| protocol, ECU target address, KB1, KB2 | 4 x u8 |
-| PID support bitmaps 01-20, 21-40, 41-60, 61-80 | 4 x u32 |
-| oldest log seq, head log seq | 2 x u32 |
-| vehicle-guard denied count | u32 |
-| ECU ID | u8 length + bytes |
-| VIN | u8 length + 17 chars (length 0 when the car does not report it) |
+GET_INFO response, in order: fw major, minor, patch, hw revision (4 x u8); protocol, ECU target address, KB1, KB2 (4 x u8); PID
+support bitmaps 01-20, 21-40, 41-60, 61-80 (4 x u32); oldest and head log seq (2 x u32); vehicle-guard denied count (u32); ECU ID
+(u8 length + bytes); VIN (u8 length + 17 chars, length 0 if not reported).
 
 ## Log sync
 
-- Every record has a strictly increasing 32-bit `seq`. The app stores the last `seq` it has.
+- Every record has a strictly increasing 32-bit `seq`; the app stores the last one it has.
 - On connect: `SET_TIME`, then `SYNC_LOG(last_seq + 1, n)`. Each chunk is written in one database transaction that also advances
-  `last_seq`, so a crash cannot skip or duplicate records.
-- A dropped link resumes from the new `last_seq` on the next connect.
+  `last_seq`, so a crash or dropped link cannot skip or duplicate records; the next connect resumes.
 - Records with a bad CRC-32 are skipped and reported as gaps.
 - Records with `utc = 0` are back-filled from the next valid (uptime, utc) pair with the same `boot_id`.
 
@@ -145,15 +122,14 @@ GET_INFO response:
 | Layer | Mechanism |
 |-------|-----------|
 | Device key | `K_dev`, 32 bytes from the hardware RNG on first boot, in encrypted NVS. Printed once as a QR pairing card `LL1:<device_id hex>:<base32(K_dev)>`, also on a label inside the shell |
-| Bonding | LE Secure Connections, Just Works, accepted only inside the pairing window: 120 s after a PAIR press with the engine running, or the first boot with no bonds. Up to 4 bonds |
+| Bonding | LE Secure Connections, Just Works, only inside a pairing window: 120 s after a PAIR press with the engine running, or 10 min after a boot with no bonds. Up to 4 bonds |
 | App auth, every connection | Dongle sends `AUTH_CHALLENGE(device_id, Nd)`. Phone answers `tag = HMAC-SHA256(K_user, "LL-AUTH" + device_id + Nd + Np)[0:16]`. `K_user = HMAC-SHA256(K_dev, "LL-USER" + user_id)`, user 0 is the owner. Session key `K_s = HMAC-SHA256(K_user, "LL-SESS" + Nd + Np)`. Constant-time compare |
-| Commands | 32-bit counter, strictly increasing per session, and `MAC = HMAC-SHA256(K_s, header + payload)[0:8]`. Replays and reordering rejected |
-| Roles | Owner (user 0): everything. Drivers (users 1 to 3): view, sync, fill-ups, set time. Drivers cannot clear codes, update firmware, change config or manage users |
-| Invites | Owner sends `USER_ADD`, receives K_user, shows it as a QR code; the driver scans it and bonds in a pairing window the owner opens |
+| Commands | 32-bit counter, strictly increasing per session, `MAC = HMAC-SHA256(K_s, header + payload)[0:8]`. Replays and reordering rejected |
+| Roles | Owner (user 0): everything. Drivers (1 to 3): view, sync, fill-ups, set time; no clearing codes, firmware, config or user management |
+| Invites | Owner sends `USER_ADD`, shows the returned K_user as a QR code (`LL1U:<device_id hex>:<user_id>:<base32(K_user)>`); the driver scans it and bonds in a pairing window the owner opens |
 | Phone storage | K_user sealed with the Android Keystore; app data private, backup disabled |
-| Firmware | Secure Boot v2 (RSA-3072), flash encryption in release mode, anti-rollback via `secure_version`, OTA only for the owner with the engine off ([06](06-firmware.md)) |
-| Car | Read-only vehicle guard ([02](02-car-interface.md)). A compromised phone still cannot send a write service |
-| Factory reset | Hold PAIR 10 s with the engine running: all bonds wiped; K_dev kept, so the card stays valid |
+| Firmware | Secure Boot v2, flash encryption, anti-rollback, owner-only OTA with the engine off ([06](06-firmware.md)) |
+| Car | Read-only vehicle guard ([02](02-car-interface.md)); a compromised phone still cannot send a write service |
+| Factory reset | Hold PAIR 10 s with the engine running: bonds wiped, K_dev kept, so the card stays valid |
 
-Threats covered: eavesdropping on trip and location data, an unauthorised phone, command replay, malicious firmware, a stolen
-phone (revoke it), and use of the dongle as a bridge into the car. There is no cloud and no inbound internet path.
+No cloud and no inbound internet path. A stolen phone is handled by revoking its user.

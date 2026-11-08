@@ -172,7 +172,7 @@ class VehicleHub(private val context: Context, val prefs: Prefs, val repo: Repos
 
     private fun onLive(f0: LiveFrame) {
         val loc = phoneLoc
-        val f = if (!f0.gnssValid && loc != null && System.currentTimeMillis() - loc.time < 5000) f0.copy(
+        val f = if (loc != null && System.currentTimeMillis() - loc.time < 5000) f0.copy(
             lat = loc.latitude, lon = loc.longitude,
             speed = f0.speed ?: if (loc.hasSpeed()) loc.speed * 3.6 else null,
         ) else f0

@@ -48,18 +48,11 @@ void proto_pack_live(const vstate_t *v, uint8_t o[LIVE_V1_LEN])
     o[20] = (uint8_t)v->stft; o[21] = (uint8_t)v->ltft; o[22] = (uint8_t)v->adv; o[23] = v->load;
     put_u16(o + 24, v->vbat_mv);
     put_u16(o + 26, v->fuel_lph_x100);
-    put_u32(o + 28, (uint32_t)v->lat_e7);
-    put_u32(o + 32, (uint32_t)v->lon_e7);
-    put_u16(o + 36, v->gspeed_x10);
-    put_u16(o + 38, v->heading_x10);
-    o[40] = v->sats; o[41] = v->fix;
-    put_u16(o + 42, (uint16_t)v->ax_mg);
-    put_u16(o + 44, (uint16_t)v->ay_mg);
-    put_u16(o + 46, v->co2);
-    put_u16(o + 48, (uint16_t)v->cabin_t_x10);
-    o[50] = v->cabin_rh; o[51] = v->state;
-    put_u16(o + 52, v->src);
-    put_u32(o + 54, v->trip_m);
-    put_u16(o + 58, v->dtc);
-    put_u16(o + 60, v->fuel_level_x100);
+    put_u16(o + 28, (uint16_t)v->ax_mg);
+    put_u16(o + 30, (uint16_t)v->ay_mg);
+    o[32] = v->state;
+    put_u16(o + 33, v->src);
+    put_u32(o + 35, v->trip_m);
+    put_u16(o + 39, v->dtc);
+    put_u16(o + 41, v->fuel_level_x100);
 }

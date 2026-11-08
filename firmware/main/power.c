@@ -160,9 +160,8 @@ static void power_task(void *arg)
             if (tc_die > 105) sensors_stop();
         }
 
-        bool blink = (t / 500) & 1;
         if (s_state == ST_DRIVE) led(false, true);
-        else led(false, blink && (t % 3000) < 100);
+        else led(false, (t % 3000) < 100);
     }
 }
 

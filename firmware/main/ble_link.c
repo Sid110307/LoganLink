@@ -133,7 +133,7 @@ static void handle_cmd(conn_t *c, const uint8_t *frame, size_t flen, const proto
     }
     case CMD_SET_TIME:
         if (al < 4) { rsp(c, ctr, cmd, RS_BAD_ARGS, NULL, 0); break; }
-        if (!(v.src & SRC_GNSS_VALID)) { VS_SET(utc, get_u32(a)); rtc_set_utc(get_u32(a)); }
+        { VS_SET(utc, get_u32(a)); rtc_set_utc(get_u32(a)); }
         rsp(c, ctr, cmd, RS_OK, NULL, 0); break;
     case CMD_SET_LIVE_RATE:
         c->live_hz = (al >= 1 && a[0] <= 10) ? a[0] : 10;

@@ -34,7 +34,7 @@ enum {
     RS_VEHICLE_STATE = 4, RS_BUSY = 5, RS_IO_ERROR = 6, RS_UNSUPPORTED = 7,
 };
 
-#define LIVE_V1_LEN 62
+#define LIVE_V1_LEN 43
 
 typedef struct {
     uint8_t  type, flags;
