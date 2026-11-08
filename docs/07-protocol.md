@@ -72,17 +72,17 @@ commands.
 | 23 | u8 | load | % | 0xFF |
 | 24 | u16 | vbat | mV | 0 |
 | 26 | u16 | fuel_rate | L/h x 100 | 0xFFFF |
-| 28 | i32 | lat | unused in rev B | 0x7FFFFFFF |
-| 32 | i32 | lon | unused in rev B | 0x7FFFFFFF |
-| 36 | u16 | gnss_speed | unused in rev B | 0xFFFF |
-| 38 | u16 | heading | unused in rev B | 0xFFFF |
-| 40 | u8 | sats | unused in rev B | 0 |
-| 41 | u8 | fix | unused in rev B | 0 |
+| 28 | i32 | lat | unused | 0x7FFFFFFF |
+| 32 | i32 | lon | unused | 0x7FFFFFFF |
+| 36 | u16 | gnss_speed | unused | 0xFFFF |
+| 38 | u16 | heading | unused | 0xFFFF |
+| 40 | u8 | sats | unused | 0 |
+| 41 | u8 | fix | unused | 0 |
 | 42 | i16 | accel_x | mg, + forward | 0x7FFF |
 | 44 | i16 | accel_y | mg, + left | 0x7FFF |
-| 46 | u16 | co2 | unused in rev B | 0 |
-| 48 | i16 | cabin_temp | unused in rev B | 0x7FFF |
-| 50 | u8 | cabin_rh | unused in rev B | 0xFF |
+| 46 | u16 | co2 | unused | 0 |
+| 48 | i16 | cabin_temp | unused | 0x7FFF |
+| 50 | u8 | cabin_rh | unused | 0xFF |
 | 51 | u8 | state | 0 BOOT, 1 STANDBY, 2 DRIVE, 3 SLEEP, 4 SAFE | |
 | 52 | u16 | source_flags | bit0 rpm ECU, bit1 rpm ripple, bit2 speed ECU, bit4 ECU online, bit5 fuel from model | |
 | 54 | u32 | trip_m | m this trip | |
@@ -107,9 +107,9 @@ Firmware and app both assert the 62-byte size.
 | 0x22 | SET_CONFIG | `u16 key, value` | owner | |
 | 0x23 | SET_ODOMETER | `u32 km` | owner | |
 | 0x24 | CAL_VBAT | `u16 measured_mV, u8 point` | owner | Two-point calibration |
-| 0x25 | CAL_FUEL | `u8 percent` | owner | Unused in rev B |
+| 0x25 | CAL_FUEL | `u8 percent` | owner | Unused |
 | 0x26 | FILL_UP | `u16 litres x 100, u32 price_paise` | any | Feeds fuel-model calibration |
-| 0x30 | AUX_OUT | | owner | UNSUPPORTED in rev B |
+| 0x30 | AUX_OUT | | owner | Unsupported |
 | 0x40 | OTA_BEGIN | `u32 size, u8 sha256[32]` | owner | |
 | 0x41 | OTA_END | | owner | Verify, switch slot |
 | 0x42 | WIFI_OTA | | owner | UNSUPPORTED |

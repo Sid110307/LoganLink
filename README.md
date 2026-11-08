@@ -8,8 +8,8 @@ driving events with an accelerometer, logs locally and streams to the phone over
 trip history and alerts. The car is read-only, except for a guarded two-step fault-code clear. It targets older OBD-II petrol cars;
 it was developed on a 2008 Renault X90-platform sedan with the K7M 1.6, called "the reference car" in these docs.
 
-Hardware baseline: **rev B**, ESP32-S3-MINI-1 module, 2-layer PCB lying flat directly behind the OBD plug, two clip-together shell
-halves, about 25 mm protrusion from the socket.
+Hardware: ESP32-S3-MINI-1 module on a 54 x 42 mm 2-layer PCB lying flat directly behind the OBD plug, in a printed
+front shell, retainer and snap-on rear shell, 27.6 mm out from the socket.
 
 ## Repository layout
 

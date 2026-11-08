@@ -71,8 +71,7 @@ Time: there is no RTC crystal. The RTC runs on the internal oscillator through d
 Crank: a start that drops VBAT below the brownout level resets the MCU. The next boot logs reset reason BROWNOUT; the app treats a
 brownout boot followed by engine running as a weak-crank event.
 
-Thermal policy (die temperature read every 10 s): above 95 °C Wi-Fi stays off and the CPU drops to 80 MHz; above 105 °C the
-sensors and the live stream stop, logging continues.
+Thermal policy: the die temperature is read every 10 s; above 105 °C the sensors stop.
 
 PAIR button (C&K PTS810): a short press with the engine running opens a 120 s pairing window; a 10 s hold with the engine running
 does a factory reset (all bonds wiped, device key kept).

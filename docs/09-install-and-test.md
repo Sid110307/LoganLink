@@ -12,8 +12,8 @@ Multimeter with a µA or 1 µA-resolution mA range, a soft cable tie, the phone 
 2. **Check pin 16 with the key out.** Pin 16 to pin 4 must read 12.2 to 12.8 V. 0 V means pin 16 is ignition-switched on this car:
    the dongle still works while driving, but it cannot log cranking or watch the battery while parked. Pin 4 to body: < 0.5 Ω.
    With the key on, pin 7 to pin 4 reads close to battery voltage (K-line idle high).
-3. **Plug in** with the key out. The LED blinks green every 3 s (STANDBY). Tie the shell's eye to the socket bracket or a nearby
-   harness so vibration does not fret the contacts.
+3. **Plug in** with the key out. The LED blinks green every 3 s (STANDBY). Check it sits fully home and square; the plug
+   should not rock in the socket.
 4. **Pair.** Start the engine and follow [08 App, Pairing](08-app.md#pairing). The probe runs automatically; the Module screen then
    shows protocol, ECU ID, supported PIDs and VIN. If no ECU answers, the battery and accelerometer features still work.
 5. **Enter vehicle data.** Garage, Vehicle: odometer from the cluster, petrol price, tank size, plate.
@@ -22,7 +22,7 @@ Multimeter with a µA or 1 µA-resolution mA range, a soft cable tie, the phone 
 7. **Check sleep current.** Find the cabin fuse that feeds pin 16 (pulling it makes pin 16 read 0 V). With the dongle unplugged,
    connect the multimeter (mA range) across the empty fuse slot and note the car's own draw. Plug the dongle in, switch Bluetooth off
    on the phone or walk away, wait 10 min for SLEEP (LED off), read again. The difference is the dongle's sleep current: ≤ 150 µA,
-   design value 65 µA. Refit the fuse.
+   design value 61 µA. Refit the fuse.
 8. **Drive 15 min**, switch off, wait 1 min. The app must show the trip and the parking spot.
 
 Removal: unplug, then factory-reset (hold PAIR 10 s with the engine running) before passing the dongle on.
@@ -31,7 +31,7 @@ Removal: unplug, then factory-reset (hold PAIR 10 s with the engine running) bef
 
 | Test | Method | Pass |
 |------|--------|------|
-| Sleep current | Step 7 above, or a bench supply at 12.6 V with a µA meter, 1 h after SLEEP entry | ≤ 150 µA (design 65 µA); HIBERNATE ≤ 80 µA |
+| Sleep current | Step 7 above, or a bench supply at 12.6 V with a µA meter, 1 h after SLEEP entry | ≤ 150 µA (design 61 µA); HIBERNATE ≤ 80 µA |
 | Parked battery impact | 14 days parked, compare resting voltage drop with and without the dongle on the same battery | ≤ 0.05 V attributable to the dongle |
 | Battery voltage accuracy | Bench supply at 9, 12, 15 V against the multimeter, after calibration | ±30 mV (±50 mV at temperature extremes) |
 | K-line timing | Scope on pin 7 during fast init and a PID request | TiniL 25 ± 1 ms, TWuP 50 ± 1 ms, P3 ≥ 55 ms, bit time 96.15 µs ± 1 % |

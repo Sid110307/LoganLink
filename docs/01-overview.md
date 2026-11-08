@@ -60,11 +60,11 @@ Hardware details: [03 Hardware](03-hardware.md). Enclosure: [05 Enclosure](05-en
 |-------|--------------|--------|-------------------|
 | DRIVE | Engine running: RPM > 400, or VBAT > 13.2 V for 3 s | ECU polling, logging 1 Hz, live stream 10 Hz | about 20 mA |
 | STANDBY | Trip ended (8 min engine-off), or after wake | BLE advertising, low-rate sensing | about 8 mA |
-| SLEEP | No BLE link, no trip, 5 min idle | ULP checks VBAT every 1 s, accelerometer wake armed, 6 h timer | 65 µA design, 150 µA max |
+| SLEEP | No BLE link, no trip, 5 min idle | ULP checks VBAT every 1 s, accelerometer wake armed, 6 h timer | 61 µA design, 150 µA max |
 | HIBERNATE | Resting VBAT < 12.1 V for 10 min, or parked > 14 days | ULP checks VBAT every 10 s, wakes only above 13.0 V | about 60 µA |
 
-Sleep wakes on a VBAT rise above 13.2 V, a VBAT step of 150 mV (door, lights), accelerometer motion, or the 6 h timer. At 65 µA the
-dongle takes about 47 mAh a month from the battery.
+Sleep wakes on a VBAT rise above 13.2 V, a VBAT step of 150 mV (door, lights), accelerometer motion, or the 6 h timer. At 61 µA the
+dongle takes about 44 mAh a month from the battery.
 
 ## Design limits
 
