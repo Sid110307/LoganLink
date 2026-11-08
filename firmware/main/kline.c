@@ -239,6 +239,18 @@ esp_err_t kl_request(kl_session_t *s, const uint8_t *req, size_t req_len,
     return ESP_ERR_TIMEOUT;
 }
 
+esp_err_t kl_read_next(kl_session_t *s, uint8_t *resp, size_t resp_max, size_t *resp_len, uint32_t timeout_ms)
+{
+    uint8_t rx[KL_MAX_MSG]; size_t rn;
+    esp_err_t e = recv_msg(s, rx, sizeof rx, &rn, timeout_ms);
+    if (e != ESP_OK) return e;
+    size_t o = data_offset(rx, s->proto), dl = rn - o - 1;
+    if (dl > resp_max) return ESP_ERR_INVALID_SIZE;
+    memcpy(resp, rx + o, dl);
+    *resp_len = dl;
+    return ESP_OK;
+}
+
 void kl_disconnect(kl_session_t *s)
 {
     if (s->proto == KL_PROTO_KWP_FAST || s->proto == KL_PROTO_KWP_5BAUD) {

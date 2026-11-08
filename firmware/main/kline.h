@@ -27,5 +27,6 @@ esp_err_t kl_connect(kl_session_t *s);
 esp_err_t kl_request(kl_session_t *s, const uint8_t *req, size_t req_len,
                      uint8_t *resp, size_t resp_max, size_t *resp_len);
 void      kl_disconnect(kl_session_t *s);
+esp_err_t kl_read_next(kl_session_t *s, uint8_t *resp, size_t resp_max, size_t *resp_len, uint32_t timeout_ms);
 bool      kl_foreign_activity(void);
 uint32_t  kl_last_tx_ms(void);

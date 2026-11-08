@@ -127,6 +127,8 @@ static void handle_cmd(conn_t *c, const uint8_t *frame, size_t flen, const proto
         put_u32(out + ol, vguard_denied_count()); ol += 4;
         size_t idl = strnlen(p->ecu_id, sizeof p->ecu_id); out[ol++] = idl;
         memcpy(out + ol, p->ecu_id, idl); ol += idl;
+        size_t vl = strnlen(p->vin, sizeof p->vin); out[ol++] = vl;
+        memcpy(out + ol, p->vin, vl); ol += vl;
         rsp(c, ctr, cmd, RS_OK, out, ol); break;
     }
     case CMD_SET_TIME:

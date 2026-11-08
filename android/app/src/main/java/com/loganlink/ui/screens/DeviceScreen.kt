@@ -85,6 +85,7 @@ fun DeviceScreen(onBack: () -> Unit) {
             Panel("Module", icon = R.drawable.engine) {
                 Kv("Firmware", i.fw)
                 if (i.ecuId.isNotBlank()) Kv("ECU ID", i.ecuId)
+                i.vin?.let { Kv("VIN", it) }
             }
         }
 

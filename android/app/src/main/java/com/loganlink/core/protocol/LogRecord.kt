@@ -72,7 +72,7 @@ data class DtcCode(val raw: Int, val status: Int) {
 
 data class DeviceInfo(
     val fw: String, val hw: Char, val protocol: Int, val ecuAddress: Int, val kb1: Int, val kb2: Int,
-    val pidSupport: List<Long>, val oldestSeq: Long, val headSeq: Long, val guardDenied: Long, val ecuId: String,
+    val pidSupport: List<Long>, val oldestSeq: Long, val headSeq: Long, val guardDenied: Long, val ecuId: String, val vin: String? = null,
 ) {
     val protocolName get() = when (protocol) {
         1 -> "KWP2000 fast init (ISO 14230)"; 2 -> "KWP2000 5-baud (ISO 14230)"; 3 -> "ISO 9141-2"
@@ -90,9 +90,11 @@ data class DeviceInfo(
             val pids = (0 until 4).map { d.u32(8 + it * 4) }
             val idLen = d.u8(36)
             val id = if (d.size >= 37 + idLen) String(d, 37, idLen, Charsets.US_ASCII) else ""
+            val vo = 37 + idLen
+            val vin = if (d.size > vo && d.size >= vo + 1 + d.u8(vo) && d.u8(vo) == 17) String(d, vo + 1, 17, Charsets.US_ASCII) else null
             return DeviceInfo(
                 "${d.u8(0)}.${d.u8(1)}.${d.u8(2)}", d.u8(3).toChar(), d.u8(4), d.u8(5), d.u8(6), d.u8(7),
-                pids, d.u32(24), d.u32(28), d.u32(32), id,
+                pids, d.u32(24), d.u32(28), d.u32(32), id, vin,
             )
         }
     }

@@ -122,6 +122,8 @@ fun VehicleScreen(onBack: () -> Unit) {
     val v by app.prefs.vehicle.collectAsStateWithLifecycle()
     var nick by rememberSaveable { mutableStateOf(v.nickname) }
     var plate by rememberSaveable { mutableStateOf(v.plate) }
+    val info by app.hub.info.collectAsStateWithLifecycle()
+    val car = remember(info?.vin) { com.loganlink.core.data.VehicleId.decodeVin(info?.vin) }
     var odo by rememberSaveable { mutableStateOf(v.odometerKm.toString()) }
     var price by rememberSaveable { mutableStateOf("%.2f".format(v.fuelPricePaise / 100.0)) }
     var tank by rememberSaveable { mutableStateOf(v.tankLitres.toString()) }
@@ -130,7 +132,8 @@ fun VehicleScreen(onBack: () -> Unit) {
     Page("Vehicle", null, onBack, snack) {
         Panel("Details") {
             OutlinedTextField(nick, { nick = it }, Modifier.fillMaxWidth(), label = { Text("Nickname") }, singleLine = true)
-            OutlinedTextField(plate, { plate = it.uppercase() }, Modifier.fillMaxWidth(), label = { Text("Registration") }, singleLine = true)
+            OutlinedTextField(plate, { plate = com.loganlink.core.data.VehicleId.formatPlate(it) }, Modifier.fillMaxWidth(), label = { Text("Registration") }, singleLine = true,
+                supportingText = com.loganlink.core.data.VehicleId.registration(plate)?.let { r -> { Text(r) } })
             OutlinedTextField(odo, { odo = it.filter(Char::isDigit) }, Modifier.fillMaxWidth(), label = { Text("Odometer (km, from the cluster)") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), singleLine = true)
             OutlinedTextField(price, { price = it }, Modifier.fillMaxWidth(), label = { Text("Petrol price (₹/L)") },
@@ -146,6 +149,15 @@ fun VehicleScreen(onBack: () -> Unit) {
                     snack.showSnackbar("Saved")
                 }
             }, Modifier.fillMaxWidth()) { Text("Save") }
+        }
+        car?.let { c ->
+            Panel("From your car", icon = R.drawable.car) {
+                Kv("VIN", c.vin)
+                c.maker?.let { Kv("Maker", it) }
+                c.year?.let { Kv("Model year", "$it") }
+                val suggestion = listOfNotNull(c.maker, c.year?.toString()).joinToString(" ")
+                if (suggestion.isNotBlank() && nick != suggestion) OutlinedButton(onClick = { nick = suggestion }) { Text("Name it \"$suggestion\"") }
+            }
         }
     }
 }

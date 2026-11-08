@@ -102,7 +102,7 @@ Each includes a size assertion (62 bytes).
 
 | ID | Name | Args | Role | Notes |
 |----|------|------|------|-------|
-| 0x01 | GET_INFO | — | any | FW/HW version, serial, vehicle profile, probe result |
+| 0x01 | GET_INFO | — | any | FW/HW version, serial, vehicle profile, probe result, ECU ID and VIN (length-prefixed, VIN read with J1979 mode 09 PID 02 during the probe when the car supports it) |
 | 0x02 | SET_TIME | u32 utc, i16 tz_min | any | Used until GNSS time is valid |
 | 0x03 | SET_LIVE_RATE | u8 hz (0–10) | any | 0 stops the stream |
 | 0x10 | READ_DTC | u8 type (stored/pending) | any | Answers with DTC_LIST |

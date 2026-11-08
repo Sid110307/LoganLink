@@ -105,6 +105,26 @@ static esp_err_t try_connect(uint8_t proto, uint8_t target, uint8_t functional)
     return kl_connect(&s_sess);
 }
 
+static void read_vin(void)
+{
+    if (s_prof.proto == 0) return;
+    uint8_t q[2] = { 0x09, 0x02 }, r[64]; size_t n;
+    char raw[24] = { 0 }; size_t got = 0;
+    xSemaphoreTake(s_bus, portMAX_DELAY);
+    esp_err_t e = kl_request(&s_sess, q, 2, r, sizeof r, &n);
+    for (int i = 0; e == ESP_OK && i < 6; i++) {
+        if (n >= 7 && r[0] == 0x49 && r[1] == 0x02) {
+            for (size_t k = 3; k < n && got < sizeof raw - 1; k++) if (r[k]) raw[got++] = (char)r[k];
+        } else if (n >= 4 && r[0] == 0x49 && r[1] == 0x02) {
+            for (size_t k = 2; k < n && got < sizeof raw - 1; k++) if (r[k] >= '0') raw[got++] = (char)r[k];
+        }
+        e = kl_read_next(&s_sess, r, sizeof r, &n, 120);
+    }
+    xSemaphoreGive(s_bus);
+    if (got >= 17) memcpy(s_prof.vin, raw + got - 17, 17);
+    s_prof.vin[17] = 0;
+}
+
 esp_err_t obd_run_probe(void)
 {
     static const struct { uint8_t proto, target, functional; } cand[] = {
@@ -152,6 +172,7 @@ esp_err_t obd_run_probe(void)
             }
         }
     }
+    read_vin();
     config_save_profile(&s_prof, sizeof s_prof);
     ESP_LOGI(TAG, "probe ok proto=%d tgt=%02X pids=%08lX %08lX ecu='%s'", s_prof.proto, s_prof.target,
              (unsigned long)s_prof.pid_support[0], (unsigned long)s_prof.pid_support[1], s_prof.ecu_id);

@@ -126,7 +126,7 @@ class SimVehicleLink : VehicleLink {
                 val pids = listOf(0xBE3EB811L, 0x80000001L, 0L, 0L)
                 CmdResult(Status.OK, byteArrayOf(1, 1, 0, 'B'.code.toByte(), 1, 0x33, 0x8F.toByte(), 0xEF.toByte()) +
                     pids.fold(ByteArray(0)) { a, p -> a + le32(p) } + le32(0) + le32(1234) + le32(0) +
-                    byteArrayOf(id.size.toByte()) + id)
+                    byteArrayOf(id.size.toByte()) + id + byteArrayOf(17) + "UU1LSDACH81234567".toByteArray())
             }
             Cmd.READ_DTC -> { _dtcs.tryEmit(activeDtcs.toList()); CmdResult(Status.OK) }
             Cmd.CLEAR_DTC -> {

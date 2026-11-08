@@ -12,6 +12,7 @@ typedef struct {
     uint8_t  kb1, kb2;
     uint32_t pid_support[4];
     char     ecu_id[32];
+    char     vin[18];
     uint8_t  lid_present[16];
 } obd_profile_t;
 
