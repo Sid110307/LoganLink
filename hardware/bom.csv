@@ -1,5 +1,5 @@
 Reference,Qty,Value,Manufacturer,MPN,KiCad footprint,Fit,Unit_INR_1,Unit_INR_25
-U1,1,ESP32-S3-MINI-1-N8,Espressif,ESP32-S3-MINI-1-N8,RF_Module:ESP32-S3-MINI-1,Fit,340,290
+U1,1,ESP32-S3-MINI-1-N8,Espressif,ESP32-S3-MINI-1-N8,RF_Module:ESP32-S2-MINI-1 (same pads as S3-MINI-1),Fit,340,290
 U2,1,LMR36006 3.3V buck,Texas Instruments,LMR36006AQRNXRQ1,loganlink:TI_RNX0012A (from TI/Ultra Librarian),Fit,170,125
 U3,1,LIS2DW12,STMicroelectronics,LIS2DW12TR,Package_LGA:LGA-12_2x2mm_P0.5mm,Fit,130,95
 U4,1,LMV331,Texas Instruments,LMV331IDBVR,Package_TO_SOT_SMD:SOT-23-5,Fit,35,20
@@ -13,7 +13,7 @@ D4,1,USBLC6-2SC6,STMicroelectronics,USBLC6-2SC6Y,Package_TO_SOT_SMD:SOT-23-6,Fit
 D5 D6,2,BAT54S,Nexperia,BAT54S-Q,Package_TO_SOT_SMD:SOT-23,Fit,8,4
 D7,1,BAS16,Nexperia,BAS16-Q,Package_TO_SOT_SMD:SOT-23,Fit,3,2
 D8,1,PMEG4010CEJ,Nexperia,PMEG4010CEJ,Diode_SMD:D_SOD-323F,Fit,10,6
-L1,1,22uH,Bourns,SRN4018-220M,Inductor_SMD:L_Bourns_SRN4018,Fit,20,12
+L1,1,22uH,Bourns,SRN4018-220M,Inductor_SMD:L_Bourns-SRN4018,Fit,20,12
 L2,1,600R ferrite,Murata,BLM31KN601SN1L,Inductor_SMD:L_1206_3216Metric,Fit,12,7
 C1 C2,2,2.2uF 100V X7S,TDK,CGA5L3X7S2A225K160AB,Capacitor_SMD:C_1206_3216Metric,Fit,20,12
 C3,1,22uF 63V electrolytic,Panasonic,EEE-FK1J220P,Capacitor_SMD:CP_Elec_6.3x5.8,Fit,25,15
