@@ -1,4 +1,4 @@
-### Footprint positions - created on 2026-11-09T12:37:29 ###
+### Footprint positions - created on 2026-11-09T17:19:52 ###
 ### Printed by KiCad version 10.0.0
 ## Unit = mm, Angle = deg.
 ## Side : All
@@ -21,21 +21,17 @@ C12       1u                           C_0402_1005Metric                        
 C13       0.1u                         C_0402_1005Metric                                          18.0000    34.5000   90.0000  top
 C14       10u                          C_0603_1608Metric                                          16.5000    34.5000   90.0000  top
 C15       0.1u                         C_0402_1005Metric                                          38.5000    30.0000   90.0000  top
-C16       1u                           C_0603_1608Metric                                          37.0000    32.0000   90.0000  top
+C16       10u                          C_0603_1608Metric                                          37.0000    32.0000   90.0000  top
 D1        PESD1LIN                     D_SOD-323                                                  30.5000    14.0000    0.0000  top
-D2        SMCJ33A                      D_SMC                                                       9.0000    17.0000  180.0000  top
-D3        STPS2H100A                   D_SMA                                                      16.0000    12.0000   90.0000  top
-D4        PMEG4010CEJ                  D_SOD-323F                                                 44.6000    16.8500    0.0000  top
+D2        SMCJ33CA                     D_SMC                                                       9.0000    17.0000  180.0000  top
+D3        SS210                        D_SMA                                                      16.0000    12.0000   90.0000  top
+D4        B5819WS                      D_SOD-323F                                                 44.6000    16.8500    0.0000  top
 D5        BAT54S                       SOT-23                                                     44.5000    25.5000  180.0000  top
 D6        BAT54S                       SOT-23                                                     40.0000    26.5000  180.0000  top
 D7        BAS16                        SOT-23                                                     24.0000    13.5000    0.0000  top
 F1        2A                           Fuse_1206_3216Metric                                       16.3000    17.0000  180.0000  top
-F2        2A                           Fuse_1206_3216Metric                                       45.7000    12.5500   90.0000  top
-FB1       BLM31KN601SN1L               L_1206_3216Metric                                          10.5000    12.0000  180.0000  top
-H1        MountingHole                 MountingHole_2.2mm_M2                                       4.5000    34.5000    0.0000  top
-H2        MountingHole                 MountingHole_2.2mm_M2                                      49.5000    34.5000    0.0000  top
-H3        MountingHole                 MountingHole_2.2mm_M2                                       4.5000     5.0000    0.0000  top
-H4        MountingHole                 MountingHole_2.2mm_M2                                      49.5000     5.0000    0.0000  top
+F2        0.75A                        Fuse_1206_3216Metric                                       45.7000    12.5500   90.0000  top
+FB1       BLM31PG601SN1L               L_1206_3216Metric                                          10.5000    12.0000  180.0000  top
 J1        OBD                          PinHeader_1x06_P2.54mm_Vertical                            20.5000    17.0000   90.0000  top
 J2        USB_C_Receptacle_USB2.0_16P  USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal    41.0000     5.5000    0.0000  top
 J3        UART                         PinHeader_1x04_P2.54mm_Vertical                            50.5000    17.5000    0.0000  top
@@ -45,7 +41,7 @@ LED2      Green                        LED_0603_1608Metric                      
 Q1        2N7002K                      SOT-23                                                     28.0000    10.0000   90.0000  top
 R1        47                           R_0603_1608Metric                                          28.0000    13.5000   90.0000  top
 R2        100k                         R_0402_1005Metric                                          25.5000     7.5000   90.0000  top
-R3        100                          R_0402_1005Metric                                          25.5000    10.0000  -90.0000  top
+R3        330                          R_0402_1005Metric                                          25.5000    10.0000  -90.0000  top
 R4        5.1k                         R_0402_1005Metric                                          37.7000    11.5800  -90.0000  top
 R5        5.1k                         R_0402_1005Metric                                          43.9000    15.3500  180.0000  top
 R6        100k                         R_0402_1005Metric                                          39.0000    22.5000    0.0000  top
@@ -68,7 +64,7 @@ R22       4.7k                         R_0402_1005Metric                        
 R23       10k                          R_0402_1005Metric                                          45.5000    23.0000    0.0000  top
 R24       10k                          R_0402_1005Metric                                          35.5000    35.0000  -90.0000  top
 R25       330                          R_0402_1005Metric                                          47.0000    27.0000  -90.0000  top
-R26       150                          R_0402_1005Metric                                          42.5000    29.0000  180.0000  top
+R26       330                          R_0402_1005Metric                                          42.5000    29.0000  180.0000  top
 SW1       SW_RESET                     SW_SPST_B3U-1000P                                          46.0000    20.5000    0.0000  top
 SW2       SW_PAIR                      SW_SPST_B3U-1000P                                          49.0000    24.0000    0.0000  top
 TP3       TestPoint_Small              TestPoint_Pad_D1.0mm                                       33.0000     4.5000    0.0000  top

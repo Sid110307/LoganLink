@@ -10389,6 +10389,15 @@
 				)
 			)
 		)
+		(property "MPN" "GRM188R61A106ME69D"
+			(at 220.98 33.02 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 224.79 31.75 0)
 			(hide yes)
@@ -10411,7 +10420,7 @@
 				)
 			)
 		)
-		(property "Description" "Unpolarized capacitor, small symbol"
+		(property "Description" "MLCC 10uF 10V X5R 0603"
 			(at 224.79 31.75 0)
 			(hide yes)
 			(show_name no)
@@ -10545,6 +10554,15 @@
 				)
 			)
 		)
+		(property "MPN" "CRCW1206510RFKEAHP"
+			(at 107.95 125.73 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 107.95 125.73 0)
 			(hide yes)
@@ -10567,7 +10585,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 510R 1% 0.5W 1206 anti-surge"
 			(at 107.95 125.73 0)
 			(hide yes)
 			(show_name no)
@@ -10680,7 +10698,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "08f560f7-189a-4049-b733-7c27292e5f73")
 		(property "Reference" "TP2"
 			(at 208.28 88.8999 0)
@@ -10705,6 +10723,15 @@
 				(justify left)
 			)
 		)
+		(property "MPN" "-"
+			(at 208.28 90.1699 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
 			(at 204.47 88.9 0)
 			(hide yes)
@@ -10727,7 +10754,7 @@
 				)
 			)
 		)
-		(property "Description" "test point"
+		(property "Description" "Test pad (not assembled)"
 			(at 209.55 88.9 0)
 			(hide yes)
 			(show_name no)
@@ -10963,7 +10990,7 @@
 				)
 			)
 		)
-		(property "Description" "3-axis accelerometer, I2C/SPI, LGA-12 2x2"
+		(property "Description" "Accelerometer 3-axis I2C LGA-12"
 			(at 228.6 166.37 0)
 			(hide yes)
 			(show_name no)
@@ -11153,6 +11180,15 @@
 				)
 			)
 		)
+		(property "MPN" "SF-1206FP200-2"
+			(at 39.37 120.65 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Fuse:Fuse_1206_3216Metric"
 			(at 39.37 123.19 0)
 			(hide yes)
@@ -11175,7 +11211,7 @@
 				)
 			)
 		)
-		(property "Description" "Fuse, small symbol"
+		(property "Description" "Fuse fast 2A 63V 1206"
 			(at 39.37 123.19 0)
 			(hide yes)
 			(show_name no)
@@ -11208,10 +11244,10 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom no)
+		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "1fc2823a-b471-4322-b36d-7b531c447c95")
 		(property "Reference" "J3"
@@ -11236,6 +11272,15 @@
 				(justify right)
 			)
 		)
+		(property "MPN" "-"
+			(at 276.86 38.0999 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical"
 			(at 275.59 35.56 0)
 			(hide yes)
@@ -11258,7 +11303,7 @@
 				)
 			)
 		)
-		(property "Description" "Generic connector, single row, 01x04, script generated"
+		(property "Description" "UART console pads (not assembled)"
 			(at 275.59 35.56 0)
 			(hide yes)
 			(show_name no)
@@ -11398,6 +11443,15 @@
 				)
 			)
 		)
+		(property "MPN" "GCM155R71H104KE02D"
+			(at 220.98 27.94 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 224.79 26.67 0)
 			(hide yes)
@@ -11420,7 +11474,7 @@
 				)
 			)
 		)
-		(property "Description" "Unpolarized capacitor, small symbol"
+		(property "Description" "MLCC 100nF 50V X7R 0402"
 			(at 224.79 26.67 0)
 			(hide yes)
 			(show_name no)
@@ -11555,6 +11609,15 @@
 				)
 			)
 		)
+		(property "MPN" "RC0402FR-074K7L"
+			(at 93.98 104.14 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 93.98 104.14 0)
 			(hide yes)
@@ -11577,7 +11640,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 4.7k 1% 1/16W 0402"
 			(at 93.98 104.14 0)
 			(hide yes)
 			(show_name no)
@@ -11711,6 +11774,15 @@
 				)
 			)
 		)
+		(property "MPN" "RC0402FR-07100KL"
+			(at 63.5 101.6 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 63.5 101.6 0)
 			(hide yes)
@@ -11733,7 +11805,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 100k 1% 1/16W 0402"
 			(at 63.5 101.6 0)
 			(hide yes)
 			(show_name no)
@@ -11846,7 +11918,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "3cb92b38-5cb6-4274-85d9-15e3436dfb09")
 		(property "Reference" "TP3"
 			(at 59.69 172.7199 0)
@@ -11871,6 +11943,15 @@
 				(justify left)
 			)
 		)
+		(property "MPN" "-"
+			(at 59.69 173.9899 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
 			(at 55.88 172.72 0)
 			(hide yes)
@@ -11893,7 +11974,7 @@
 				)
 			)
 		)
-		(property "Description" "test point"
+		(property "Description" "Test pad (not assembled)"
 			(at 60.96 172.72 0)
 			(hide yes)
 			(show_name no)
@@ -11949,6 +12030,15 @@
 				)
 			)
 		)
+		(property "MPN" "BAT54S"
+			(at 93.98 92.71 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
 			(at 92.075 93.345 0)
 			(hide yes)
@@ -11972,7 +12062,7 @@
 				)
 			)
 		)
-		(property "Description" "Vr 30V, If 200mA, Dual schottky barrier diode, in series, SOT-323"
+		(property "Description" "Dual Schottky diode series 30V SOT-23"
 			(at 93.98 96.52 0)
 			(hide yes)
 			(show_name no)
@@ -12033,6 +12123,15 @@
 				)
 			)
 		)
+		(property "MPN" "2N7002K-7"
+			(at 41.91 160.02 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
 			(at 43.815 161.29 0)
 			(hide yes)
@@ -12058,7 +12157,7 @@
 				(justify left)
 			)
 		)
-		(property "Description" "0.38A Id, 60V Vds, N-Channel MOSFET, SOT-23"
+		(property "Description" "N-MOSFET 60V 0.3A SOT-23"
 			(at 41.91 166.37 0)
 			(hide yes)
 			(show_name no)
@@ -12198,6 +12297,15 @@
 				)
 			)
 		)
+		(property "MPN" "B3U-1100P-B"
+			(at 196.85 46.99 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Button_Switch_SMD:SW_SPST_B3U-1000P"
 			(at 198.12 41.91 0)
 			(hide yes)
@@ -12220,7 +12328,7 @@
 				)
 			)
 		)
-		(property "Description" "Single Pole Single Throw (SPST) switch"
+		(property "Description" "Tactile switch SPST-NO SMD 2-pin"
 			(at 198.12 41.91 0)
 			(hide yes)
 			(show_name no)
@@ -12411,7 +12519,7 @@
 		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "48047fe2-7245-4c88-9625-8d1094714d64")
@@ -12513,6 +12621,15 @@
 				(justify right)
 			)
 		)
+		(property "MPN" "GRM31CR61C226KE15L"
+			(at 154.178 44.45 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 156.21 44.45 0)
 			(hide yes)
@@ -12535,7 +12652,7 @@
 				)
 			)
 		)
-		(property "Description" "Unpolarized capacitor, small symbol"
+		(property "Description" "MLCC 22uF 16V X5R 1206"
 			(at 156.21 44.45 0)
 			(hide yes)
 			(show_name no)
@@ -12592,6 +12709,15 @@
 				)
 			)
 		)
+		(property "MPN" "RC0402FR-074K7L"
+			(at 201.93 63.5 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 201.93 63.5 0)
 			(hide yes)
@@ -12614,7 +12740,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 4.7k 1% 1/16W 0402"
 			(at 201.93 63.5 0)
 			(hide yes)
 			(show_name no)
@@ -12738,10 +12864,19 @@
 				)
 			)
 		)
-		(property "Value" "BLM31KN601SN1L"
+		(property "Value" "BLM31PG601SN1L"
 			(at 125.6919 124.46 90)
 			(show_name no)
 			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "BLM31PG601SN1L"
+			(at 125.6919 124.46 0)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12770,7 +12905,7 @@
 				)
 			)
 		)
-		(property "Description" "Ferrite bead, small symbol"
+		(property "Description" "Ferrite bead 600R at 100MHz 1206"
 			(at 125.73 128.27 0)
 			(hide yes)
 			(show_name no)
@@ -12817,10 +12952,19 @@
 				)
 			)
 		)
-		(property "Value" "150"
+		(property "Value" "330"
 			(at 250.19 71.12 90)
 			(show_name no)
 			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0402FR-07330RL"
+			(at 250.19 71.12 0)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12849,7 +12993,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 330R 1% 1/16W 0402"
 			(at 250.19 71.12 0)
 			(hide yes)
 			(show_name no)
@@ -12984,6 +13128,15 @@
 				)
 			)
 		)
+		(property "MPN" "RE0603DRE071ML"
+			(at 93.98 109.22 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 93.98 109.22 0)
 			(hide yes)
@@ -13006,7 +13159,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 1M 0.5% 1/10W 0603"
 			(at 93.98 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -13299,6 +13452,15 @@
 				)
 			)
 		)
+		(property "MPN" "USB4105-GF-A"
+			(at 34.29 22.86 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Connector_USB:USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal"
 			(at 38.1 43.18 0)
 			(hide yes)
@@ -13321,7 +13483,7 @@
 				)
 			)
 		)
-		(property "Description" "USB 2.0-only 16P Type-C Receptacle connector"
+		(property "Description" "USB Type-C receptacle USB2.0 16P"
 			(at 34.29 43.18 0)
 			(hide yes)
 			(show_name no)
@@ -13424,6 +13586,15 @@
 				)
 			)
 		)
+		(property "MPN" "SRN4018-220M"
+			(at 144.78 39.37 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Inductor_SMD:L_Bourns-SRN4018"
 			(at 144.78 41.91 0)
 			(hide yes)
@@ -13446,7 +13617,7 @@
 				)
 			)
 		)
-		(property "Description" "Inductor, small symbol"
+		(property "Description" "Power inductor 22uH shielded 4x4 Isat 0.95A"
 			(at 144.78 41.91 0)
 			(hide yes)
 			(show_name no)
@@ -13503,6 +13674,15 @@
 				)
 			)
 		)
+		(property "MPN" "RC0402FR-07100KL"
+			(at 143.51 45.72 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 143.51 45.72 0)
 			(hide yes)
@@ -13525,7 +13705,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 100k 1% 1/16W 0402"
 			(at 143.51 45.72 0)
 			(hide yes)
 			(show_name no)
@@ -13730,7 +13910,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "STPS2H100A"
+		(property "Value" "SS210"
 			(at 60.96 127.2539 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13739,6 +13919,15 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+			)
+		)
+		(property "MPN" "SS210-HF"
+			(at 60.96 127.2539 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(property "Footprint" "Diode_SMD:D_SMA"
@@ -13763,7 +13952,7 @@
 				)
 			)
 		)
-		(property "Description" "Schottky diode, small symbol"
+		(property "Description" "Schottky diode 100V 2A SMA"
 			(at 58.42 125.73 0)
 			(hide yes)
 			(show_name no)
@@ -13822,6 +14011,15 @@
 				(justify right)
 			)
 		)
+		(property "MPN" "GCM155R71H104KE02D"
+			(at 141.732 39.37 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 139.7 39.37 0)
 			(hide yes)
@@ -13844,7 +14042,7 @@
 				)
 			)
 		)
-		(property "Description" "Unpolarized capacitor, small symbol"
+		(property "Description" "MLCC 100nF 50V X7R 0402"
 			(at 139.7 39.37 0)
 			(hide yes)
 			(show_name no)
@@ -13904,6 +14102,15 @@
 				(justify right)
 			)
 		)
+		(property "MPN" "CL05B103KB5VPNC"
+			(at 100.33 106.172 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 100.33 104.14 0)
 			(hide yes)
@@ -13926,7 +14133,7 @@
 				)
 			)
 		)
-		(property "Description" "Unpolarized capacitor, small symbol"
+		(property "Description" "MLCC 10nF 50V X7R 0402"
 			(at 100.33 104.14 0)
 			(hide yes)
 			(show_name no)
@@ -13984,6 +14191,15 @@
 				)
 			)
 		)
+		(property "MPN" "RC0402FR-074K7L"
+			(at 73.66 109.22 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 73.66 109.22 0)
 			(hide yes)
@@ -14006,7 +14222,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 4.7k 1% 1/16W 0402"
 			(at 73.66 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -14211,10 +14427,19 @@
 				)
 			)
 		)
-		(property "Value" "100"
+		(property "Value" "330"
 			(at 46.99 171.45 90)
 			(show_name no)
 			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0402FR-07330RL"
+			(at 46.99 171.45 0)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14243,7 +14468,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 330R 1% 1/16W 0402"
 			(at 46.99 171.45 0)
 			(hide yes)
 			(show_name no)
@@ -14377,6 +14602,15 @@
 				)
 			)
 		)
+		(property "MPN" "RC0402FR-0710KL"
+			(at 213.36 35.56 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 213.36 35.56 0)
 			(hide yes)
@@ -14399,7 +14633,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 10k 1% 1/16W 0402"
 			(at 213.36 35.56 0)
 			(hide yes)
 			(show_name no)
@@ -14533,6 +14767,15 @@
 				)
 			)
 		)
+		(property "MPN" "RC0402FR-0743K2L"
+			(at 138.43 48.26 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 138.43 48.26 0)
 			(hide yes)
@@ -14555,7 +14798,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 43.2k 1% 1/16W 0402"
 			(at 138.43 48.26 0)
 			(hide yes)
 			(show_name no)
@@ -14615,6 +14858,15 @@
 				(justify left)
 			)
 		)
+		(property "MPN" "LMV331IDBVR"
+			(at 78.3433 181.61 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
 			(at 78.74 168.91 0)
 			(hide yes)
@@ -14637,7 +14889,7 @@
 				)
 			)
 		)
-		(property "Description" "Single General-Purpose Low-Voltage Comparator, SOT-23-5/SC-70-5"
+		(property "Description" "Comparator low-voltage open-drain SOT-23-5"
 			(at 78.74 171.45 0)
 			(hide yes)
 			(show_name no)
@@ -14695,7 +14947,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "SMCJ33A"
+		(property "Value" "SMCJ33CA"
 			(at 46.99 126.9999 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14704,6 +14956,15 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+			)
+		)
+		(property "MPN" "SMCJ33CA-13-F"
+			(at 46.99 126.9999 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(property "Footprint" "Diode_SMD:D_SMC"
@@ -14728,7 +14989,7 @@
 				)
 			)
 		)
-		(property "Description" "Zener diode, small symbol"
+		(property "Description" "TVS diode bidirectional 33V standoff 1500W SMC"
 			(at 44.45 125.73 0)
 			(hide yes)
 			(show_name no)
@@ -14785,6 +15046,15 @@
 				)
 			)
 		)
+		(property "MPN" "RC0402FR-07100KL"
+			(at 41.91 173.99 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 41.91 173.99 0)
 			(hide yes)
@@ -14807,7 +15077,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 100k 1% 1/16W 0402"
 			(at 41.91 173.99 0)
 			(hide yes)
 			(show_name no)
@@ -14944,6 +15214,15 @@
 				(justify right)
 			)
 		)
+		(property "MPN" "GRM188R72A104KA35D"
+			(at 75.692 114.3 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 73.66 114.3 0)
 			(hide yes)
@@ -14966,7 +15245,7 @@
 				)
 			)
 		)
-		(property "Description" "Unpolarized capacitor, small symbol"
+		(property "Description" "MLCC 100nF 100V X7R 0603"
 			(at 73.66 114.3 0)
 			(hide yes)
 			(show_name no)
@@ -15026,6 +15305,15 @@
 				(justify left)
 			)
 		)
+		(property "MPN" "ESP32-S3-MINI-1-N8"
+			(at 232.0133 33.02 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "RF_Module:ESP32-S2-MINI-1"
 			(at 245.11 92.71 0)
 			(hide yes)
@@ -15048,7 +15336,7 @@
 				)
 			)
 		)
-		(property "Description" "RF Module, ESP32-S3 SoC, Wi-Fi 802.11b/g/n, Bluetooth, BLE, 32-bit, 3.3V, SMD, onboard antenna"
+		(property "Description" "Wi-Fi + BLE module ESP32-S3 8MB flash"
 			(at 229.87 20.32 0)
 			(hide yes)
 			(show_name no)
@@ -15348,7 +15636,7 @@
 		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8b70dd85-8289-405b-b585-3f1d5abf156e")
@@ -15450,6 +15738,15 @@
 				(justify left)
 			)
 		)
+		(property "MPN" "SN65HVD230QDRQ1"
+			(at 127.8733 161.29 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 			(at 125.73 181.61 0)
 			(hide yes)
@@ -15472,7 +15769,7 @@
 				)
 			)
 		)
-		(property "Description" "CAN Bus Transceivers, 3.3V, 1Mbps, Low-Power capabilities, SOIC-8"
+		(property "Description" "CAN transceiver 3.3V SOIC-8 (CAN cars only)"
 			(at 125.73 168.91 0)
 			(hide yes)
 			(show_name no)
@@ -15549,6 +15846,15 @@
 				(justify left)
 			)
 		)
+		(property "MPN" "GRT155R61E105KE01D"
+			(at 204.47 32.004 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 205.74 34.29 0)
 			(hide yes)
@@ -15571,7 +15877,7 @@
 				)
 			)
 		)
-		(property "Description" "Unpolarized capacitor, small symbol"
+		(property "Description" "MLCC 1uF 25V X5R 0402"
 			(at 205.74 34.29 0)
 			(hide yes)
 			(show_name no)
@@ -15705,6 +16011,15 @@
 				)
 			)
 		)
+		(property "MPN" "RC0402FR-0710KL"
+			(at 210.82 39.37 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 210.82 39.37 0)
 			(hide yes)
@@ -15727,7 +16042,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 10k 1% 1/16W 0402"
 			(at 210.82 39.37 0)
 			(hide yes)
 			(show_name no)
@@ -15940,6 +16255,15 @@
 				)
 			)
 		)
+		(property "MPN" "RC0402FR-075K1L"
+			(at 52.07 35.56 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 52.07 35.56 0)
 			(hide yes)
@@ -15962,7 +16286,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 5.1k 1% 1/16W 0402"
 			(at 52.07 35.56 0)
 			(hide yes)
 			(show_name no)
@@ -16022,6 +16346,15 @@
 				(justify left)
 			)
 		)
+		(property "MPN" "USBLC6-2SC6"
+			(at 63.8811 38.1 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6"
 			(at 63.5 49.53 0)
 			(hide yes)
@@ -16047,7 +16380,7 @@
 				(justify left)
 			)
 		)
-		(property "Description" "Very low capacitance ESD protection diode, 2 data-line, SOT-23-6"
+		(property "Description" "USB ESD protection diode array SOT-23-6"
 			(at 62.23 43.18 0)
 			(hide yes)
 			(show_name no)
@@ -16117,6 +16450,15 @@
 				)
 			)
 		)
+		(property "MPN" "RT0603DRE07150KL"
+			(at 63.5 176.53 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 63.5 176.53 0)
 			(hide yes)
@@ -16139,7 +16481,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 150k 0.5% 1/10W 0603"
 			(at 63.5 176.53 0)
 			(hide yes)
 			(show_name no)
@@ -16352,6 +16694,15 @@
 				)
 			)
 		)
+		(property "MPN" "RC0402FR-07330RL"
+			(at 250.19 68.58 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 250.19 68.58 0)
 			(hide yes)
@@ -16374,7 +16725,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 330R 1% 1/16W 0402"
 			(at 250.19 68.58 0)
 			(hide yes)
 			(show_name no)
@@ -16510,6 +16861,15 @@
 				(justify right)
 			)
 		)
+		(property "MPN" "CL31B225KCHSNNE"
+			(at 60.452 132.08 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 58.42 132.08 0)
 			(hide yes)
@@ -16532,7 +16892,7 @@
 				)
 			)
 		)
-		(property "Description" "Unpolarized capacitor, small symbol"
+		(property "Description" "MLCC 2.2uF 100V X7R 1206"
 			(at 58.42 132.08 0)
 			(hide yes)
 			(show_name no)
@@ -16668,6 +17028,15 @@
 				)
 			)
 		)
+		(property "MPN" "RT0603DRE0768KL"
+			(at 71.12 176.53 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 71.12 176.53 0)
 			(hide yes)
@@ -16690,7 +17059,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 68k 0.5% 1/10W 0603"
 			(at 71.12 176.53 0)
 			(hide yes)
 			(show_name no)
@@ -16826,6 +17195,15 @@
 				)
 			)
 		)
+		(property "MPN" "BAT54S"
+			(at 73.66 92.71 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
 			(at 71.755 93.345 0)
 			(hide yes)
@@ -16849,7 +17227,7 @@
 				)
 			)
 		)
-		(property "Description" "Vr 30V, If 200mA, Dual schottky barrier diode, in series, SOT-323"
+		(property "Description" "Dual Schottky diode series 30V SOT-23"
 			(at 73.66 96.52 0)
 			(hide yes)
 			(show_name no)
@@ -17145,6 +17523,15 @@
 				)
 			)
 		)
+		(property "MPN" "RT0603DRE07150KL"
+			(at 100.33 109.22 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 100.33 109.22 0)
 			(hide yes)
@@ -17167,7 +17554,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 150k 0.5% 1/10W 0603"
 			(at 100.33 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -17278,7 +17665,7 @@
 		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a84f7e50-e202-49f3-8020-39e91ff55a19")
@@ -17380,6 +17767,15 @@
 				(justify right)
 			)
 		)
+		(property "MPN" "GRM1555C1H102JA01D"
+			(at 80.01 105.41 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 80.01 104.14 0)
 			(hide yes)
@@ -17402,7 +17798,7 @@
 				)
 			)
 		)
-		(property "Description" "Unpolarized capacitor, small symbol"
+		(property "Description" "MLCC 1nF 50V C0G 0402"
 			(at 80.01 104.14 0)
 			(hide yes)
 			(show_name no)
@@ -17459,6 +17855,15 @@
 				)
 			)
 		)
+		(property "MPN" "RC0402FR-074K7L"
+			(at 204.47 60.96 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 204.47 60.96 0)
 			(hide yes)
@@ -17481,7 +17886,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 4.7k 1% 1/16W 0402"
 			(at 204.47 60.96 0)
 			(hide yes)
 			(show_name no)
@@ -17615,6 +18020,15 @@
 				)
 			)
 		)
+		(property "MPN" "APT1608SGC"
+			(at 255.27 74.168 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 255.27 71.12 90)
 			(hide yes)
@@ -17637,7 +18051,7 @@
 				)
 			)
 		)
-		(property "Description" "Light emitting diode, small symbol"
+		(property "Description" "LED green 0603"
 			(at 255.27 71.12 0)
 			(hide yes)
 			(show_name no)
@@ -17760,7 +18174,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "ac5e32cb-db66-4eca-a692-75c73e53d9b3")
 		(property "Reference" "J1"
@@ -17777,6 +18191,15 @@
 			(at 27.305 120.65 0)
 			(show_name no)
 			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "-"
+			(at 27.305 120.65 0)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17805,7 +18228,7 @@
 				)
 			)
 		)
-		(property "Description" "Generic connector, single row, 01x06, script generated"
+		(property "Description" "OBD wire pads (not assembled)"
 			(at 26.67 128.27 0)
 			(hide yes)
 			(show_name no)
@@ -17851,7 +18274,7 @@
 		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ace7ae95-68e3-49b0-88ce-949c89da52a6")
@@ -17929,7 +18352,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "b3433d72-092c-46aa-99cb-4e4b2fb287e4")
 		(property "Reference" "SW1"
@@ -17946,6 +18369,15 @@
 			(at 198.12 34.29 0)
 			(show_name no)
 			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "B3U-1100P-B"
+			(at 198.12 34.29 0)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17974,7 +18406,7 @@
 				)
 			)
 		)
-		(property "Description" "Single Pole Single Throw (SPST) switch"
+		(property "Description" "Tactile switch SPST-NO SMD (reset; not assembled)"
 			(at 198.12 38.1 0)
 			(hide yes)
 			(show_name no)
@@ -18189,6 +18621,15 @@
 				(justify left)
 			)
 		)
+		(property "MPN" "CL31B225KCHSNNE"
+			(at 128.27 133.0898 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 130.81 132.08 0)
 			(hide yes)
@@ -18211,7 +18652,7 @@
 				)
 			)
 		)
-		(property "Description" "Unpolarized capacitor, small symbol"
+		(property "Description" "MLCC 2.2uF 100V X7R 1206"
 			(at 130.81 132.08 0)
 			(hide yes)
 			(show_name no)
@@ -18271,6 +18712,15 @@
 				(justify left)
 			)
 		)
+		(property "MPN" "PESD1LIN-SL"
+			(at 29.21 167.6399 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 26.67 166.37 0)
 			(hide yes)
@@ -18293,7 +18743,7 @@
 				)
 			)
 		)
-		(property "Description" "Bidirectional transient-voltage-suppression diode, small symbol"
+		(property "Description" "ESD protection diode LIN bus SOD-323"
 			(at 26.67 166.37 0)
 			(hide yes)
 			(show_name no)
@@ -18351,6 +18801,15 @@
 				)
 			)
 		)
+		(property "MPN" "RE0603DRE071ML"
+			(at 63.5 166.37 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 63.5 166.37 0)
 			(hide yes)
@@ -18373,7 +18832,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 1M 0.5% 1/10W 0603"
 			(at 63.5 166.37 0)
 			(hide yes)
 			(show_name no)
@@ -18507,6 +18966,15 @@
 				)
 			)
 		)
+		(property "MPN" "RC0402FR-074M7L"
+			(at 83.82 160.02 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 83.82 160.02 0)
 			(hide yes)
@@ -18529,7 +18997,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 4.7M 1% 1/16W 0402"
 			(at 83.82 160.02 0)
 			(hide yes)
 			(show_name no)
@@ -18733,7 +19201,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "PMEG4010CEJ"
+		(property "Value" "B5819WS"
 			(at 64.77 26.4159 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -18742,6 +19210,15 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+			)
+		)
+		(property "MPN" "B5819WS"
+			(at 64.77 26.4159 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(property "Footprint" "Diode_SMD:D_SOD-323F"
@@ -18766,7 +19243,7 @@
 				)
 			)
 		)
-		(property "Description" "Schottky diode, small symbol"
+		(property "Description" "Schottky diode 40V 1A SOD-323"
 			(at 62.23 25.4 0)
 			(hide yes)
 			(show_name no)
@@ -18823,6 +19300,15 @@
 				)
 			)
 		)
+		(property "MPN" "RC0402FR-0710KL"
+			(at 92.71 163.83 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 92.71 163.83 0)
 			(hide yes)
@@ -18845,7 +19331,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 10k 1% 1/16W 0402"
 			(at 92.71 163.83 0)
 			(hide yes)
 			(show_name no)
@@ -18970,10 +19456,19 @@
 				)
 			)
 		)
-		(property "Value" "1u"
+		(property "Value" "10u"
 			(at 238.76 135.89 90)
 			(show_name no)
 			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "GRM188R61A106ME69D"
+			(at 238.76 135.89 0)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19002,7 +19497,7 @@
 				)
 			)
 		)
-		(property "Description" "Unpolarized capacitor, small symbol"
+		(property "Description" "MLCC 10uF 10V X5R 0603"
 			(at 234.95 134.62 0)
 			(hide yes)
 			(show_name no)
@@ -19215,6 +19710,15 @@
 				)
 			)
 		)
+		(property "MPN" "GCM155R71H104KE02D"
+			(at 238.76 130.81 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 234.95 129.54 0)
 			(hide yes)
@@ -19237,7 +19741,7 @@
 				)
 			)
 		)
-		(property "Description" "Unpolarized capacitor, small symbol"
+		(property "Description" "MLCC 100nF 50V X7R 0402"
 			(at 234.95 129.54 0)
 			(hide yes)
 			(show_name no)
@@ -19372,6 +19876,15 @@
 				)
 			)
 		)
+		(property "MPN" "RC0603FR-0747RL"
+			(at 34.29 163.83 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 34.29 163.83 0)
 			(hide yes)
@@ -19394,7 +19907,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 47R 1% 1/10W 0603"
 			(at 34.29 163.83 0)
 			(hide yes)
 			(show_name no)
@@ -19585,7 +20098,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "d407dcff-6831-4e2d-b1ba-e657928db6ba")
 		(property "Reference" "TP4"
 			(at 68.58 163.8299 0)
@@ -19610,6 +20123,15 @@
 				(justify left)
 			)
 		)
+		(property "MPN" "-"
+			(at 68.58 165.0999 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
 			(at 64.77 163.83 0)
 			(hide yes)
@@ -19632,7 +20154,7 @@
 				)
 			)
 		)
-		(property "Description" "test point"
+		(property "Description" "Test pad (not assembled)"
 			(at 69.85 163.83 0)
 			(hide yes)
 			(show_name no)
@@ -19687,6 +20209,15 @@
 				)
 			)
 		)
+		(property "MPN" "APT1608EC"
+			(at 255.27 65.532 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 255.27 68.58 90)
 			(hide yes)
@@ -19709,7 +20240,7 @@
 				)
 			)
 		)
-		(property "Description" "Light emitting diode, small symbol"
+		(property "Description" "LED red 0603"
 			(at 255.27 68.58 0)
 			(hide yes)
 			(show_name no)
@@ -19845,10 +20376,19 @@
 				)
 			)
 		)
-		(property "Value" "2A"
+		(property "Value" "0.75A"
 			(at 55.88 24.13 90)
 			(show_name no)
 			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "MF-NSMF075-2"
+			(at 55.88 24.13 0)
+			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19878,7 +20418,7 @@
 				)
 			)
 		)
-		(property "Description" "Resettable fuse, polymeric positive temperature coefficient, small symbol"
+		(property "Description" "PTC resettable fuse 0.75A hold 6V 1206"
 			(at 55.88 27.94 0)
 			(hide yes)
 			(show_name no)
@@ -19960,7 +20500,7 @@
 				)
 			)
 		)
-		(property "Description" "Switching diode, SOT-23 (1 A, 3 K)"
+		(property "Description" "Switching diode 100V SOT-23"
 			(at 119.38 116.84 0)
 			(hide yes)
 			(show_name no)
@@ -19971,7 +20511,7 @@
 				)
 			)
 		)
-		(property "MPN" "BAS16-Q"
+		(property "MPN" "BAS16"
 			(at 121.92 116.84 0)
 			(hide yes)
 			(show_name no)
@@ -20120,6 +20660,15 @@
 				)
 			)
 		)
+		(property "MPN" "RC0402FR-07100KL"
+			(at 80.01 109.22 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 80.01 109.22 0)
 			(hide yes)
@@ -20142,7 +20691,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 100k 1% 1/16W 0402"
 			(at 80.01 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -20255,7 +20804,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "def1d5c4-268d-4c72-9173-94264394fdf3")
 		(property "Reference" "TP1"
 			(at 208.28 86.3599 0)
@@ -20280,6 +20829,15 @@
 				(justify left)
 			)
 		)
+		(property "MPN" "-"
+			(at 208.28 87.6299 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
 			(at 204.47 86.36 0)
 			(hide yes)
@@ -20302,7 +20860,7 @@
 				)
 			)
 		)
-		(property "Description" "test point"
+		(property "Description" "Test pad (not assembled)"
 			(at 209.55 86.36 0)
 			(hide yes)
 			(show_name no)
@@ -20359,6 +20917,15 @@
 				(justify right)
 			)
 		)
+		(property "MPN" "GCM155R71H104KE02D"
+			(at 90.932 166.37 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 88.9 166.37 0)
 			(hide yes)
@@ -20381,7 +20948,7 @@
 				)
 			)
 		)
-		(property "Description" "Unpolarized capacitor, small symbol"
+		(property "Description" "MLCC 100nF 50V X7R 0402"
 			(at 88.9 166.37 0)
 			(hide yes)
 			(show_name no)
@@ -20461,7 +21028,7 @@
 				)
 			)
 		)
-		(property "Description" "60 V 0.6 A synchronous buck, adjustable, 400 kHz, VQFN-HR 12"
+		(property "Description" "Buck converter 60V 0.6A 3.3V VQFN-HR-12"
 			(at 125.73 66.04 0)
 			(hide yes)
 			(show_name no)
@@ -20573,6 +21140,15 @@
 				(justify right)
 			)
 		)
+		(property "MPN" "GRM31CR61C226KE15L"
+			(at 149.098 44.45 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 151.13 44.45 0)
 			(hide yes)
@@ -20595,7 +21171,7 @@
 				)
 			)
 		)
-		(property "Description" "Unpolarized capacitor, small symbol"
+		(property "Description" "MLCC 22uF 16V X5R 1206"
 			(at 151.13 44.45 0)
 			(hide yes)
 			(show_name no)
@@ -20732,6 +21308,15 @@
 				(justify right)
 			)
 		)
+		(property "MPN" "GRT155R61E105KE01D"
+			(at 117.602 45.72 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 115.57 45.72 0)
 			(hide yes)
@@ -20754,7 +21339,7 @@
 				)
 			)
 		)
-		(property "Description" "Unpolarized capacitor, small symbol"
+		(property "Description" "MLCC 1uF 25V X5R 0402"
 			(at 115.57 45.72 0)
 			(hide yes)
 			(show_name no)
@@ -20813,6 +21398,15 @@
 				(justify left)
 			)
 		)
+		(property "MPN" "UCD1J220MCL1GS"
+			(at 138.43 133.0898 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.8"
 			(at 135.89 132.08 0)
 			(hide yes)
@@ -20835,7 +21429,7 @@
 				)
 			)
 		)
-		(property "Description" "Unpolarized capacitor, small symbol"
+		(property "Description" "Aluminium electrolytic 22uF 63V SMD 6.3x7.7 (6.3 mm land pattern)"
 			(at 135.89 132.08 0)
 			(hide yes)
 			(show_name no)
@@ -21129,6 +21723,15 @@
 				)
 			)
 		)
+		(property "MPN" "RC0402FR-075K1L"
+			(at 52.07 33.02 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 52.07 33.02 0)
 			(hide yes)
@@ -21151,7 +21754,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 5.1k 1% 1/16W 0402"
 			(at 52.07 33.02 0)
 			(hide yes)
 			(show_name no)
@@ -21364,6 +21967,15 @@
 				)
 			)
 		)
+		(property "MPN" "RE0603DRE071ML"
+			(at 113.03 125.73 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 113.03 125.73 0)
 			(hide yes)
@@ -21386,7 +21998,7 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "Chip resistor 1M 0.5% 1/10W 0603"
 			(at 113.03 125.73 0)
 			(hide yes)
 			(show_name no)

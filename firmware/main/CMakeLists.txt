@@ -7,7 +7,7 @@ idf_component_register(
              app_update ulp esp_pm
 )
 
-# ULP-RISC-V program: parked VBAT supervision (docs/07 §5)
+# ULP-RISC-V program: parked VBAT supervision (docs/LoganLink.md, Firmware)
 set(ulp_app_name ulp_main)
 set(ulp_riscv_sources "ulp/ulp_vbat.c")
 set(ulp_exp_dep_srcs "power.c")
