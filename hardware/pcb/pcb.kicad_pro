@@ -726,12 +726,12 @@
       "sort_field": "Reference"
     },
     "bus_aliases": {},
-    "connection_grid_size": 50,
+    "connection_grid_size": 50.0,
     "drawing": {
-      "dashed_lines_dash_length_ratio": 12,
-      "dashed_lines_gap_length_ratio": 3,
-      "default_line_thickness": 6,
-      "default_text_size": 50,
+      "dashed_lines_dash_length_ratio": 12.0,
+      "dashed_lines_gap_length_ratio": 3.0,
+      "default_line_thickness": 6.0,
+      "default_text_size": 50.0,
       "field_names": [],
       "hop_over_size_choice": 0,
       "intersheets_ref_own_page": false,
@@ -746,7 +746,7 @@
       "operating_point_overlay_v_precision": 3,
       "operating_point_overlay_v_range": "~V",
       "overbar_offset_ratio": 1.23,
-      "pin_symbol_size": 25,
+      "pin_symbol_size": 25.0,
       "text_offset_ratio": 0.15
     },
     "legacy_lib_dir": "",
@@ -766,7 +766,7 @@
         "uuid": "32c656a8-a948-47e0-af35-3cfbf8f7b6bf"
       }
     ],
-    "used_designators": "",
+    "used_designators": "TP1-6",
     "variants": []
   },
   "sheets": [
