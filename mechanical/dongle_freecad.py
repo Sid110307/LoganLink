@@ -9,10 +9,10 @@ OUT = os.path.dirname(os.path.abspath(__file__)) if "__file__" in globals() else
 P = dict(
     plug_w=39.0, plug_w_bot=33.0, plug_h=17.0, plug_r=2.5, plug_out=16.0,
     flange_t=3.0, flange_ext=1.2, plug_body=8.0, wire_gap=5.0,
-    pcb_w=54.0, pcb_h=42.0, pcb_t=1.6, comp_top=6.0, hole_inset=3.0,
+    pcb_w=51.0, pcb_h=40.0, pcb_t=1.6, comp_top=6.0,
     face_t=2.0, ret_t=2.0, wall=1.6, roof=1.5, gap=0.3, r_out=3.0,
     boss_d=5.0, pilot_d=1.6, clear_d=2.4, lip_h=3.0, lip_t=0.8,
-    led_x=21.0, led_y=9.0, btn_x=22.0, btn_y=3.0,
+    led_x=21.0, led_y=8.0, pipe_gap=1.3, btn_x=22.0, btn_y=2.0,
 )
 p = type("P", (), P)
 
@@ -26,8 +26,7 @@ z_top = z_roof_in + p.roof
 
 in_w, in_h = p.pcb_w + 2 * p.gap, p.pcb_h + 2 * p.gap
 out_w, out_h = in_w + 2 * p.wall, in_h + 2 * p.wall
-hx, hy = p.pcb_w / 2 - p.hole_inset, p.pcb_h / 2 - p.hole_inset
-holes = [(sx * hx, sy * hy) for sx in (-1, 1) for sy in (-1, 1)]
+holes = [(-22.5, 12.5), (22.5, 12.5), (-22.5, -17.0), (22.5, -17.0)]
 
 
 def rbox(w, h, z0, dz, r):
@@ -83,8 +82,8 @@ rear = rear.cut(cyl(3.0, p.led_x, p.led_y, z_roof_in - 1, 5))
 rear = rear.cut(cyl(1.6, p.btn_x, p.btn_y, z_roof_in - 1, 5))
 rear = rear.removeSplitter()
 
-pipe_len = z_top - (z_pcb_top + 1.0)
-pipe = Part.makeCylinder(1.45, pipe_len).fuse(Part.makeCylinder(2.0, 0.8, V(0, 0, z_roof_in - (z_pcb_top + 1.0) - 0.8)))
+pipe_len = z_top - (z_pcb_top + p.pipe_gap)
+pipe = Part.makeCylinder(1.45, pipe_len).fuse(Part.makeCylinder(2.0, 0.8, V(0, 0, z_roof_in - (z_pcb_top + p.pipe_gap) - 0.8)))
 
 pcb = rbox(p.pcb_w, p.pcb_h, z_pcb, p.pcb_t, 3.0)
 for x, y in holes:
@@ -103,7 +102,7 @@ for i, (k, v) in enumerate(P.items(), start=1):
 parts = {}
 for label, shp, col, tr in (("Front", front, (0.17, 0.18, 0.21), 0), ("Retainer", ret, (0.85, 0.65, 0.1), 0),
                             ("Rear", rear, (0.23, 0.25, 0.29), 45),
-                            ("LightPipe", pipe.translated(V(p.led_x, p.led_y, z_pcb_top + 1.0)), (0.95, 0.95, 0.95), 30),
+                            ("LightPipe", pipe.translated(V(p.led_x, p.led_y, z_pcb_top + p.pipe_gap)), (0.95, 0.95, 0.95), 30),
                             ("PCB_ref", pcb, (0.1, 0.37, 0.13), 0), ("OBDPlug_ref", plug, (0.55, 0.55, 0.55), 60)):
     o = doc.addObject("Part::Feature", label)
     o.Shape = shp

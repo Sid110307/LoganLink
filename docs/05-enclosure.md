@@ -1,6 +1,6 @@
 # 05. Enclosure
 
-Plug nose into the car, board flat behind it: 57.8 x 45.8 mm, 27.6 mm out from the socket face, so a knee or glovebox lid pushes
+Plug nose into the car, board flat behind it: 54.8 x 43.8 mm, 27.6 mm out from the socket face, so a knee or glovebox lid pushes
 it straight in.
 
 `mechanical/dongle_freecad.py` generates everything. Run it in FreeCAD (Macro > Execute, or the MCP bridge); it writes
