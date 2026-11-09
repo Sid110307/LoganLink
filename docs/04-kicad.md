@@ -31,7 +31,7 @@ Field Name Templates). U5: `Exclude from board` off, `DNP` on.
 | USB_DN / USB_DP | J2 D- / D+ (both pins each), D4 I/O pair, U1 GPIO19 / GPIO20 |
 | CC1 / CC2 | J2 CC1 to R6, CC2 to R7, other ends GND |
 | EN | U1 EN, R4, C10, TP |
-| BTN_PAIR | U1 GPIO0, R5, SW1 (other side GND), TP |
+| BTN_PAIR | U1 GPIO0, R5, SW2 (other side GND), TP |
 | VBAT_DIV | R13.2, R14 (to GND), C15 (to GND), R15.1 |
 | VBAT_SENSE | R15.2, D5 mid, U1 GPIO1 (D5 ends to GND and 3V3) |
 | VBAT_AC | C16.2, R16.1 |
@@ -84,11 +84,11 @@ negative y, so type y with the sign flipped.
 | Item | Position | Notes |
 |------|----------|-------|
 | Outline (Edge.Cuts) | 51 x 40 mm, corners R3 | |
-| H1 to H4 | (±23.9, ±17.1) from the board centre | `MountingHole:MountingHole_2.2mm_M2`, keep 5 mm diameter clear on both sides |
+| H1 to H4 | (±22.5, 12.5) and (±22.5, -17) from the board centre | `MountingHole:MountingHole_2.2mm_M2`, keep 5 mm diameter clear on both sides |
 | ESP32 module | centred on x = 0, antenna up, top edge on the board edge | Must be centred: its built-in antenna keepout is 45.4 mm wide and would hit a mounting hole otherwise |
 | J1 wire pads | pin 1 at (-6.35, -4), pin 6 at (6.35, -4), 2.54 pitch | Wires solder from the bottom |
-| LED1, LED2 | (21.0, 9.9), (21.0, 8.1) | Light pipe centre (21, 9). Nothing above 0.8 mm within 2.5 mm of it |
-| SW1 | (22.0, 3.0) | Pinhole above it |
+| LED1, LED2 | (21.0, 7.0), (21.0, 9.0) | Light pipe centre (21, 8). Nothing above 0.8 mm within 2.5 mm of it |
+| SW2 (PAIR) | (22.0, 2.0) | Pinhole above it. SW1 (reset) at (19.0, -1.5), no hole |
 | J2 USB-C | centre x 14, mouth on the bottom edge | Bench only, used with the rear shell off |
 | TP1 to TP6 | bottom side, x 23, y -6.25 to 6.25, 2.5 pitch | Pads only |
 
@@ -103,7 +103,7 @@ All on top. Tallest part 6.0 mm (C3 is 5.8).
 | Sense | -6 to 2, 0 to 21 | R13 to R18, C15 to C17, D5, D6, U3, R11, R12, C13, C14 |
 | K-line | -8 to 9, -21 to -6 | Q1, R19, R26, R27, R10, D7, D3, U4, R20 to R25, C18, U5 |
 | USB | 9 to 21, -21 to -9 | J2, D4, R6, R7, D8 |
-| UI | 18 to 27, 0 to 14 | LED1, LED2, R8, R9, SW1, R4, R5, C10 |
+| UI | 18 to 27, 0 to 14 | LED1, LED2, R8, R9, SW1, SW2, R4, R5, C10 |
 
 C9 at the module 3V3 pin. Keep the SW node and L1 as far from the antenna as the zone allows. Bottom side: only J1 joints and test
 pads; keep the area inside the plug housing outline (39 x 17 mm trapezoid centred on the board, wide side up) flat, the housing's

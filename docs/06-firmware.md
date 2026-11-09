@@ -72,7 +72,7 @@ SLEEP wakes (reboot, cause logged) on VBAT > 13.2 V, a VBAT step of 150 mV (door
 
 - Crank: a start that drops VBAT below brownout resets the MCU. A BROWNOUT boot followed by engine running is shown as a weak crank.
 - Thermal: die temperature read every 10 s; above 105 °C the sensors stop.
-- PAIR button (C&K PTS810), engine running: short press opens a 120 s pairing window; 10 s hold factory-resets (bonds wiped, device
+- PAIR button (SW2, Omron B3U-1000P), engine running: short press opens a 120 s pairing window; 10 s hold factory-resets (bonds wiped, device
   key kept).
 - LED: green steady in DRIVE, short green blink every 3 s in STANDBY, off in SLEEP.
 

@@ -7,17 +7,17 @@ LionCircuits; check before ordering.
 
 | Item | 1 unit | Each at 25 |
 |------|--------|-----------|
-| Board parts (SMT) | about ₹1,155 | about ₹820 |
+| Board parts (SMT) | about ₹1,215 | about ₹865 |
 | OBD housing, pins, wire | about ₹300 | about ₹225 |
 | PCB, 2-layer HASL | ₹200 | ₹60 |
 | Assembly, top side | ₹1,500 | ₹300 |
 | Enclosure print + screws | ₹120 | ₹80 |
-| Total | about ₹3,275 | about ₹1,485 |
+| Total | about ₹3,335 | about ₹1,530 |
 
 Assembly setup dominates at one unit. Order at least 5 boards for price and bring-up spares.
 
 Cost choices: ESP32-S3-MINI-1 module (pre-certified, no RF tuning); 2N7002K + LMV331 instead of a K-line transceiver; no RTC crystal;
-C&K PTS810 button; Bourns SRN4018 inductor; 1 % feedback resistors; CAN footprint only (DNP); wires to pads instead of a board-mount
+Bourns SRN4018 inductor; 1 % feedback resistors; CAN footprint only (DNP); wires to pads instead of a board-mount
 OBD connector.
 
 ## LionCircuits order

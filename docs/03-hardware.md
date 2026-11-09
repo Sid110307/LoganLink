@@ -51,8 +51,8 @@ The ratiometric reference tracks battery voltage from 9 to 16 V without calibrat
 
 ## ESP32-S3-MINI-1
 
-- EN: R4 10k up, C10 1 µF down.
-- GPIO0: R5 10k up, SW1 (PAIR) to GND. Held at power-up = download mode.
+- EN: R4 10k up, C10 1 µF down, SW1 (reset) to GND.
+- GPIO0: R5 10k up, SW2 (PAIR) to GND. Held at power-up = download mode.
 - USB: GPIO19/20 to USB-C via D4 (USBLC6); CC1, CC2 each 5.1k to GND.
 - No 32 kHz crystal; the RTC runs on the internal oscillator and is re-synced from the phone on every connect.
 - LEDs: red GPIO38 (330R, about 4 mA), green GPIO39 (150R, about 7 mA), PWM-dimmed.

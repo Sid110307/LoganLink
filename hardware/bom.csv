@@ -41,7 +41,8 @@ R24,1,4.7M,Yageo,RC0402FR-074M7L,Resistor_SMD:R_0402_1005Metric,Fit,1,0.5
 R26,1,100R,Yageo,RC0402FR-07100RL,Resistor_SMD:R_0402_1005Metric,Fit,1,0.5
 LED1,1,Red,Kingbright,APT1608EC,LED_SMD:LED_0603_1608Metric,Fit,8,5
 LED2,1,Green,Kingbright,APT1608SGC,LED_SMD:LED_0603_1608Metric,Fit,8,5
-SW1,1,PAIR,C&K,PTS810SJM250SMTRLFS,Button_Switch_SMD:SW_SPST_PTS810,Fit,21,15
+SW1,1,RESET,Omron,B3U-1000P,Button_Switch_SMD:SW_SPST_B3U-1000P,Fit,40,30
+SW2,1,PAIR,Omron,B3U-1000P,Button_Switch_SMD:SW_SPST_B3U-1000P,Fit,40,30
 J1,1,OBD wire pads,-,-,Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical,Pads only,0,0
 J2,1,USB-C,GCT,USB4105-GF-A,Connector_USB:USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal,Fit,60,45
 TP1-TP6,6,Test pads,-,-,TestPoint:TestPoint_Pad_D1.5mm,Pads only,0,0
